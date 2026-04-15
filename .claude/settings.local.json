@@ -6,7 +6,22 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm)",
       "Bash(npm install:*)",
       "Bash(npx husky:*)",
-      "Bash(npx shadcn@latest init --defaults)"
+      "Bash(npx shadcn@latest init --defaults)",
+      "Bash(npx shadcn@latest add card input badge --overwrite)",
+      "Bash(npx tsc:*)",
+      "Bash(npx shadcn@latest add sonner --overwrite)",
+      "Bash(npm test:*)",
+      "Bash(npx netlify:*)",
+      "Bash(netlify --version)",
+      "Bash(netlify status:*)",
+      "Bash(ls C:/Users/csnkarthik/Lab/room-booking-engine/node_modules/next/dist/docs/01-app/02-guides/deploying*.md)",
+      "Bash(xargs grep:*)",
+      "Bash(ls C:/Users/csnkarthik/Lab/room-booking-engine/.env*)",
+      "Bash(npm show:*)",
+      "Bash(netlify sites:create --name room-booking-engine)",
+      "Bash(netlify deploy:*)",
+      "Bash(node:*)",
+      "Bash(npx eslint:*)"
     ]
   }
 }

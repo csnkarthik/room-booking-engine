@@ -1,0 +1,140 @@
+[
+  {
+    "roomId": "room-003",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611782"
+    },
+    "checkIn": "2026-04-16",
+    "checkOut": "2026-04-23",
+    "guests": 1,
+    "extras": {
+      "breakfast": true,
+      "airportTransfer": true,
+      "lateCheckout": true
+    },
+    "totalPrice": 1833,
+    "stripePaymentIntentId": "pi_3TMMuzLlGzz3pHWe1ZebQ0DP",
+    "id": "da639424-33ec-462c-918a-9a3e71ce5737",
+    "room": {
+      "id": "room-003",
+      "name": "Deluxe King",
+      "type": "deluxe",
+      "maxGuests": 2,
+      "pricePerNight": 219,
+      "images": [
+        "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800",
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800",
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
+      ],
+      "amenities": [
+        "Free Wi-Fi",
+        "Air Conditioning",
+        "55\" Smart TV",
+        "Full Mini-bar",
+        "Safe",
+        "Bathrobe & Slippers",
+        "Nespresso Machine",
+        "Panoramic View",
+        "Soaking Tub"
+      ],
+      "description": "Our Deluxe King room offers stunning panoramic views, a plush king-size bed with premium linens, and a spa-inspired bathroom with both a soaking tub and walk-in shower.",
+      "size": 420,
+      "floor": 7,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-15T06:29:25.918Z"
+  },
+  {
+    "roomId": "room-002",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611782"
+    },
+    "checkIn": "2026-04-23",
+    "checkOut": "2026-04-30",
+    "guests": 1,
+    "extras": {
+      "breakfast": true,
+      "airportTransfer": true,
+      "lateCheckout": false
+    },
+    "totalPrice": 1293,
+    "stripePaymentIntentId": "pi_3TMN27LlGzz3pHWe1t8F5U6Q",
+    "id": "c409c3eb-9312-45f3-b235-5e332f66d1f2",
+    "room": {
+      "id": "room-002",
+      "name": "Superior Double",
+      "type": "double",
+      "maxGuests": 2,
+      "pricePerNight": 149,
+      "images": [
+        "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+        "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+        "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800",
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+      ],
+      "amenities": [
+        "Free Wi-Fi",
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini-bar",
+        "Safe",
+        "Bathrobe & Slippers",
+        "Coffee Machine"
+      ],
+      "description": "Spacious double room with city views. Features a king-size bed, seating area, and luxurious marble bathroom with rain shower.",
+      "size": 320,
+      "floor": 4,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-15T06:35:32.279Z"
+  },
+  {
+    "roomId": "room-001",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611782"
+    },
+    "checkIn": "2026-04-24",
+    "checkOut": "2026-04-30",
+    "guests": 1,
+    "extras": {
+      "breakfast": false,
+      "airportTransfer": false,
+      "lateCheckout": false
+    },
+    "totalPrice": 534,
+    "stripePaymentIntentId": "pi_3TMNnMLlGzz3pHWe0ms0hq64",
+    "id": "95d6f542-d7a4-4bea-8db7-e02d8b2cc338",
+    "room": {
+      "id": "room-001",
+      "name": "Classic Single",
+      "type": "single",
+      "maxGuests": 1,
+      "pricePerNight": 89,
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+      ],
+      "amenities": ["Free Wi-Fi", "Air Conditioning", "Flat-screen TV", "Mini-fridge", "Safe"],
+      "description": "A comfortable and cozy single room perfect for solo travelers. Features a plush queen bed, work desk, and modern en-suite bathroom.",
+      "size": 220,
+      "floor": 2,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-15T07:24:32.575Z"
+  }
+]

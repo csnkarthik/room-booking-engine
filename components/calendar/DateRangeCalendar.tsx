@@ -1,0 +1,238 @@
+'use client'
+
+import { useState, useCallback, useMemo } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { formatDate, parseDate, daysBetween } from '@/lib/utils/dates'
+import { getDailyPrice } from '@/lib/utils/pricing'
+import type { DateRange, Availability } from '@/lib/types'
+
+interface DateRangeCalendarProps {
+  checkIn: string | null
+  checkOut: string | null
+  availability?: Availability
+  /** Base price per night for this room — enables per-day pricing display */
+  basePrice?: number
+  onSelect: (checkIn: string, checkOut: string) => void
+  onClose?: () => void
+  className?: string
+}
+
+function getDaysInMonth(year: number, month: number): number {
+  return new Date(year, month + 1, 0).getDate()
+}
+
+function getFirstDayOfMonth(year: number, month: number): number {
+  return new Date(year, month, 1).getDay()
+}
+
+function formatPrice(price: number): string {
+  return price >= 1000 ? `$${(price / 1000).toFixed(1)}k` : `$${price}`
+}
+
+export function DateRangeCalendar({
+  checkIn,
+  checkOut,
+  availability,
+  basePrice,
+  onSelect,
+  onClose,
+  className,
+}: DateRangeCalendarProps) {
+  const today = useMemo(() => {
+    const d = new Date()
+    d.setHours(0, 0, 0, 0)
+    return d
+  }, [])
+
+  const [viewMonth, setViewMonth] = useState(today.getMonth())
+  const [viewYear, setViewYear] = useState(today.getFullYear())
+  const [hoverDate, setHoverDate] = useState<string | null>(null)
+  const [selecting, setSelecting] = useState<'checkIn' | 'checkOut'>('checkIn')
+  const [tempCheckIn, setTempCheckIn] = useState<string | null>(checkIn)
+
+  const blockedRanges = useMemo<DateRange[]>(
+    () => availability?.blockedRanges ?? [],
+    [availability?.blockedRanges]
+  )
+  const minStay = availability?.minStayNights ?? 1
+
+  const isBlocked = useCallback(
+    (dateStr: string): boolean => {
+      const date = parseDate(dateStr)
+      if (date < today) return true
+      return blockedRanges.some((range) => {
+        const from = parseDate(range.from)
+        const to = parseDate(range.to)
+        return date >= from && date <= to
+      })
+    },
+    [blockedRanges, today]
+  )
+
+  const isInRange = useCallback(
+    (dateStr: string): boolean => {
+      const start = tempCheckIn
+      const end = selecting === 'checkOut' ? hoverDate : checkOut
+      if (!start || !end) return false
+      const date = parseDate(dateStr)
+      const from = parseDate(start)
+      const to = parseDate(end)
+      if (from > to) return false
+      return date > from && date < to
+    },
+    [tempCheckIn, checkOut, hoverDate, selecting]
+  )
+
+  const isCheckIn = (dateStr: string) => dateStr === tempCheckIn
+  const isCheckOut = (dateStr: string) =>
+    selecting === 'checkIn' ? dateStr === checkOut : dateStr === hoverDate && tempCheckIn !== null
+
+  const handleDayClick = (dateStr: string) => {
+    if (isBlocked(dateStr)) return
+
+    if (selecting === 'checkIn') {
+      setTempCheckIn(dateStr)
+      setSelecting('checkOut')
+    } else {
+      if (!tempCheckIn) return
+      if (parseDate(dateStr) <= parseDate(tempCheckIn)) {
+        setTempCheckIn(dateStr)
+        return
+      }
+      const nights = daysBetween(tempCheckIn, dateStr)
+      if (nights < minStay) return
+      onSelect(tempCheckIn, dateStr)
+      setSelecting('checkIn')
+      if (onClose) onClose()
+    }
+  }
+
+  const prevMonth = () => {
+    if (viewMonth === 0) {
+      setViewMonth(11)
+      setViewYear((y) => y - 1)
+    } else setViewMonth((m) => m - 1)
+  }
+
+  const nextMonth = () => {
+    if (viewMonth === 11) {
+      setViewMonth(0)
+      setViewYear((y) => y + 1)
+    } else setViewMonth((m) => m + 1)
+  }
+
+  const monthName = new Date(viewYear, viewMonth).toLocaleString('default', {
+    month: 'long',
+    year: 'numeric',
+  })
+
+  const daysInMonth = getDaysInMonth(viewYear, viewMonth)
+  const firstDay = getFirstDayOfMonth(viewYear, viewMonth)
+  const days = Array.from({ length: daysInMonth }, (_, i) => {
+    return formatDate(new Date(viewYear, viewMonth, i + 1))
+  })
+
+  return (
+    <div
+      className={cn('w-full rounded-xl border bg-white p-4 shadow-lg', className)}
+      role="dialog"
+      aria-label="Date range calendar"
+    >
+      {/* Header */}
+      <div className="mb-3 flex items-center justify-between">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={prevMonth}
+          aria-label="Previous month"
+          className="h-8 w-8"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        <span className="text-sm font-semibold">{monthName}</span>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={nextMonth}
+          aria-label="Next month"
+          className="h-8 w-8"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </div>
+
+      {/* Prompt */}
+      <div className="text-muted-foreground mb-2 text-center text-xs">
+        {selecting === 'checkIn'
+          ? 'Select check-in date'
+          : `Select check-out (min ${minStay} night${minStay > 1 ? 's' : ''})`}
+      </div>
+
+      {/* Day labels */}
+      <div className="mb-1 grid grid-cols-7 text-center">
+        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d) => (
+          <div key={d} className="text-muted-foreground py-1 text-xs font-medium">
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-7">
+        {Array.from({ length: firstDay }).map((_, i) => (
+          <div key={`e-${i}`} />
+        ))}
+
+        {days.map((dateStr) => {
+          const blocked = isBlocked(dateStr)
+          const inRange = isInRange(dateStr)
+          const isStart = isCheckIn(dateStr)
+          const isEnd = isCheckOut(dateStr)
+          const dayNum = new Date(dateStr + 'T00:00:00').getDate()
+          const price = basePrice && !blocked ? getDailyPrice(basePrice, dateStr) : null
+
+          return (
+            <button
+              key={dateStr}
+              onClick={() => handleDayClick(dateStr)}
+              onMouseEnter={() => setHoverDate(dateStr)}
+              onMouseLeave={() => setHoverDate(null)}
+              disabled={blocked}
+              aria-label={`${dateStr}${price ? `, $${price} per night` : ''}`}
+              aria-pressed={isStart || isEnd}
+              className={cn(
+                'relative flex flex-col items-center justify-center py-1 text-xs transition-colors',
+                basePrice ? 'h-12' : 'h-9',
+                blocked && 'cursor-not-allowed opacity-30',
+                !blocked && 'hover:bg-primary/10 cursor-pointer',
+                inRange && 'bg-primary/10',
+                (isStart || isEnd) &&
+                  'bg-primary text-primary-foreground hover:bg-primary rounded-lg font-semibold'
+              )}
+            >
+              <span className={cn('font-medium', basePrice ? 'text-xs' : 'text-sm')}>{dayNum}</span>
+              {price !== null && (
+                <span
+                  className={cn(
+                    'text-[9px] leading-none',
+                    isStart || isEnd ? 'text-primary-foreground/80' : 'text-muted-foreground'
+                  )}
+                >
+                  {formatPrice(price)}
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      {minStay > 1 && (
+        <p className="text-muted-foreground mt-2 text-center text-xs">
+          Minimum stay: {minStay} nights
+        </p>
+      )}
+    </div>
+  )
+}
