@@ -64,23 +64,23 @@ test.describe('Rooms Listing', () => {
 
 test.describe('Room Detail', () => {
   test('loads room detail page', async ({ page }) => {
-    await page.goto('/rooms/room-001')
+    await page.goto('/rooms/BSIG')
     await expect(page.getByRole('heading', { name: /Classic Single/i })).toBeVisible()
   })
 
   test('shows image gallery', async ({ page }) => {
-    await page.goto('/rooms/room-001')
+    await page.goto('/rooms/BSIG')
     const images = page.getByRole('button', { name: /View Classic Single image/i })
     await expect(images.first()).toBeVisible()
   })
 
   test('shows amenities', async ({ page }) => {
-    await page.goto('/rooms/room-001')
+    await page.goto('/rooms/BSIG')
     await expect(page.getByText('Free Wi-Fi')).toBeVisible()
   })
 
   test('shows booking panel with Book Now', async ({ page }) => {
-    await page.goto('/rooms/room-001')
+    await page.goto('/rooms/BSIG')
     await expect(page.getByRole('button', { name: /Select dates to book|Book Now/i })).toBeVisible()
   })
 })

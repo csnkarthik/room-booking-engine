@@ -1,6 +1,6 @@
 [
   {
-    "roomId": "room-003",
+    "roomId": "BK",
     "guest": {
       "firstName": "Karthikeyan",
       "lastName": "Nallathambi",
@@ -19,7 +19,7 @@
     "stripePaymentIntentId": "pi_3TMMuzLlGzz3pHWe1ZebQ0DP",
     "id": "da639424-33ec-462c-918a-9a3e71ce5737",
     "room": {
-      "id": "room-003",
+      "id": "BK",
       "name": "Deluxe King",
       "type": "deluxe",
       "maxGuests": 2,
@@ -50,7 +50,7 @@
     "createdAt": "2026-04-15T06:29:25.918Z"
   },
   {
-    "roomId": "room-002",
+    "roomId": "BD",
     "guest": {
       "firstName": "Karthikeyan",
       "lastName": "Nallathambi",
@@ -69,7 +69,7 @@
     "stripePaymentIntentId": "pi_3TMN27LlGzz3pHWe1t8F5U6Q",
     "id": "c409c3eb-9312-45f3-b235-5e332f66d1f2",
     "room": {
-      "id": "room-002",
+      "id": "BD",
       "name": "Superior Double",
       "type": "double",
       "maxGuests": 2,
@@ -98,7 +98,7 @@
     "createdAt": "2026-04-15T06:35:32.279Z"
   },
   {
-    "roomId": "room-001",
+    "roomId": "BSIG",
     "guest": {
       "firstName": "Karthikeyan",
       "lastName": "Nallathambi",
@@ -117,7 +117,7 @@
     "stripePaymentIntentId": "pi_3TMNnMLlGzz3pHWe0ms0hq64",
     "id": "95d6f542-d7a4-4bea-8db7-e02d8b2cc338",
     "room": {
-      "id": "room-001",
+      "id": "BSIG",
       "name": "Classic Single",
       "type": "single",
       "maxGuests": 1,

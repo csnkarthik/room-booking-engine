@@ -30,11 +30,11 @@ export default function CheckoutPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        amount: totalPrice || room.pricePerNight,
+        amount: totalPrice || room!.pricePerNight,
         currency: 'usd',
         metadata: {
-          roomId: room.id,
-          roomName: room.name,
+          roomId: room!.id,
+          roomName: room!.name,
           checkIn,
           checkOut,
           guests: String(guests),

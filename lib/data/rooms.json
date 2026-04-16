@@ -1,6 +1,6 @@
 [
   {
-    "id": "room-001",
+    "id": "BSIG",
     "name": "Classic Single",
     "type": "single",
     "maxGuests": 1,
@@ -18,7 +18,75 @@
     "available": true
   },
   {
-    "id": "room-002",
+    "id": "BSIG2",
+    "name": "Classic Twin",
+    "type": "single",
+    "maxGuests": 2,
+    "pricePerNight": 99,
+    "images": [
+      "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800",
+      "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+    ],
+    "amenities": ["Free Wi-Fi", "Air Conditioning", "Flat-screen TV", "Mini-fridge", "Safe"],
+    "description": "A bright twin room with two single beds, ideal for friends or colleagues traveling together. Features a work desk and a well-appointed en-suite bathroom.",
+    "size": 240,
+    "floor": 2,
+    "available": true
+  },
+  {
+    "id": "BSIGH",
+    "name": "Single Harbour View",
+    "type": "single",
+    "maxGuests": 1,
+    "pricePerNight": 119,
+    "images": [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Flat-screen TV",
+      "Mini-fridge",
+      "Safe",
+      "Harbour View"
+    ],
+    "description": "A cozy single room with stunning harbour views. Wake up to the sight of the waterfront from your queen bed. Features a modern en-suite bathroom and a dedicated work desk.",
+    "size": 230,
+    "floor": 5,
+    "available": true
+  },
+  {
+    "id": "BSIGH2",
+    "name": "Twin Harbour View",
+    "type": "single",
+    "maxGuests": 2,
+    "pricePerNight": 129,
+    "images": [
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+      "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Flat-screen TV",
+      "Mini-fridge",
+      "Safe",
+      "Harbour View"
+    ],
+    "description": "A twin room with two single beds and sweeping harbour views. Ideal for two guests who want a scenic stay, featuring a bright en-suite bathroom and ample wardrobe space.",
+    "size": 250,
+    "floor": 5,
+    "available": true
+  },
+  {
+    "id": "BD",
     "name": "Superior Double",
     "type": "double",
     "maxGuests": 2,
@@ -38,13 +106,67 @@
       "Bathrobe & Slippers",
       "Coffee Machine"
     ],
-    "description": "Spacious double room with city views. Features a king-size bed, seating area, and luxurious marble bathroom with rain shower.",
+    "description": "Spacious double room with a king-size bed, seating area, and luxurious marble bathroom with rain shower.",
     "size": 320,
     "floor": 4,
     "available": true
   },
   {
-    "id": "room-003",
+    "id": "BDC",
+    "name": "Double City View",
+    "type": "double",
+    "maxGuests": 2,
+    "pricePerNight": 169,
+    "images": [
+      "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800",
+      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Flat-screen TV",
+      "Mini-bar",
+      "Safe",
+      "Bathrobe & Slippers",
+      "Coffee Machine",
+      "City View"
+    ],
+    "description": "A superior double room with floor-to-ceiling windows framing vibrant city skyline views. Boasts a king-size bed, plush seating area, and a marble bathroom with rain shower.",
+    "size": 330,
+    "floor": 6,
+    "available": true
+  },
+  {
+    "id": "BDH",
+    "name": "Double Harbour View",
+    "type": "double",
+    "maxGuests": 2,
+    "pricePerNight": 179,
+    "images": [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+      "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Flat-screen TV",
+      "Mini-bar",
+      "Safe",
+      "Bathrobe & Slippers",
+      "Coffee Machine",
+      "Harbour View"
+    ],
+    "description": "A superior double room with breathtaking harbour views. Wake up to shimmering waterfront scenery from your king-size bed. Features a marble bathroom with walk-in shower.",
+    "size": 330,
+    "floor": 6,
+    "available": true
+  },
+  {
+    "id": "BK",
     "name": "Deluxe King",
     "type": "deluxe",
     "maxGuests": 2,
@@ -72,10 +194,66 @@
     "available": true
   },
   {
-    "id": "room-004",
-    "name": "Junior Suite",
-    "type": "suite",
-    "maxGuests": 3,
+    "id": "BKC",
+    "name": "King City View",
+    "type": "deluxe",
+    "maxGuests": 2,
+    "pricePerNight": 249,
+    "images": [
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800",
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "55\" Smart TV",
+      "Full Mini-bar",
+      "Safe",
+      "Bathrobe & Slippers",
+      "Nespresso Machine",
+      "City View",
+      "Soaking Tub"
+    ],
+    "description": "The King City View room pairs a luxurious king-size bed with sweeping urban skyline vistas. Enjoy premium linens, a spa-inspired bathroom with soaking tub, and a dedicated sitting area.",
+    "size": 430,
+    "floor": 8,
+    "available": true
+  },
+  {
+    "id": "BKH",
+    "name": "King Harbour View",
+    "type": "deluxe",
+    "maxGuests": 2,
+    "pricePerNight": 269,
+    "images": [
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800",
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800",
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800"
+    ],
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "55\" Smart TV",
+      "Full Mini-bar",
+      "Safe",
+      "Bathrobe & Slippers",
+      "Nespresso Machine",
+      "Harbour View",
+      "Soaking Tub"
+    ],
+    "description": "The King Harbour View room offers an unobstructed waterfront panorama from a plush king-size bed. Features premium linens, a spa-inspired soaking tub, and a dedicated lounge area.",
+    "size": 430,
+    "floor": 8,
+    "available": true
+  },
+  {
+    "id": "BAPT2",
+    "name": "Two-Bedroom Apartment",
+    "type": "apartment",
+    "maxGuests": 4,
     "pricePerNight": 349,
     "images": [
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
@@ -91,21 +269,23 @@
       "In-room Safe",
       "Luxury Bathrobes",
       "Nespresso Machine",
+      "Two Bedrooms",
       "Separate Living Area",
+      "Kitchenette",
       "Soaking Tub & Walk-in Shower",
       "Complimentary Fruit & Snacks",
       "Priority Housekeeping"
     ],
-    "description": "The Junior Suite features a separate living area with a plush sofa, executive work desk, and a gorgeous bathroom. Ideal for longer stays or those who enjoy extra space.",
-    "size": 580,
+    "description": "A spacious two-bedroom apartment with a fully separate living area, kitchenette, and two private bathrooms. Perfect for families or groups seeking a home-away-from-home experience.",
+    "size": 620,
     "floor": 9,
     "available": true
   },
   {
-    "id": "room-005",
-    "name": "Grand Suite",
-    "type": "suite",
-    "maxGuests": 4,
+    "id": "BDUP3",
+    "name": "Three-Bedroom Duplex",
+    "type": "duplex",
+    "maxGuests": 6,
     "pricePerNight": 549,
     "images": [
       "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800",
@@ -121,20 +301,22 @@
       "In-room Safe",
       "Luxury Bathrobes & Slippers",
       "Nespresso & Tea Station",
+      "Three Bedrooms",
       "Separate Living & Dining Area",
       "Two Bathrooms",
+      "Full Kitchenette",
       "Soaking Tub & Rainfall Shower",
       "Complimentary Champagne",
       "24h Butler Service",
       "Airport Transfer Included"
     ],
-    "description": "Our Grand Suite is the pinnacle of luxury, featuring a full living and dining area, two premium bathrooms, and breathtaking top-floor views. Includes daily complimentary champagne and 24-hour butler service.",
-    "size": 920,
-    "floor": 12,
+    "description": "Our Three-Bedroom Duplex spans two floors with three private bedrooms, a grand living and dining area, and two premium bathrooms. Includes daily complimentary champagne and 24-hour butler service.",
+    "size": 1100,
+    "floor": 11,
     "available": true
   },
   {
-    "id": "room-006",
+    "id": "BPENT",
     "name": "Penthouse",
     "type": "penthouse",
     "maxGuests": 6,

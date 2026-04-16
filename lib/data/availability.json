@@ -1,6 +1,6 @@
 [
   {
-    "roomId": "room-001",
+    "roomId": "BSIG",
     "blockedRanges": [
       { "from": "2026-04-20", "to": "2026-04-23" },
       { "from": "2026-05-01", "to": "2026-05-05" }
@@ -8,7 +8,7 @@
     "minStayNights": 1
   },
   {
-    "roomId": "room-002",
+    "roomId": "BD",
     "blockedRanges": [
       { "from": "2026-04-18", "to": "2026-04-22" },
       { "from": "2026-05-10", "to": "2026-05-15" }
@@ -16,22 +16,22 @@
     "minStayNights": 2
   },
   {
-    "roomId": "room-003",
+    "roomId": "BK",
     "blockedRanges": [{ "from": "2026-04-25", "to": "2026-04-28" }],
     "minStayNights": 2
   },
   {
-    "roomId": "room-004",
+    "roomId": "BAPT2",
     "blockedRanges": [{ "from": "2026-05-01", "to": "2026-05-07" }],
     "minStayNights": 3
   },
   {
-    "roomId": "room-005",
+    "roomId": "BDUP3",
     "blockedRanges": [{ "from": "2026-04-30", "to": "2026-05-03" }],
     "minStayNights": 3
   },
   {
-    "roomId": "room-006",
+    "roomId": "BPENT",
     "blockedRanges": [],
     "minStayNights": 5
   }
