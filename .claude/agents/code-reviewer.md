@@ -40,3 +40,5 @@ One or two sentences on the overall quality and risk level.
 ```
 
 Keep findings specific: cite file and line, quote the problematic snippet, explain the risk, and suggest a concrete fix. Skip obvious boilerplate and only flag things that genuinely matter.
+
+When you're done, ask if the user wants to fix the issues you found or if they want to hand off to an engineer to fix them.

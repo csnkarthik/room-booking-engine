@@ -22,6 +22,7 @@ interface RoomsListWithFilterProps {
   checkIn?: string
   checkOut?: string
   guests?: number
+  apiPrices?: Map<string, number>
 }
 
 export function RoomsListWithFilter({
@@ -29,6 +30,7 @@ export function RoomsListWithFilter({
   checkIn,
   checkOut,
   guests,
+  apiPrices,
 }: RoomsListWithFilterProps) {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<RoomType | 'all'>('all')
@@ -83,10 +85,10 @@ export function RoomsListWithFilter({
               type="button"
               onClick={() => setCategory(cat.value)}
               className={cn(
-                'rounded-full border px-4 py-1.5 text-sm font-medium transition-colors',
+                'rounded-none border px-5 py-1.5 text-xs font-medium tracking-widest uppercase transition-colors',
                 category === cat.value
                   ? 'border-primary bg-primary text-primary-foreground'
-                  : 'hover:border-primary hover:text-primary border-slate-200 bg-white text-slate-600'
+                  : 'hover:border-primary hover:bg-primary hover:text-primary-foreground border-[#E8D9C5] bg-white text-[#7B5135]'
               )}
             >
               {cat.label}
@@ -110,9 +112,9 @@ export function RoomsListWithFilter({
         <div className="space-y-10">
           {Array.from(grouped.entries()).map(([type, typeRooms]) => (
             <section key={type}>
-              <h2 className="mb-4 text-lg font-semibold text-slate-800 capitalize">
+              <h2 className="text-foreground mb-4 font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-wide capitalize">
                 {type} Rooms
-                <span className="text-muted-foreground ml-2 text-sm font-normal">
+                <span className="text-muted-foreground ml-2 font-sans text-sm font-normal">
                   ({typeRooms.length})
                 </span>
               </h2>
@@ -124,6 +126,7 @@ export function RoomsListWithFilter({
                     checkIn={checkIn}
                     checkOut={checkOut}
                     guests={guests}
+                    apiPricePerNight={apiPrices?.get(room.id)}
                   />
                 ))}
               </div>
@@ -140,6 +143,7 @@ export function RoomsListWithFilter({
               checkIn={checkIn}
               checkOut={checkOut}
               guests={guests}
+              apiPricePerNight={apiPrices?.get(room.id)}
             />
           ))}
         </div>

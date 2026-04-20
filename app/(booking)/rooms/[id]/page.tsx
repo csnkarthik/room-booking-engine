@@ -40,9 +40,8 @@ export default async function RoomDetailPage({ params, searchParams }: PageProps
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-3">
+      <main className="mx-auto max-w-6xl px-4 py-8">
+        <div className="mb-4">
           <Link
             href="/"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
@@ -52,41 +51,40 @@ export default async function RoomDetailPage({ params, searchParams }: PageProps
             Back to rooms
           </Link>
         </div>
-      </div>
 
-      <main className="mx-auto max-w-6xl px-4 py-8">
+        {/* Title section — above the gallery */}
+        <div className="mb-6">
+          <div className="mb-3 flex items-center gap-2">
+            <Badge variant="outline" className="capitalize">
+              {room.type}
+            </Badge>
+            <div className="flex items-center gap-1 text-amber-500">
+              <Star className="h-4 w-4 fill-current" />
+              <span className="text-sm font-medium">4.9</span>
+            </div>
+          </div>
+          <h1 className="mb-3 text-3xl font-bold">{room.name}</h1>
+          <div className="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
+            <span className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              Up to {room.maxGuests} {room.maxGuests === 1 ? 'guest' : 'guests'}
+            </span>
+            <span className="flex items-center gap-1">
+              <Maximize2 className="h-4 w-4" />
+              {room.size} sq ft
+            </span>
+            <span>Floor {room.floor}</span>
+          </div>
+        </div>
+
         {/* Image Gallery */}
-        <div className="mb-8 h-[480px]">
+        <div className="mb-10">
           <ImageGallery images={room.images} roomName={room.name} />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* Left: Room info */}
+          {/* Left: Room details */}
           <div className="lg:col-span-2">
-            <div className="mb-2 flex items-center gap-2">
-              <Badge variant="outline" className="capitalize">
-                {room.type}
-              </Badge>
-              <div className="flex items-center gap-1 text-amber-500">
-                <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm font-medium">4.9</span>
-              </div>
-            </div>
-
-            <h1 className="mb-2 text-3xl font-bold">{room.name}</h1>
-
-            <div className="text-muted-foreground mb-6 flex flex-wrap items-center gap-4 text-sm">
-              <span className="flex items-center gap-1">
-                <Users className="h-4 w-4" />
-                Up to {room.maxGuests} {room.maxGuests === 1 ? 'guest' : 'guests'}
-              </span>
-              <span className="flex items-center gap-1">
-                <Maximize2 className="h-4 w-4" />
-                {room.size} sq ft
-              </span>
-              <span>Floor {room.floor}</span>
-            </div>
-
             {/* Description */}
             <div className="mb-8">
               <h2 className="mb-3 text-lg font-semibold">About this room</h2>
@@ -132,7 +130,7 @@ export default async function RoomDetailPage({ params, searchParams }: PageProps
 
           {/* Right: Booking panel */}
           <div className="lg:col-span-1">
-            <div className="sticky top-20">
+            <div className="sticky top-36">
               <RoomBookingPanel
                 room={room}
                 availability={availability}

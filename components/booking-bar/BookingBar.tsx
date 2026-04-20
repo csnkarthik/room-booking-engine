@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Calendar, Search } from 'lucide-react'
+import { Calendar, Search, DoorOpen, Minus, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DateRangeCalendar } from '@/components/calendar/DateRangeCalendar'
 import { GuestSelector } from '@/components/booking-bar/GuestSelector'
@@ -20,7 +20,7 @@ interface BookingBarProps {
 
 export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) {
   const router = useRouter()
-  const { checkIn, checkOut, guests, setDates, setGuests } = useBookingStore()
+  const { checkIn, checkOut, guests, rooms, setDates, setGuests, setRooms } = useBookingStore()
 
   const [showCalendar, setShowCalendar] = useState(false)
   const calendarRef = useRef<HTMLDivElement>(null)
@@ -44,6 +44,7 @@ export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) 
     if (checkIn) params.set('checkIn', checkIn)
     if (checkOut) params.set('checkOut', checkOut)
     params.set('guests', String(guests))
+    params.set('rooms', String(rooms))
     router.push(`/rooms?${params.toString()}`)
   }
 
@@ -54,7 +55,7 @@ export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) 
 
   return (
     <div
-      className={cn('w-full rounded-2xl border bg-white shadow-lg', className)}
+      className={cn('w-full border border-[#E8D9C5] bg-white shadow-lg', className)}
       role="search"
       aria-label="Room search"
     >
@@ -66,7 +67,7 @@ export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) 
             onClick={() => setShowCalendar((o) => !o)}
             aria-haspopup="dialog"
             aria-expanded={showCalendar}
-            className="hover:bg-muted/50 flex h-full w-full items-center gap-2 px-4 py-3 focus:outline-none md:rounded-l-2xl"
+            className="hover:bg-muted/50 flex h-full w-full items-center gap-2 px-4 py-3 focus:outline-none"
           >
             <Calendar className="text-muted-foreground h-4 w-4 shrink-0" />
             <div className="text-left">
@@ -99,12 +100,47 @@ export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) 
           <GuestSelector value={guests} onChange={setGuests} className="h-full" />
         </div>
 
+        {/* Rooms */}
+        <div className="flex-1">
+          <div className="flex h-full items-center gap-2 px-3 py-2">
+            <DoorOpen className="text-muted-foreground h-4 w-4 shrink-0" />
+            <div className="flex-1">
+              <div className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
+                Rooms
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setRooms(Math.max(1, rooms - 1))}
+                  disabled={rooms <= 1}
+                  aria-label="Decrease rooms"
+                  className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+                >
+                  <Minus className="h-3 w-3" />
+                </button>
+                <span className="text-sm font-medium">
+                  {rooms} {rooms === 1 ? 'room' : 'rooms'}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setRooms(Math.min(4, rooms + 1))}
+                  disabled={rooms >= 4}
+                  aria-label="Increase rooms"
+                  className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+                >
+                  <Plus className="h-3 w-3" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Search CTA */}
-        <div className="flex items-center p-2 md:rounded-r-2xl">
+        <div className="flex items-center p-2">
           <Button
             onClick={handleSearch}
             size="lg"
-            className="w-full gap-2 md:w-auto"
+            className="w-full gap-2 rounded-none text-xs tracking-widest uppercase md:w-auto"
             aria-label="Search available rooms"
           >
             <Search className="h-4 w-4" />

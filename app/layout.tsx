@@ -1,17 +1,22 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Cormorant_Garamond, Lato } from 'next/font/google'
 import './globals.css'
 import { QueryProvider } from '@/lib/providers/QueryProvider'
 import { Toaster } from '@/components/ui/sonner'
+import Footer from '@/components/footer/Footer'
+import { SiteHeader } from '@/components/header/SiteHeader'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const cormorant = Cormorant_Garamond({
+  variable: '--font-heading',
   subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const lato = Lato({
+  variable: '--font-sans',
   subsets: ['latin'],
+  weight: ['300', '400', '700'],
 })
 
 export const metadata: Metadata = {
@@ -26,10 +31,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${cormorant.variable} ${lato.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <QueryProvider>
+          <SiteHeader />
           {children}
+          <Footer />
           <Toaster richColors position="top-right" />
         </QueryProvider>
       </body>

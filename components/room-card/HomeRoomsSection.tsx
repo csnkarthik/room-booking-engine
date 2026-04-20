@@ -57,10 +57,12 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
   return (
     <div>
       {/* Booking bar */}
-      <BookingBar className="mb-6" basePrice={minPrice} onSearch={handleSearch} />
+      <div className="sticky top-0 z-40 -mx-4 bg-white px-4 pt-3 pb-3 shadow-sm">
+        <BookingBar basePrice={minPrice} onSearch={handleSearch} />
+      </div>
 
       {/* Category pills */}
-      <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+      <div className="mt-4 mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.value}

@@ -53,9 +53,8 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="border-b bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-4">
+      <main className="mx-auto max-w-5xl px-4 py-8">
+        <div className="mb-6">
           <Link
             href={room ? `/rooms/${room.id}` : '/rooms'}
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
@@ -63,11 +62,10 @@ export default function CheckoutPage() {
             <ArrowLeft className="h-4 w-4" />
             Back to room
           </Link>
-          <h1 className="mt-2 text-2xl font-bold">Complete Your Booking</h1>
+          <h1 className="mt-2 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-wide">
+            Complete Your Booking
+          </h1>
         </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl px-4 py-8">
         <div className="grid gap-8 lg:grid-cols-5">
           {/* Checkout form - 3 cols */}
           <div className="lg:col-span-3">

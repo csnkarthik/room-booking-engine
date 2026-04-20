@@ -14,6 +14,7 @@ interface RoomCardProps {
   checkIn?: string | null
   checkOut?: string | null
   guests?: number
+  apiPricePerNight?: number
 }
 
 const roomTypeLabels: Record<string, string> = {
@@ -26,7 +27,7 @@ const roomTypeLabels: Record<string, string> = {
 
 const noExtras = { breakfast: false, airportTransfer: false, lateCheckout: false }
 
-export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
+export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: RoomCardProps) {
   const params = new URLSearchParams()
   if (checkIn) params.set('checkIn', checkIn)
   if (checkOut) params.set('checkOut', checkOut)
@@ -47,7 +48,7 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
   }
 
   return (
-    <Card className="group overflow-hidden transition-shadow hover:shadow-lg">
+    <Card className="group overflow-hidden border-[#E8D9C5] pt-0 transition-shadow hover:shadow-xl">
       <div className="bg-muted relative aspect-[4/3] overflow-hidden">
         <Image
           src={room.images[0]}
@@ -56,16 +57,25 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <Badge variant="secondary" className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm">
+        <Badge className="absolute top-3 left-3 rounded-none border-0 bg-[#3D2314] px-2 py-0.5 text-[10px] tracking-widest text-[#C8B89A] uppercase">
           {roomTypeLabels[room.type] ?? room.type}
         </Badge>
       </div>
 
       <CardContent className="p-4">
         <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="text-base leading-tight font-semibold">{room.name}</h3>
+          <h3 className="font-[family-name:var(--font-heading)] text-lg leading-tight font-semibold tracking-wide">
+            {room.name}
+          </h3>
           <div className="shrink-0 text-right">
-            {stayTotal ? (
+            {apiPricePerNight ? (
+              <>
+                <div className="text-primary text-lg font-bold">
+                  {formatCurrency(apiPricePerNight)}
+                </div>
+                <div className="text-muted-foreground text-xs">/night</div>
+              </>
+            ) : stayTotal ? (
               <>
                 <div className="text-primary text-lg font-bold">{formatCurrency(stayTotal)}</div>
                 <div className="text-muted-foreground text-xs">
@@ -98,12 +108,19 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
 
         <div className="mb-4 flex flex-wrap gap-1">
           {room.amenities.slice(0, 3).map((amenity) => (
-            <Badge key={amenity} variant="outline" className="text-xs">
+            <Badge
+              key={amenity}
+              variant="outline"
+              className="rounded-none border-[#E8D9C5] text-[10px] tracking-wider text-[#7B5135] uppercase"
+            >
               {amenity}
             </Badge>
           ))}
           {room.amenities.length > 3 && (
-            <Badge variant="outline" className="text-xs">
+            <Badge
+              variant="outline"
+              className="rounded-none border-[#E8D9C5] text-[10px] tracking-wider text-[#7B5135] uppercase"
+            >
               +{room.amenities.length - 3} more
             </Badge>
           )}
@@ -111,7 +128,7 @@ export function RoomCard({ room, checkIn, checkOut, guests }: RoomCardProps) {
 
         <Link
           href={`/rooms/${room.id}${query ? `?${query}` : ''}`}
-          className={cn(buttonVariants(), 'w-full')}
+          className={cn(buttonVariants(), 'w-full rounded-none text-xs tracking-widest uppercase')}
         >
           View Room
         </Link>

@@ -1,14 +1,6 @@
 import type { Booking } from '@/lib/types'
-import { parseDate } from './dates'
-
-function formatICalDate(dateStr: string): string {
-  const d = parseDate(dateStr)
-  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
-}
 
 export function generateICalContent(booking: Booking): string {
-  const checkIn = formatICalDate(booking.checkIn)
-  const checkOut = formatICalDate(booking.checkOut)
   const now = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
   const roomName = booking.room?.name ?? 'Hotel Room'
 

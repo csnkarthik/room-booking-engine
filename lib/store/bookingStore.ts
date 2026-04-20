@@ -8,12 +8,14 @@ interface BookingState {
   checkIn: string | null
   checkOut: string | null
   guests: number
+  rooms: number
   extras: BookingExtras
   totalPrice: number
 
   setRoom: (room: Room) => void
   setDates: (checkIn: string, checkOut: string) => void
   setGuests: (guests: number) => void
+  setRooms: (rooms: number) => void
   setExtras: (extras: Partial<BookingExtras>) => void
   clearBooking: () => void
 }
@@ -31,6 +33,7 @@ export const useBookingStore = create<BookingState>()(
       checkIn: null,
       checkOut: null,
       guests: 1,
+      rooms: 1,
       extras: defaultExtras,
       totalPrice: 0,
 
@@ -53,6 +56,8 @@ export const useBookingStore = create<BookingState>()(
 
       setGuests: (guests) => set({ guests }),
 
+      setRooms: (rooms) => set({ rooms }),
+
       setExtras: (newExtras) => {
         const { room, checkIn, checkOut, extras } = get()
         const merged = { ...extras, ...newExtras }
@@ -69,6 +74,7 @@ export const useBookingStore = create<BookingState>()(
           checkIn: null,
           checkOut: null,
           guests: 1,
+          rooms: 1,
           extras: defaultExtras,
           totalPrice: 0,
         }),
@@ -80,6 +86,7 @@ export const useBookingStore = create<BookingState>()(
         checkIn: state.checkIn,
         checkOut: state.checkOut,
         guests: state.guests,
+        rooms: state.rooms,
         extras: state.extras,
         totalPrice: state.totalPrice,
       }),

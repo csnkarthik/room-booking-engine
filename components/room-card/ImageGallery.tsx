@@ -21,7 +21,7 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
   return (
     <>
       {/* Main gallery grid */}
-      <div className="grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-2xl">
+      <div className="grid h-[360px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-2xl md:h-[480px]">
         {/* Primary large image */}
         <button
           className="relative col-span-2 row-span-2 cursor-zoom-in overflow-hidden"
@@ -45,7 +45,7 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
         {images.slice(1, 5).map((src, i) => (
           <button
             key={src}
-            className="relative aspect-square cursor-zoom-in overflow-hidden"
+            className="relative cursor-zoom-in overflow-hidden"
             onClick={() => {
               setActiveIndex(i + 1)
               setLightboxOpen(true)
