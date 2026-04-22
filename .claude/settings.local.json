@@ -21,7 +21,9 @@
       "Bash(netlify sites:create --name room-booking-engine)",
       "Bash(netlify deploy:*)",
       "Bash(node:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(grep -E '\\\\.\\(ts|js\\)$')",
+      "Bash(npm run *)"
     ]
   }
 }

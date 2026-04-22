@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { DateRangeCalendar } from '@/components/calendar/DateRangeCalendar'
 import { GuestSelector } from '@/components/booking-bar/GuestSelector'
 import { useBookingStore } from '@/lib/store/bookingStore'
+import { useCalendarPricing } from '@/lib/hooks/useCalendarPricing'
 import { formatDisplayDate } from '@/lib/utils/dates'
 import { cn } from '@/lib/utils'
 
@@ -14,16 +15,33 @@ interface BookingBarProps {
   className?: string
   /** Show per-day pricing in the calendar (e.g. minimum room price) */
   basePrice?: number
+  /** Room type code (e.g. "BD") — enables API-driven per-day pricing */
+  roomTypeCode?: string
   /** If provided, called on Search instead of navigating to /rooms */
   onSearch?: () => void
 }
 
-export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) {
+function monthBounds(year: number, month: number): { startDate: string; endDate: string } {
+  const start = new Date(year, month, 1)
+  const end = new Date(year, month + 1, 0)
+  return {
+    startDate: start.toISOString().slice(0, 10),
+    endDate: end.toISOString().slice(0, 10),
+  }
+}
+
+export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: BookingBarProps) {
   const router = useRouter()
   const { checkIn, checkOut, guests, rooms, setDates, setGuests, setRooms } = useBookingStore()
 
   const [showCalendar, setShowCalendar] = useState(false)
   const calendarRef = useRef<HTMLDivElement>(null)
+
+  const today = new Date()
+  const [visibleYear, setVisibleYear] = useState(today.getFullYear())
+  const [visibleMonth, setVisibleMonth] = useState(today.getMonth())
+  const { startDate, endDate } = monthBounds(visibleYear, visibleMonth)
+  const { dailyPrices } = useCalendarPricing(roomTypeCode, guests, startDate, endDate)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -85,11 +103,16 @@ export function BookingBar({ className, basePrice, onSearch }: BookingBarProps) 
                 checkIn={checkIn}
                 checkOut={checkOut}
                 basePrice={basePrice}
+                dailyPrices={dailyPrices}
                 onSelect={(ci, co) => {
                   setDates(ci, co)
                   setShowCalendar(false)
                 }}
                 onClose={() => setShowCalendar(false)}
+                onMonthChange={(y, m) => {
+                  setVisibleYear(y)
+                  setVisibleMonth(m)
+                }}
               />
             </div>
           )}

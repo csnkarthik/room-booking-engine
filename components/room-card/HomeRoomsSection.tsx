@@ -1,11 +1,17 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { BookingBar } from '@/components/booking-bar/BookingBar'
 import { RoomCard } from '@/components/room-card/RoomCard'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { cn } from '@/lib/utils'
 import type { Room, RoomType } from '@/lib/types'
+
+function isoDate(offsetDays: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + offsetDays)
+  return d.toISOString().slice(0, 10)
+}
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
@@ -22,12 +28,24 @@ interface HomeRoomsSectionProps {
 }
 
 export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
-  const { checkIn, checkOut, guests } = useBookingStore()
+  const { checkIn, checkOut, guests, setDates, setGuests } = useBookingStore()
   const [category, setCategory] = useState<RoomType | 'all'>('all')
+
+  const defaultCheckIn = checkIn ?? isoDate(1)
+  const defaultCheckOut = checkOut ?? isoDate(3)
+  const defaultGuests = checkIn ? guests : 2
+
   // Triggered when user clicks Search — snapshot the store values
-  const [activeCheckIn, setActiveCheckIn] = useState<string | null>(null)
-  const [activeCheckOut, setActiveCheckOut] = useState<string | null>(null)
-  const [activeGuests, setActiveGuests] = useState<number | undefined>(undefined)
+  const [activeCheckIn, setActiveCheckIn] = useState<string | null>(defaultCheckIn)
+  const [activeCheckOut, setActiveCheckOut] = useState<string | null>(defaultCheckOut)
+  const [activeGuests, setActiveGuests] = useState<number | undefined>(defaultGuests)
+
+  useEffect(() => {
+    if (!checkIn) {
+      setDates(isoDate(1), isoDate(3))
+      setGuests(2)
+    }
+  }, [])
 
   const handleSearch = () => {
     setActiveCheckIn(checkIn)

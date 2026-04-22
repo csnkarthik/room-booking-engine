@@ -67,3 +67,15 @@ export interface SearchParams {
   guests?: number
   location?: string
 }
+
+export interface DailyPrice {
+  date: string
+  rates: {
+    one: number
+    two: number
+    three: number
+    four: number
+    five: number
+  }
+  roomTypes: string[]
+}

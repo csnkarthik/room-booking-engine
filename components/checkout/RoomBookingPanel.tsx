@@ -6,9 +6,19 @@ import { Button } from '@/components/ui/button'
 import { DateRangeCalendar } from '@/components/calendar/DateRangeCalendar'
 import { GuestSelector } from '@/components/booking-bar/GuestSelector'
 import { useBookingStore } from '@/lib/store/bookingStore'
+import { useCalendarPricing } from '@/lib/hooks/useCalendarPricing'
 import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/dates'
 import { calculateStayPrice } from '@/lib/utils/pricing'
 import type { Room, Availability } from '@/lib/types'
+
+function monthBounds(year: number, month: number): { startDate: string; endDate: string } {
+  const start = new Date(year, month, 1)
+  const end = new Date(year, month + 1, 0)
+  return {
+    startDate: start.toISOString().slice(0, 10),
+    endDate: end.toISOString().slice(0, 10),
+  }
+}
 
 interface RoomBookingPanelProps {
   room: Room
@@ -32,6 +42,12 @@ export function RoomBookingPanel({
   const [localCheckOut, setLocalCheckOut] = useState<string | null>(initialCheckOut ?? null)
   const [localGuests, setLocalGuests] = useState(initialGuests)
   const [showCalendar, setShowCalendar] = useState(false)
+
+  const today = new Date()
+  const [visibleYear, setVisibleYear] = useState(today.getFullYear())
+  const [visibleMonth, setVisibleMonth] = useState(today.getMonth())
+  const { startDate, endDate } = monthBounds(visibleYear, visibleMonth)
+  const { dailyPrices } = useCalendarPricing(room.id, localGuests, startDate, endDate)
 
   useEffect(() => {
     if (initialCheckIn && initialCheckOut) {
@@ -103,9 +119,14 @@ export function RoomBookingPanel({
               checkIn={localCheckIn}
               checkOut={localCheckOut}
               availability={availability}
+              dailyPrices={dailyPrices}
               basePrice={room.pricePerNight}
               onSelect={handleDateSelect}
               onClose={() => setShowCalendar(false)}
+              onMonthChange={(y, m) => {
+                setVisibleYear(y)
+                setVisibleMonth(m)
+              }}
             />
           </div>
         )}

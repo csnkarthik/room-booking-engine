@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Calendar } from 'lucide-react'
 import { DateRangeCalendar } from '@/components/calendar/DateRangeCalendar'
+import { useCalendarPricing } from '@/lib/hooks/useCalendarPricing'
 import type { Room } from '@/lib/types'
 
 interface RoomCardCalendarProps {
@@ -13,10 +14,26 @@ interface RoomCardCalendarProps {
   guests?: number
 }
 
+function monthBounds(year: number, month: number): { startDate: string; endDate: string } {
+  const start = new Date(year, month, 1)
+  const end = new Date(year, month + 1, 0)
+  return {
+    startDate: start.toISOString().slice(0, 10),
+    endDate: end.toISOString().slice(0, 10),
+  }
+}
+
 export function RoomCardCalendar({ room, checkIn, checkOut, guests }: RoomCardCalendarProps) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+
+  const today = new Date()
+  const [visibleYear, setVisibleYear] = useState(today.getFullYear())
+  const [visibleMonth, setVisibleMonth] = useState(today.getMonth())
+
+  const { startDate, endDate } = monthBounds(visibleYear, visibleMonth)
+  const { dailyPrices } = useCalendarPricing(room.id, guests ?? 1, startDate, endDate)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -58,9 +75,13 @@ export function RoomCardCalendar({ room, checkIn, checkOut, guests }: RoomCardCa
           <DateRangeCalendar
             checkIn={checkIn ?? null}
             checkOut={checkOut ?? null}
-            basePrice={room.pricePerNight}
+            dailyPrices={dailyPrices}
             onSelect={handleSelect}
             onClose={() => setOpen(false)}
+            onMonthChange={(y, m) => {
+              setVisibleYear(y)
+              setVisibleMonth(m)
+            }}
           />
         </div>
       )}

@@ -136,5 +136,52 @@
     },
     "status": "confirmed",
     "createdAt": "2026-04-15T07:24:32.575Z"
+  },
+  {
+    "roomId": "BSIGH",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611781"
+    },
+    "checkIn": "2026-04-24",
+    "checkOut": "2026-04-26",
+    "guests": 1,
+    "extras": {
+      "breakfast": true,
+      "airportTransfer": true,
+      "lateCheckout": false
+    },
+    "totalPrice": 363,
+    "stripePaymentIntentId": "pi_3TOtGTLlGzz3pHWe0swjW4HC",
+    "id": "a9342750-43a0-416c-a53d-83cde518c844",
+    "room": {
+      "id": "BSIGH",
+      "name": "Single Harbour View",
+      "type": "single",
+      "maxGuests": 1,
+      "pricePerNight": 119,
+      "images": [
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+      ],
+      "amenities": [
+        "Free Wi-Fi",
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini-fridge",
+        "Safe",
+        "Harbour View"
+      ],
+      "description": "A cozy single room with stunning harbour views. Wake up to the sight of the waterfront from your queen bed. Features a modern en-suite bathroom and a dedicated work desk.",
+      "size": 230,
+      "floor": 5,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-22T05:24:46.804Z"
   }
 ]

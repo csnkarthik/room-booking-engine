@@ -216,6 +216,7 @@ export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
         <PaymentElement
           options={{
             layout: 'tabs',
+            wallets: { link: 'never' },
           }}
         />
         <p className="text-muted-foreground mt-3 text-xs">

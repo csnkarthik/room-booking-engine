@@ -12,10 +12,14 @@ interface DateRangeCalendarProps {
   checkIn: string | null
   checkOut: string | null
   availability?: Availability
-  /** Base price per night for this room — enables per-day pricing display */
+  /** Base price per night — static fallback when dailyPrices is absent */
   basePrice?: number
+  /** API-driven per-day prices keyed by YYYY-MM-DD; takes precedence over basePrice */
+  dailyPrices?: Record<string, number>
   onSelect: (checkIn: string, checkOut: string) => void
   onClose?: () => void
+  /** Called when the user navigates to a different month */
+  onMonthChange?: (year: number, month: number) => void
   className?: string
 }
 
@@ -36,8 +40,10 @@ export function DateRangeCalendar({
   checkOut,
   availability,
   basePrice,
+  dailyPrices,
   onSelect,
   onClose,
+  onMonthChange,
   className,
 }: DateRangeCalendarProps) {
   const today = useMemo(() => {
@@ -110,17 +116,19 @@ export function DateRangeCalendar({
   }
 
   const prevMonth = () => {
-    if (viewMonth === 0) {
-      setViewMonth(11)
-      setViewYear((y) => y - 1)
-    } else setViewMonth((m) => m - 1)
+    const newMonth = viewMonth === 0 ? 11 : viewMonth - 1
+    const newYear = viewMonth === 0 ? viewYear - 1 : viewYear
+    setViewMonth(newMonth)
+    setViewYear(newYear)
+    onMonthChange?.(newYear, newMonth)
   }
 
   const nextMonth = () => {
-    if (viewMonth === 11) {
-      setViewMonth(0)
-      setViewYear((y) => y + 1)
-    } else setViewMonth((m) => m + 1)
+    const newMonth = viewMonth === 11 ? 0 : viewMonth + 1
+    const newYear = viewMonth === 11 ? viewYear + 1 : viewYear
+    setViewMonth(newMonth)
+    setViewYear(newYear)
+    onMonthChange?.(newYear, newMonth)
   }
 
   const monthName = new Date(viewYear, viewMonth).toLocaleString('default', {
@@ -191,7 +199,10 @@ export function DateRangeCalendar({
           const isStart = isCheckIn(dateStr)
           const isEnd = isCheckOut(dateStr)
           const dayNum = new Date(dateStr + 'T00:00:00').getDate()
-          const price = basePrice && !blocked ? getDailyPrice(basePrice, dateStr) : null
+          const price = !blocked
+            ? (dailyPrices?.[dateStr] ?? (basePrice ? getDailyPrice(basePrice, dateStr) : null))
+            : null
+          const showPricing = basePrice !== undefined || dailyPrices !== undefined
 
           return (
             <button
@@ -204,7 +215,7 @@ export function DateRangeCalendar({
               aria-pressed={isStart || isEnd}
               className={cn(
                 'relative flex flex-col items-center justify-center py-1 text-xs transition-colors',
-                basePrice ? 'h-12' : 'h-9',
+                showPricing ? 'h-12' : 'h-9',
                 blocked && 'cursor-not-allowed opacity-30',
                 !blocked && 'hover:bg-primary/10 cursor-pointer',
                 inRange && 'bg-primary/10',
@@ -212,7 +223,9 @@ export function DateRangeCalendar({
                   'bg-primary text-primary-foreground hover:bg-primary rounded-lg font-semibold'
               )}
             >
-              <span className={cn('font-medium', basePrice ? 'text-xs' : 'text-sm')}>{dayNum}</span>
+              <span className={cn('font-medium', showPricing ? 'text-xs' : 'text-sm')}>
+                {dayNum}
+              </span>
               {price !== null && (
                 <span
                   className={cn(
