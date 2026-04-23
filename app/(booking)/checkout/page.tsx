@@ -14,7 +14,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { room, checkIn, checkOut, guests, extras, totalPrice } = useBookingStore()
+  const { room, checkIn, checkOut, guests, totalPrice } = useBookingStore()
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   // Capture booking validity at mount time — not reactive to store being cleared after payment
@@ -86,7 +86,7 @@ export default function CheckoutPage() {
                   },
                 }}
               >
-                <CheckoutForm clientSecret={clientSecret} />
+                <CheckoutForm />
               </Elements>
             ) : (
               <div className="border-destructive/50 bg-destructive/10 rounded-xl border p-6 text-center">

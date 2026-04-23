@@ -1,4 +1,11 @@
-export type RoomType = 'single' | 'double' | 'suite' | 'deluxe' | 'penthouse'
+export type RoomType =
+  | 'single'
+  | 'double'
+  | 'suite'
+  | 'deluxe'
+  | 'penthouse'
+  | 'apartment'
+  | 'duplex'
 
 export interface Room {
   id: string
@@ -30,6 +37,12 @@ export interface Guest {
   lastName: string
   email: string
   phone: string
+  addressLine1: string
+  addressLine2?: string
+  city: string
+  state: string
+  postalCode: string
+  countryCode: string
 }
 
 export interface BookingExtras {
@@ -51,6 +64,8 @@ export interface Booking {
   stripePaymentIntentId: string
   status: 'pending' | 'confirmed' | 'cancelled'
   createdAt: string
+  operaReservationId?: string
+  operaConfirmationNumber?: string
 }
 
 export interface BookingSession {

@@ -1,0 +1,477 @@
+1. requeset End point:
+{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations
+
+2. Sample resposne:
+{
+    "reservations": {
+        "reservation": {
+            "reservationGuests":  [
+                    {
+                        "profileInfo": {
+                            "profile": {
+                                "customer": {
+                                    "personName": [
+                                        {
+                                            "givenName": "Sam",
+                                            "middleName": "F",
+                                            "surname": "Smith",
+                                            "nameType": "Primary"
+                                        },
+                                        {
+                                            "nameType": "External"
+                                        }
+                                    ],
+                                    "language": "E"
+                                },
+                                "addresses": {
+                                    "addressInfo": [
+                                        {
+                                            "address": {
+                                                "addressLine": [
+                                                    "Riverside Corporate Park",
+                                                    "4 Julius Avenue"
+                                                ],
+                                                "cityName": "North Ryde",
+                                                "postalCode": "2113",
+                                                "state": "NSW",
+                                                "country": {
+                                                    "value": "USA",
+                                                    "code": "US"
+                                                },
+                                                "language": "EN",
+                                                "type": "HOME",
+                                                "primaryInd": true
+                                            }
+                                        }
+                                    ]
+                                },
+                                "emails": {
+                                    "emailInfo": {
+                                        "email": {
+                                            "emailAddress": "example@example.com",
+                                            "type": "HOME",
+                                            "typeDescription": "",
+                                            "primaryInd": true
+                                        }
+                                    }
+                                },
+                                "profileType": "Guest"
+                            }
+                        },
+                        "primary": true
+                    }
+                ],
+            "reservationPaymentMethods": {
+                "paymentMethod": "CA"
+            },
+            "markAsRecentlyAccessed": true,
+            "hotelId": "{{HotelId}}",
+            "reservationStatus": "Reserved",
+            "roomStay": {
+                "guarantee": {
+                    "onHold": false,
+                    "guaranteeCode": "DEP"
+                },
+                "roomRates": {
+                    "sourceCode": "{{SourceCode}}",
+                    "numberOfUnits": 1,
+                    "rates": {
+                        "rate": {
+                            "start": "{{currentdate}}",
+                            "end": "{{currentdateplus1}}",
+                            "base": {
+                                "amountBeforeTax": 899,
+                                "currencyCode": "USD"
+                            }
+                        }
+                    },
+                    "start": "{{currentdate}}",
+                    "marketCode": "{{MarketCode}}",
+                    "end": "{{currentdateplus1}}",
+                    "roomTypeCharged": "{{RoomType}}",
+                    "ratePlanCode": "{{RatePlanCode-Booking}}",
+                    "roomType": "{{RoomType}}",
+                    "pseudoRoom": false
+                },
+                "guestCounts": {
+                    "children": 0,
+                    "adults": 1
+                },
+                "departureDate": "{{currentdateplus1}}",
+                "arrivalDate": "{{currentdate}}"
+            }
+        }
+    },
+    "fetchInstructions": "Reservation"
+}
+3. Create reservation Response:
+{
+    "links": [
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations/26633003",
+            "rel": "self",
+            "templated": false,
+            "method": "GET",
+            "operationId": "getReservation"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations/26633003",
+            "rel": "self",
+            "templated": false,
+            "method": "PUT",
+            "operationId": "putReservation"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations/26633003/cancellations",
+            "rel": "self",
+            "templated": false,
+            "method": "POST",
+            "operationId": "postCancelReservation"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/fof/v1/hotels/BOSDEV/reservations/26633003/checkIns",
+            "rel": "self",
+            "templated": false,
+            "method": "POST",
+            "operationId": "postCheckIn"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations?confirmationNumberList=26506710",
+            "rel": "self",
+            "templated": false,
+            "method": "GET",
+            "operationId": "getHotelReservations"
+        }
+    ]
+}
+
+4. Field mappings from the booking flow to the create reservation API:
+
+- "sourceCode": HotelId from environment variable
+- "sourceType": "PMS"
+- "start": user input persisten from the calander
+- "end": user input persisted from booking flow
+- amountBeforeTax: total price persisted from booking flow
+- adults: user input persisted from the booking flow
+- children: always 0 for this flow
+- roomType: persisted from the booking flow
+- ratePlanCode: persisted from the booking flow
+- givenName: user input persisted from the booking flow
+- middleName: user input persisted from the booking flow
+- surname: user input persisted from the booking flow
+- emailAddress: user input persisted from the booking flow
+- arrivalDate: user input persisted from the booking flow
+- departureDate: user input persisted from the booking flow
+- marketCode: "BASE"
+- email: user input persisted from the booking flow 
+- address: user input persisted from the booking flow 
+
+5. get reservation request
+{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=Reservation
+6. Get resvervation response
+{
+    "reservations": {
+        "reservation": [
+            {
+                "reservationIdList": [
+                    {
+                        "id": "26633003",
+                        "type": "Reservation"
+                    },
+                    {
+                        "id": "26506710",
+                        "type": "Confirmation",
+                        "idExtension": 1
+                    }
+                ],
+                "externalReferences": [
+                    {
+                        "id": "26506710",
+                        "idExtension": 1,
+                        "idContext": "OPERA"
+                    }
+                ],
+                "sourceOfSale": {
+                    "sourceType": "PMS",
+                    "sourceCode": "BOSDEV"
+                },
+                "roomStay": {
+                    "registrationNumber": {
+                        "id": "",
+                        "type": "Reservation"
+                    },
+                    "currentRoomInfo": {
+                        "roomType": "BK",
+                        "roomOwnershipType": "Regular"
+                    },
+                    "roomRates": [
+                        {
+                            "total": {
+                                "amountBeforeTax": 599
+                            },
+                            "rates": {
+                                "rate": [
+                                    {
+                                        "base": {
+                                            "amountBeforeTax": 599,
+                                            "currencyCode": "USD",
+                                            "baseAmount": 599
+                                        },
+                                        "shareDistributionInstruction": "Full",
+                                        "total": {
+                                            "amountBeforeTax": 599
+                                        },
+                                        "start": "2026-04-22",
+                                        "end": "2026-04-22"
+                                    }
+                                ]
+                            },
+                            "guestCounts": {
+                                "childBuckets": {
+                                    "bucket1Count": 0,
+                                    "bucket2Count": 0,
+                                    "bucket3Count": 0,
+                                    "bucket4Count": 0,
+                                    "bucket5Count": 0
+                                },
+                                "adults": 1,
+                                "children": 0
+                            },
+                            "roomType": "BK",
+                            "ratePlanCode": "DEVRATE",
+                            "membershipEligible": false,
+                            "start": "2026-04-22",
+                            "end": "2026-04-22",
+                            "suppressRate": false,
+                            "marketCode": "BASE",
+                            "marketCodeDescription": "BASE RATE CODE",
+                            "sourceCode": "X",
+                            "sourceCodeDescription": "Default",
+                            "numberOfUnits": 1,
+                            "pseudoRoom": false,
+                            "roomTypeCharged": "BK",
+                            "houseUseOnly": false,
+                            "complimentary": false,
+                            "fixedRate": false,
+                            "discountAllowed": false,
+                            "bogoDiscount": false,
+                            "allowAutoCheckIn": false
+                        }
+                    ],
+                    "guestCounts": {
+                        "childBuckets": {
+                            "bucket1Count": 0,
+                            "bucket2Count": 0,
+                            "bucket3Count": 0,
+                            "bucket4Count": 0,
+                            "bucket5Count": 0
+                        },
+                        "adults": 1,
+                        "children": 0
+                    },
+                    "arrivalDate": "2026-04-22",
+                    "departureDate": "2026-04-23",
+                    "expectedTimes": {
+                        "reservationExpectedArrivalTime": "2026-04-22",
+                        "reservationExpectedDepartureTime": "2026-04-23"
+                    },
+                    "guarantee": {
+                        "guaranteeCode": "DEP",
+                        "shortDescription": "Deposit Received"
+                    },
+                    "total": {
+                        "amountBeforeTax": 599
+                    },
+                    "totalPoints": {
+                        "points": 0
+                    },
+                    "roomNumberLocked": false,
+                    "printRate": false
+                },
+                "reservationGuests": [
+                    {
+                        "profileInfo": {
+                            "profileIdList": [
+                                {
+                                    "id": "3804651",
+                                    "type": "Profile"
+                                }
+                            ],
+                            "profile": {
+                                "customer": {
+                                    "personName": [
+                                        {
+                                            "givenName": "Dilish",
+                                            "surname": "Dilish Velayudhan",
+                                            "nameType": "Primary"
+                                        },
+                                        {
+                                            "nameType": "External"
+                                        }
+                                    ],
+                                    "language": "E"
+                                },
+                                "addresses": {
+                                    "addressInfo": [
+                                        {
+                                            "address": {
+                                                "isValidated": true,
+                                                "cityName": "Henderson",
+                                                "postalCode": "89052",
+                                                "state": "NV",
+                                                "country": {
+                                                    "value": "United States",
+                                                    "code": "US",
+                                                    "displayCountryFlag": false,
+                                                    "isoCode": "US"
+                                                },
+                                                "language": "E",
+                                                "type": "HOME",
+                                                "primaryInd": true
+                                            },
+                                            "id": "2802122",
+                                            "type": "Address"
+                                        }
+                                    ]
+                                },
+                                "telephones": {
+                                    "telephoneInfo": [
+                                        {
+                                            "telephone": {
+                                                "phoneTechType": "PHONE",
+                                                "phoneUseType": "HOME",
+                                                "phoneNumber": "9988776655",
+                                                "primaryInd": true
+                                            },
+                                            "id": "4969547",
+                                            "type": "Communication"
+                                        }
+                                    ]
+                                },
+                                "profileType": "Guest"
+                            }
+                        },
+                        "arrivalTransport": {
+                            "transportationReqd": false
+                        },
+                        "departureTransport": {
+                            "transportationReqd": false
+                        },
+                        "primary": true
+                    }
+                ],
+                "cashiering": {
+                    "billingPrivileges": {
+                        "postingRestriction": true,
+                        "postStayCharging": true,
+                        "videoCheckout": false
+                    },
+                    "taxType": {
+                        "code": "0",
+                        "description": "Room and Tax"
+                    },
+                    "compAccounting": {
+                        "compPostings": "N"
+                    },
+                    "reverseCheckInAllowed": false,
+                    "reverseAdvanceCheckInAllowed": false,
+                    "transactionsPosted": false
+                },
+                "extSystemSync": true,
+                "hotelId": "BOSDEV",
+                "roomStayReservation": true,
+                "reservationStatus": "Reserved",
+                "computedReservationStatus": "DueIn",
+                "walkIn": false,
+                "printRate": false,
+                "createDateTime": "2026-04-23 04:14:58.0",
+                "creatorId": "A5522D92A7D445888BCAE95495A0CE",
+                "lastModifyDateTime": "2026-04-23 04:14:58.0",
+                "lastModifierId": "A5522D92A7D445888BCAE95495A0CE",
+                "createBusinessDate": "2026-04-22",
+                "displayColor": "NONE",
+                "displayColorDetails": {
+                    "colorDefinition": "MARKET_CODE",
+                    "colorDescription": "BASE RATE CODE"
+                },
+                "preRegistered": false,
+                "upgradeEligible": false,
+                "allowAutoCheckin": false,
+                "hasOpenFolio": false,
+                "allowMobileCheckout": false,
+                "allowMobileViewFolio": false,
+                "allowPreRegistration": false,
+                "optedForCommunication": false,
+                "backToBack": false,
+                "payeeSharer": false
+            }
+        ]
+    },
+    "masterInfoList": [
+        {
+            "codeInfo": [
+                {
+                    "description": "United States",
+                    "code": "US"
+                }
+            ],
+            "codeType": "Country"
+        },
+        {
+            "codeInfo": [
+                {
+                    "description": "Nevada",
+                    "code": "NV"
+                }
+            ],
+            "codeType": "State"
+        },
+        {
+            "codeInfo": [
+                {
+                    "description": "Home Address",
+                    "code": "HOME"
+                }
+            ],
+            "codeType": "AddressType"
+        }
+    ],
+    "links": [
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations/26633003",
+            "rel": "self",
+            "templated": false,
+            "method": "PUT",
+            "operationId": "putReservation"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rsv/v1/hotels/BOSDEV/reservations/26633003/cancellations",
+            "rel": "self",
+            "templated": false,
+            "method": "POST",
+            "operationId": "postCancelReservation"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/fof/v1/hotels/BOSDEV/reservations/26633003/checkIns",
+            "rel": "self",
+            "templated": false,
+            "method": "POST",
+            "operationId": "postCheckIn"
+        },
+        {
+            "href": "https://wynncu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/fof/v1/hotels/BOSDEV/reservations/26633003/roomAssignments",
+            "rel": "self",
+            "templated": false,
+            "method": "POST",
+            "operationId": "postRoomAssignment"
+        }
+    ]
+}
+
+From the  1, 2 and 3, 
+    1. Create a new service Create Reservation & Get Reservation in the backend that will call the create reservation API and get reservation API respectively.
+    2. Use token implementation from the other services
+    3. persist and pouplate the payload the booking flow
+    4. Call Create Reservation on the check out page
+    5. Use the reservationId from the create reservation response to call the get reservation API and display the reservation details on the confirmation page.
+    6. wire it all up

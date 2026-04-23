@@ -14,17 +14,7 @@ import { GuestSchema } from '@/lib/types/schemas'
 
 type GuestFormValues = z.infer<typeof GuestSchema>
 
-interface CheckoutFormProps {
-  clientSecret: string
-}
-
-const ExtrasSchema = z.object({
-  breakfast: z.boolean(),
-  airportTransfer: z.boolean(),
-  lateCheckout: z.boolean(),
-})
-
-export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
+export function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
@@ -39,6 +29,7 @@ export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
     formState: { errors },
   } = useForm<GuestFormValues>({
     resolver: zodResolver(GuestSchema),
+    defaultValues: { countryCode: 'US' },
   })
 
   const onSubmit = async (guestData: GuestFormValues) => {
@@ -59,7 +50,32 @@ export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
       }
 
       if (paymentIntent?.status === 'succeeded') {
-        // Create booking record
+        // Best-effort: create Opera reservation (failure does not block local booking)
+        let operaReservationId: string | undefined
+        try {
+          const operaRes = await fetch('/api/opera/reservation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              roomId: room.id,
+              checkIn,
+              checkOut,
+              adults: guests,
+              totalPrice,
+              guest: guestData,
+            }),
+          })
+          if (operaRes.ok) {
+            const operaData = await operaRes.json()
+            operaReservationId = operaData.operaReservationId
+          } else {
+            console.error('[CheckoutForm] Opera reservation failed:', await operaRes.text())
+          }
+        } catch (operaErr) {
+          console.error('[CheckoutForm] Opera reservation error:', operaErr)
+        }
+
+        // Create local booking record
         const res = await fetch('/api/bookings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -72,11 +88,12 @@ export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
             extras,
             totalPrice,
             stripePaymentIntentId: paymentIntent.id,
+            operaReservationId,
           }),
         })
 
         if (!res.ok) {
-          toast.error('Booking saved failed — please contact support.')
+          toast.error('Booking save failed — please contact support.')
           setProcessing(false)
           return
         }
@@ -175,6 +192,118 @@ export function CheckoutForm({ clientSecret }: CheckoutFormProps) {
             {errors.phone && (
               <p className="text-destructive mt-1 text-xs" role="alert">
                 {errors.phone.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Address */}
+        <div className="mt-4 grid gap-4">
+          <div>
+            <label htmlFor="addressLine1" className="mb-1 block text-sm font-medium">
+              Address{' '}
+              <span aria-hidden="true" className="text-destructive">
+                *
+              </span>
+            </label>
+            <Input
+              id="addressLine1"
+              {...register('addressLine1')}
+              aria-invalid={!!errors.addressLine1}
+              placeholder="123 Main St"
+            />
+            {errors.addressLine1 && (
+              <p className="text-destructive mt-1 text-xs" role="alert">
+                {errors.addressLine1.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="addressLine2" className="mb-1 block text-sm font-medium">
+              Address Line 2
+            </label>
+            <Input
+              id="addressLine2"
+              {...register('addressLine2')}
+              placeholder="Apt, suite, unit (optional)"
+            />
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="lg:col-span-2">
+              <label htmlFor="city" className="mb-1 block text-sm font-medium">
+                City{' '}
+                <span aria-hidden="true" className="text-destructive">
+                  *
+                </span>
+              </label>
+              <Input
+                id="city"
+                {...register('city')}
+                aria-invalid={!!errors.city}
+                placeholder="New York"
+              />
+              {errors.city && (
+                <p className="text-destructive mt-1 text-xs" role="alert">
+                  {errors.city.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="state" className="mb-1 block text-sm font-medium">
+                State{' '}
+                <span aria-hidden="true" className="text-destructive">
+                  *
+                </span>
+              </label>
+              <Input
+                id="state"
+                {...register('state')}
+                aria-invalid={!!errors.state}
+                placeholder="NY"
+              />
+              {errors.state && (
+                <p className="text-destructive mt-1 text-xs" role="alert">
+                  {errors.state.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="postalCode" className="mb-1 block text-sm font-medium">
+                Postal Code{' '}
+                <span aria-hidden="true" className="text-destructive">
+                  *
+                </span>
+              </label>
+              <Input
+                id="postalCode"
+                {...register('postalCode')}
+                aria-invalid={!!errors.postalCode}
+                placeholder="10001"
+              />
+              {errors.postalCode && (
+                <p className="text-destructive mt-1 text-xs" role="alert">
+                  {errors.postalCode.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="sm:w-1/4">
+            <label htmlFor="countryCode" className="mb-1 block text-sm font-medium">
+              Country{' '}
+              <span aria-hidden="true" className="text-destructive">
+                *
+              </span>
+            </label>
+            <Input
+              id="countryCode"
+              {...register('countryCode')}
+              aria-invalid={!!errors.countryCode}
+              placeholder="US"
+              maxLength={2}
+            />
+            {errors.countryCode && (
+              <p className="text-destructive mt-1 text-xs" role="alert">
+                {errors.countryCode.message}
               </p>
             )}
           </div>

@@ -5,7 +5,15 @@ export const DateRangeSchema = z.object({
   to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 })
 
-export const RoomTypeSchema = z.enum(['single', 'double', 'suite', 'deluxe', 'penthouse'])
+export const RoomTypeSchema = z.enum([
+  'single',
+  'double',
+  'suite',
+  'deluxe',
+  'penthouse',
+  'apartment',
+  'duplex',
+])
 
 export const RoomSchema = z.object({
   id: z.string(),
@@ -32,6 +40,12 @@ export const GuestSchema = z.object({
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(7, 'Phone number is required'),
+  addressLine1: z.string().min(1, 'Address is required'),
+  addressLine2: z.string().optional(),
+  city: z.string().min(1, 'City is required'),
+  state: z.string().min(1, 'State is required'),
+  postalCode: z.string().min(1, 'Postal code is required'),
+  countryCode: z.string().length(2, 'Use 2-letter country code'),
 })
 
 export const BookingExtrasSchema = z.object({
@@ -49,6 +63,8 @@ export const CreateBookingSchema = z.object({
   extras: BookingExtrasSchema,
   totalPrice: z.number().positive(),
   stripePaymentIntentId: z.string(),
+  operaReservationId: z.string().optional(),
+  operaConfirmationNumber: z.string().optional(),
 })
 
 export const BookingSchema = CreateBookingSchema.extend({

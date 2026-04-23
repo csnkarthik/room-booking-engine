@@ -183,5 +183,52 @@
     },
     "status": "confirmed",
     "createdAt": "2026-04-22T05:24:46.804Z"
+  },
+  {
+    "roomId": "BSIG2",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611782",
+      "addressLine1": "4563 Bayley Skye Avenue",
+      "addressLine2": "",
+      "city": "Las Vegas",
+      "state": "NV",
+      "postalCode": "89141",
+      "countryCode": "US"
+    },
+    "checkIn": "2026-06-10",
+    "checkOut": "2026-06-12",
+    "guests": 2,
+    "extras": {
+      "breakfast": false,
+      "airportTransfer": false,
+      "lateCheckout": false
+    },
+    "totalPrice": 198,
+    "stripePaymentIntentId": "pi_3TPFHJLlGzz3pHWe15vBT4tm",
+    "operaReservationId": "26633004",
+    "id": "22075ecd-05a6-44f6-aa5e-1ee509dff69f",
+    "room": {
+      "id": "BSIG2",
+      "name": "Classic Twin",
+      "type": "single",
+      "maxGuests": 2,
+      "pricePerNight": 99,
+      "images": [
+        "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+      ],
+      "amenities": ["Free Wi-Fi", "Air Conditioning", "Flat-screen TV", "Mini-fridge", "Safe"],
+      "description": "A bright twin room with two single beds, ideal for friends or colleagues traveling together. Features a work desk and a well-appointed en-suite bathroom.",
+      "size": 240,
+      "floor": 2,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-23T04:55:18.604Z"
   }
 ]

@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle, Download, Calendar, Users, Home } from 'lucide-react'
+import { CheckCircle, Download, Calendar, Users, Home, Hotel } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { readBookingById } from '@/lib/utils/data'
 import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/dates'
+import { getReservation, GetReservationResult } from '@/lib/services/operaReservation'
 
 interface PageProps {
   searchParams: Promise<{ bookingId?: string }>
@@ -22,6 +23,15 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
 
   const nights = daysBetween(booking.checkIn, booking.checkOut)
 
+  let operaData: GetReservationResult | null = null
+  if (booking.operaReservationId) {
+    try {
+      operaData = await getReservation(booking.operaReservationId)
+    } catch (err) {
+      console.error('[ConfirmationPage] Failed to fetch Opera reservation:', err)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       <main className="mx-auto max-w-2xl px-4 py-12">
@@ -36,6 +46,45 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
             <span className="font-medium text-slate-900">{booking.guest.email}</span>
           </p>
         </div>
+
+        {/* Opera Confirmation */}
+        {operaData && (
+          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
+            <div className="mb-4 flex items-center gap-2">
+              <Hotel className="h-5 w-5 text-amber-700" />
+              <h2 className="text-lg font-semibold text-amber-900">Hotel Confirmation</h2>
+            </div>
+            <div className="mb-3">
+              <p className="text-xs font-medium tracking-wider text-amber-700 uppercase">
+                Confirmation Number
+              </p>
+              <p className="mt-0.5 font-mono text-3xl font-bold text-amber-900">
+                {operaData.operaConfirmationNumber}
+              </p>
+              <p className="text-muted-foreground mt-0.5 text-xs">
+                Quote this number when contacting the hotel
+              </p>
+            </div>
+            <dl className="grid grid-cols-2 gap-3 border-t border-amber-200 pt-3 text-sm">
+              <div>
+                <dt className="text-amber-700">Reservation ID</dt>
+                <dd className="font-mono font-medium">{operaData.operaReservationId}</dd>
+              </div>
+              <div>
+                <dt className="text-amber-700">Room Type</dt>
+                <dd className="font-medium">{operaData.roomType}</dd>
+              </div>
+              <div>
+                <dt className="text-amber-700">Arrival</dt>
+                <dd className="font-medium">{formatDisplayDate(operaData.arrivalDate)}</dd>
+              </div>
+              <div>
+                <dt className="text-amber-700">Departure</dt>
+                <dd className="font-medium">{formatDisplayDate(operaData.departureDate)}</dd>
+              </div>
+            </dl>
+          </div>
+        )}
 
         {/* Booking reference */}
         <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
