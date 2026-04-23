@@ -230,5 +230,115 @@
     },
     "status": "confirmed",
     "createdAt": "2026-04-23T04:55:18.604Z"
+  },
+  {
+    "roomId": "BSIGH2",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611781",
+      "addressLine1": "9490 Bermuda Rd",
+      "addressLine2": "Apt #1140",
+      "city": "Las Vegas",
+      "state": "NV",
+      "postalCode": "89123",
+      "countryCode": "US"
+    },
+    "checkIn": "2026-04-24",
+    "checkOut": "2026-04-26",
+    "guests": 2,
+    "extras": {
+      "breakfast": false,
+      "airportTransfer": false,
+      "lateCheckout": false
+    },
+    "totalPrice": 258,
+    "stripePaymentIntentId": "pi_3TPG0RLlGzz3pHWe00cStY3D",
+    "operaReservationId": "26633006",
+    "id": "5aa60393-6ba9-4096-a8b7-8274d1a3bcfa",
+    "room": {
+      "id": "BSIGH2",
+      "name": "Twin Harbour View",
+      "type": "single",
+      "maxGuests": 2,
+      "pricePerNight": 129,
+      "images": [
+        "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800",
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+      ],
+      "amenities": [
+        "Free Wi-Fi",
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini-fridge",
+        "Safe",
+        "Harbour View"
+      ],
+      "description": "A twin room with two single beds and sweeping harbour views. Ideal for two guests who want a scenic stay, featuring a bright en-suite bathroom and ample wardrobe space.",
+      "size": 250,
+      "floor": 5,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-23T05:41:33.883Z"
+  },
+  {
+    "roomId": "BDH",
+    "guest": {
+      "firstName": "Karthikeyan",
+      "lastName": "Nallathambi",
+      "email": "karthik.aspx.cs@gmail.com",
+      "phone": "17028611781",
+      "addressLine1": "9490 Bermuda Rd",
+      "addressLine2": "Apt #1140",
+      "city": "Las Vegas",
+      "state": "NV",
+      "postalCode": "89123",
+      "countryCode": "US"
+    },
+    "checkIn": "2026-04-29",
+    "checkOut": "2026-04-30",
+    "guests": 2,
+    "extras": {
+      "breakfast": false,
+      "airportTransfer": false,
+      "lateCheckout": false
+    },
+    "totalPrice": 179,
+    "stripePaymentIntentId": "pi_3TPHagLlGzz3pHWe1x5qnWSR",
+    "operaReservationId": "26633010",
+    "id": "b5e7c324-cd64-46e0-b14d-80afb75329b2",
+    "room": {
+      "id": "BDH",
+      "name": "Double Harbour View",
+      "type": "double",
+      "maxGuests": 2,
+      "pricePerNight": 179,
+      "images": [
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+        "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+        "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800",
+        "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800"
+      ],
+      "amenities": [
+        "Free Wi-Fi",
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini-bar",
+        "Safe",
+        "Bathrobe & Slippers",
+        "Coffee Machine",
+        "Harbour View"
+      ],
+      "description": "A superior double room with breathtaking harbour views. Wake up to shimmering waterfront scenery from your king-size bed. Features a marble bathroom with walk-in shower.",
+      "size": 330,
+      "floor": 6,
+      "available": true
+    },
+    "status": "confirmed",
+    "createdAt": "2026-04-23T07:22:56.828Z"
   }
 ]
