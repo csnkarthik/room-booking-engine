@@ -10,7 +10,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     }
     const availability = readAvailabilityByRoomId(id)
     return NextResponse.json({ room, availability })
-  } catch {
+  } catch (err) {
+    console.error('[/api/rooms/[id]] GET error:', err)
     return NextResponse.json({ error: 'Failed to fetch room' }, { status: 500 })
   }
 }

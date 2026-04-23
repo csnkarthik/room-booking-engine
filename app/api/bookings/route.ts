@@ -6,7 +6,8 @@ export async function GET() {
   try {
     const bookings = readBookings()
     return NextResponse.json(bookings)
-  } catch {
+  } catch (err) {
+    console.error('[/api/bookings] GET error:', err)
     return NextResponse.json({ error: 'Failed to fetch bookings' }, { status: 500 })
   }
 }
@@ -17,6 +18,10 @@ export async function POST(req: NextRequest) {
     const parsed = CreateBookingSchema.safeParse(body)
 
     if (!parsed.success) {
+      console.error(
+        '[/api/bookings] POST validation error:',
+        JSON.stringify(parsed.error.flatten(), null, 2)
+      )
       return NextResponse.json(
         { error: 'Invalid booking data', details: parsed.error.flatten() },
         { status: 400 }
@@ -25,7 +30,8 @@ export async function POST(req: NextRequest) {
 
     const booking = writeBooking(parsed.data)
     return NextResponse.json(booking, { status: 201 })
-  } catch {
+  } catch (err) {
+    console.error('[/api/bookings] POST error:', err)
     return NextResponse.json({ error: 'Failed to create booking' }, { status: 500 })
   }
 }

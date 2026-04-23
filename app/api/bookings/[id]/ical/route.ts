@@ -18,7 +18,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
         'Content-Disposition': `attachment; filename="luxstay-booking-${id}.ics"`,
       },
     })
-  } catch {
+  } catch (err) {
+    console.error('[/api/bookings/[id]/ical] GET error:', err)
     return NextResponse.json({ error: 'Failed to generate iCal' }, { status: 500 })
   }
 }

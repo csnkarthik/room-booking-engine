@@ -9,7 +9,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 })
     }
     return NextResponse.json(booking)
-  } catch {
+  } catch (err) {
+    console.error('[/api/bookings/[id]] GET error:', err)
     return NextResponse.json({ error: 'Failed to fetch booking' }, { status: 500 })
   }
 }

@@ -16,6 +16,10 @@ export async function POST(req: NextRequest) {
     const parsed = PaymentIntentSchema.safeParse(body)
 
     if (!parsed.success) {
+      console.error(
+        '[/api/payments] Validation error:',
+        JSON.stringify(parsed.error.flatten(), null, 2)
+      )
       return NextResponse.json({ error: 'Invalid payment data' }, { status: 400 })
     }
 

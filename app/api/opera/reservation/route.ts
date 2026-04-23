@@ -27,6 +27,10 @@ export async function POST(request: Request) {
     const parsed = CreateReservationSchema.safeParse(body)
 
     if (!parsed.success) {
+      console.error(
+        '[/api/opera/reservation] Validation error:',
+        JSON.stringify(parsed.error.flatten(), null, 2)
+      )
       return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
     }
 
