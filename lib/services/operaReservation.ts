@@ -157,7 +157,14 @@ export async function createReservation(
     fetchInstructions: 'Reservation',
   }
 
-  const res = await fetch(`${baseUrl}/rsv/v1/hotels/${hotelId}/reservations`, {
+  const url = `${baseUrl}/rsv/v1/hotels/${hotelId}/reservations`
+  console.log('[Opera createReservation] REQUEST', {
+    url,
+    method: 'POST',
+    payload: JSON.stringify(payload, null, 2),
+  })
+
+  const res = await fetch(url, {
     method: 'POST',
     headers: buildHeaders(token, hotelId),
     body: JSON.stringify(payload),
@@ -165,6 +172,13 @@ export async function createReservation(
 
   if (!res.ok) {
     const text = await res.text()
+    console.error('[Opera createReservation] ERROR', {
+      url,
+      status: res.status,
+      statusText: res.statusText,
+      requestPayload: JSON.stringify(payload, null, 2),
+      responseBody: text,
+    })
     throw new Error(`Opera createReservation failed (${res.status}): ${text}`)
   }
 
@@ -185,13 +199,19 @@ export async function getReservation(reservationId: string): Promise<GetReservat
   const baseUrl = getEnv('HOSPITALITY_API_BASE_URL')
   const hotelId = getEnv('HOSPITALITY_HOTEL_ID')
 
-  const res = await fetch(
-    `${baseUrl}/rsv/v1/hotels/${hotelId}/reservations/${reservationId}?fetchInstructions=Reservation`,
-    { headers: buildHeaders(token, hotelId) }
-  )
+  const url = `${baseUrl}/rsv/v1/hotels/${hotelId}/reservations/${reservationId}?fetchInstructions=Reservation`
+  console.log('[Opera getReservation] REQUEST', { url, method: 'GET' })
+
+  const res = await fetch(url, { headers: buildHeaders(token, hotelId) })
 
   if (!res.ok) {
     const text = await res.text()
+    console.error('[Opera getReservation] ERROR', {
+      url,
+      status: res.status,
+      statusText: res.statusText,
+      responseBody: text,
+    })
     throw new Error(`Opera getReservation failed (${res.status}): ${text}`)
   }
 
