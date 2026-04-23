@@ -96,6 +96,8 @@ export function CheckoutForm() {
         })
 
         if (!res.ok) {
+          const text = await res.text()
+          console.error('[CheckoutForm] Booking save failed:', res.status, text)
           toast.error('Booking save failed — please contact support.')
           setProcessing(false)
           return
@@ -107,7 +109,8 @@ export function CheckoutForm() {
         router.push(`/confirmation?bookingId=${booking.id}`)
         clearBooking()
       }
-    } catch {
+    } catch (err) {
+      console.error('[CheckoutForm] Unexpected error during submission:', err)
       toast.error('An unexpected error occurred. Please try again.')
       setProcessing(false)
     }
