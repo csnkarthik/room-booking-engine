@@ -78,35 +78,37 @@ export function CheckoutForm() {
           console.error('[CheckoutForm] Opera reservation error:', operaErr)
         }
 
-        // Create local booking record
-        const res = await fetch('/api/bookings', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            roomId: room.id,
-            guest: guestData,
-            checkIn,
-            checkOut,
-            guests,
-            extras,
-            totalPrice,
-            stripePaymentIntentId: paymentIntent.id,
-            operaReservationId,
-          }),
-        })
+        // Local booking save commented out — Opera reservation is sufficient
+        // const res = await fetch('/api/bookings', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({
+        //     roomId: room.id,
+        //     guest: guestData,
+        //     checkIn,
+        //     checkOut,
+        //     guests,
+        //     extras,
+        //     totalPrice,
+        //     stripePaymentIntentId: paymentIntent.id,
+        //     operaReservationId,
+        //   }),
+        // })
+        // if (!res.ok) {
+        //   const text = await res.text()
+        //   console.error('[CheckoutForm] Booking save failed:', res.status, text)
+        //   toast.error('Booking save failed — please contact support.')
+        //   setProcessing(false)
+        //   return
+        // }
+        // const booking = await res.json()
 
-        if (!res.ok) {
-          const text = await res.text()
-          console.error('[CheckoutForm] Booking save failed:', res.status, text)
-          toast.error('Booking save failed — please contact support.')
-          setProcessing(false)
-          return
-        }
-
-        const booking = await res.json()
         toast.success('Payment successful! Your booking is confirmed.')
-
-        router.push(`/confirmation?bookingId=${booking.id}`)
+        if (operaReservationId) {
+          router.push(`/confirmation?reservationId=${operaReservationId}`)
+        } else {
+          router.push(`/confirmation?paymentIntentId=${paymentIntent.id}`)
+        }
         clearBooking()
       }
     } catch (err) {

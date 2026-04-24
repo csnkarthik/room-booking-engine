@@ -1,36 +1,64 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
-import { CheckCircle, Download, Calendar, Users, Home, Hotel } from 'lucide-react'
+// import Image from 'next/image' // commented out — room image not available from Opera
+import { CheckCircle, Calendar, Users, Home, Hotel } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { readBookingById } from '@/lib/utils/data'
+// import { readBookingById } from '@/lib/utils/data' // commented out — bookings no longer saved to local JSON
 import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/dates'
 import { getReservation, GetReservationResult } from '@/lib/services/operaReservation'
 
 interface PageProps {
-  searchParams: Promise<{ bookingId?: string }>
+  searchParams: Promise<{ reservationId?: string; paymentIntentId?: string }>
 }
 
 export default async function ConfirmationPage({ searchParams }: PageProps) {
-  const { bookingId } = await searchParams
+  const { reservationId, paymentIntentId } = await searchParams
 
-  if (!bookingId) notFound()
+  if (!reservationId && !paymentIntentId) notFound()
 
-  const booking = readBookingById(bookingId)
-  if (!booking) notFound()
-
-  const nights = daysBetween(booking.checkIn, booking.checkOut)
+  // Local booking lookup commented out — bookings are no longer saved to local JSON
+  // const booking = readBookingById(bookingId)
+  // if (!booking) notFound()
 
   let operaData: GetReservationResult | null = null
-  if (booking.operaReservationId) {
+  if (reservationId) {
     try {
-      operaData = await getReservation(booking.operaReservationId)
+      operaData = await getReservation(reservationId)
     } catch (err) {
       console.error('[ConfirmationPage] Failed to fetch Opera reservation:', err)
     }
   }
+
+  // Mode B: payment succeeded but Opera reservation unavailable
+  if (!operaData && paymentIntentId) {
+    return (
+      <div className="min-h-screen bg-slate-50">
+        <main className="mx-auto max-w-2xl px-4 py-12">
+          <div className="mb-8 text-center">
+            <div className="mb-4 flex justify-center">
+              <CheckCircle className="h-16 w-16 text-green-500" />
+            </div>
+            <h1 className="mb-2 text-3xl font-bold text-slate-900">Payment Received!</h1>
+            <p className="text-muted-foreground">Our team will confirm your reservation shortly.</p>
+          </div>
+          <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
+            <h2 className="mb-2 text-lg font-semibold">Payment Reference</h2>
+            <p className="font-mono text-sm text-slate-600">{paymentIntentId}</p>
+          </div>
+          <Link href="/" className={cn(buttonVariants(), 'flex gap-2')}>
+            <Home className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </main>
+      </div>
+    )
+  }
+
+  if (!operaData) notFound()
+
+  const nights = daysBetween(operaData.arrivalDate, operaData.departureDate)
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -41,80 +69,71 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
             <CheckCircle className="h-16 w-16 text-green-500" />
           </div>
           <h1 className="mb-2 text-3xl font-bold text-slate-900">Booking Confirmed!</h1>
-          <p className="text-muted-foreground">
+          {/* Guest email not available without local booking record */}
+          {/* <p className="text-muted-foreground">
             A confirmation has been sent to{' '}
             <span className="font-medium text-slate-900">{booking.guest.email}</span>
-          </p>
+          </p> */}
         </div>
 
         {/* Opera Confirmation */}
-        {operaData && (
-          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
-            <div className="mb-4 flex items-center gap-2">
-              <Hotel className="h-5 w-5 text-amber-700" />
-              <h2 className="text-lg font-semibold text-amber-900">Hotel Confirmation</h2>
-            </div>
-            <div className="mb-3">
-              <p className="text-xs font-medium tracking-wider text-amber-700 uppercase">
-                Confirmation Number
-              </p>
-              <p className="mt-0.5 font-mono text-3xl font-bold text-amber-900">
-                {operaData.operaConfirmationNumber}
-              </p>
-              <p className="text-muted-foreground mt-0.5 text-xs">
-                Quote this number when contacting the hotel
-              </p>
-            </div>
-            <dl className="grid grid-cols-2 gap-3 border-t border-amber-200 pt-3 text-sm">
-              <div>
-                <dt className="text-amber-700">Reservation ID</dt>
-                <dd className="font-mono font-medium">{operaData.operaReservationId}</dd>
-              </div>
-              <div>
-                <dt className="text-amber-700">Room Type</dt>
-                <dd className="font-medium">{operaData.roomType}</dd>
-              </div>
-              <div>
-                <dt className="text-amber-700">Arrival</dt>
-                <dd className="font-medium">{formatDisplayDate(operaData.arrivalDate)}</dd>
-              </div>
-              <div>
-                <dt className="text-amber-700">Departure</dt>
-                <dd className="font-medium">{formatDisplayDate(operaData.departureDate)}</dd>
-              </div>
-            </dl>
+        <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
+          <div className="mb-4 flex items-center gap-2">
+            <Hotel className="h-5 w-5 text-amber-700" />
+            <h2 className="text-lg font-semibold text-amber-900">Hotel Confirmation</h2>
           </div>
-        )}
+          <div className="mb-3">
+            <p className="text-xs font-medium tracking-wider text-amber-700 uppercase">
+              Confirmation Number
+            </p>
+            <p className="mt-0.5 font-mono text-3xl font-bold text-amber-900">
+              {operaData.operaConfirmationNumber}
+            </p>
+            <p className="text-muted-foreground mt-0.5 text-xs">
+              Quote this number when contacting the hotel
+            </p>
+          </div>
+          <dl className="grid grid-cols-2 gap-3 border-t border-amber-200 pt-3 text-sm">
+            <div>
+              <dt className="text-amber-700">Reservation ID</dt>
+              <dd className="font-mono font-medium">{operaData.operaReservationId}</dd>
+            </div>
+            <div>
+              <dt className="text-amber-700">Room Type</dt>
+              <dd className="font-medium">{operaData.roomType}</dd>
+            </div>
+            <div>
+              <dt className="text-amber-700">Arrival</dt>
+              <dd className="font-medium">{formatDisplayDate(operaData.arrivalDate)}</dd>
+            </div>
+            <div>
+              <dt className="text-amber-700">Departure</dt>
+              <dd className="font-medium">{formatDisplayDate(operaData.departureDate)}</dd>
+            </div>
+          </dl>
+        </div>
 
         {/* Booking reference */}
         <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold">Booking Reference</h2>
             <Badge variant="outline" className="font-mono text-xs">
-              {booking.id.slice(0, 8).toUpperCase()}
+              {operaData.operaReservationId.slice(0, 8).toUpperCase()}
             </Badge>
           </div>
 
-          {/* Room image */}
-          {booking.room && (
+          {/* Room image commented out — room details not available from Opera reservation */}
+          {/* {booking.room && (
             <div className="mb-4 flex gap-4">
               <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-xl">
-                <Image
-                  src={booking.room.images[0]}
-                  alt={booking.room.name}
-                  fill
-                  className="object-cover"
-                  sizes="128px"
-                />
+                <Image src={booking.room.images[0]} alt={booking.room.name} fill className="object-cover" sizes="128px" />
               </div>
               <div>
                 <p className="font-semibold">{booking.room.name}</p>
-                <Badge variant="outline" className="mt-1 text-xs capitalize">
-                  {booking.room.type}
-                </Badge>
+                <Badge variant="outline" className="mt-1 text-xs capitalize">{booking.room.type}</Badge>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Details */}
           <div className="space-y-3 text-sm">
@@ -123,7 +142,8 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
               <div className="flex-1">
                 <span className="text-muted-foreground">Dates: </span>
                 <span className="font-medium">
-                  {formatDisplayDate(booking.checkIn)} → {formatDisplayDate(booking.checkOut)}
+                  {formatDisplayDate(operaData.arrivalDate)} →{' '}
+                  {formatDisplayDate(operaData.departureDate)}
                 </span>
                 <span className="text-muted-foreground ml-2">
                   ({nights} night{nights > 1 ? 's' : ''})
@@ -135,39 +155,25 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
               <span>
                 <span className="text-muted-foreground">Guests: </span>
                 <span className="font-medium">
-                  {booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}
+                  {operaData.adults} {operaData.adults === 1 ? 'guest' : 'guests'}
                 </span>
               </span>
             </div>
 
-            {/* Add-ons */}
-            {(booking.extras.breakfast ||
-              booking.extras.airportTransfer ||
-              booking.extras.lateCheckout) && (
+            {/* Add-ons commented out — extras not available from Opera reservation */}
+            {/* {(booking.extras.breakfast || booking.extras.airportTransfer || booking.extras.lateCheckout) && (
               <div className="mt-2 flex flex-wrap gap-1.5">
-                {booking.extras.breakfast && (
-                  <Badge variant="secondary" className="text-xs">
-                    🍳 Breakfast
-                  </Badge>
-                )}
-                {booking.extras.airportTransfer && (
-                  <Badge variant="secondary" className="text-xs">
-                    ✈️ Airport Transfer
-                  </Badge>
-                )}
-                {booking.extras.lateCheckout && (
-                  <Badge variant="secondary" className="text-xs">
-                    ⏰ Late Checkout
-                  </Badge>
-                )}
+                {booking.extras.breakfast && <Badge variant="secondary" className="text-xs">🍳 Breakfast</Badge>}
+                {booking.extras.airportTransfer && <Badge variant="secondary" className="text-xs">✈️ Airport Transfer</Badge>}
+                {booking.extras.lateCheckout && <Badge variant="secondary" className="text-xs">⏰ Late Checkout</Badge>}
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Total */}
           <div className="mt-4 flex justify-between border-t pt-4 font-semibold">
             <span>Total Paid</span>
-            <span className="text-primary">{formatCurrency(booking.totalPrice)}</span>
+            <span className="text-primary">{formatCurrency(operaData.amountBeforeTax)}</span>
           </div>
         </div>
 
@@ -177,18 +183,17 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
           <dl className="grid grid-cols-2 gap-3 text-sm">
             <div>
               <dt className="text-muted-foreground">Name</dt>
-              <dd className="font-medium">
-                {booking.guest.firstName} {booking.guest.lastName}
-              </dd>
+              <dd className="font-medium">{operaData.guestName}</dd>
             </div>
-            <div>
+            {/* Email and phone not available from Opera reservation */}
+            {/* <div>
               <dt className="text-muted-foreground">Email</dt>
               <dd className="font-medium">{booking.guest.email}</dd>
             </div>
             <div>
               <dt className="text-muted-foreground">Phone</dt>
               <dd className="font-medium">{booking.guest.phone}</dd>
-            </div>
+            </div> */}
             <div>
               <dt className="text-muted-foreground">Status</dt>
               <dd>
@@ -200,14 +205,11 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
 
         {/* Actions */}
         <div className="flex flex-col gap-3 sm:flex-row">
-          <a
-            href={`/api/bookings/${booking.id}/ical`}
-            download
-            className={cn(buttonVariants({ variant: 'outline' }), 'flex-1 gap-2')}
-          >
+          {/* iCal download commented out — requires local booking record */}
+          {/* <a href={`/api/bookings/${booking.id}/ical`} download className={cn(buttonVariants({ variant: 'outline' }), 'flex-1 gap-2')}>
             <Download className="h-4 w-4" />
             Download to Calendar (.ics)
-          </a>
+          </a> */}
           <Link href="/" className={cn(buttonVariants(), 'flex-1 gap-2')}>
             <Home className="h-4 w-4" />
             Back to Home
