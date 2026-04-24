@@ -15,11 +15,13 @@ function isoDate(offsetDays: number): string {
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'single', label: 'Single' },
-  { value: 'double', label: 'Double' },
-  { value: 'suite', label: 'Suite' },
-  { value: 'deluxe', label: 'Deluxe' },
-  { value: 'penthouse', label: 'Penthouse' },
+  //{ value: 'single', label: 'Single' },
+  //{ value: 'double', label: 'Double' },
+  { value: 'room', label: 'Encore Rooms' },
+
+  { value: 'suite', label: 'Encore Suites' },
+  //{ value: 'deluxe', label: 'Deluxe' },
+  //{ value: 'penthouse', label: 'Penthouse' },
 ]
 
 interface HomeRoomsSectionProps {
@@ -107,7 +109,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
           {Array.from(grouped.entries()).map(([type, typeRooms]) => (
             <section key={type}>
               <h2 className="mb-4 text-lg font-semibold text-slate-800 capitalize">
-                {type} Rooms
+                {CATEGORIES.find((cat) => cat.value === type)?.label}
                 <span className="text-muted-foreground ml-2 text-sm font-normal">
                   ({typeRooms.length})
                 </span>

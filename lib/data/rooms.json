@@ -1,8 +1,8 @@
 [
   {
     "id": "BSIG",
-    "name": "Classic Single",
-    "type": "single",
+    "name": "Encore Suites",
+    "type": "suite",
     "maxGuests": 1,
     "pricePerNight": 89,
     "images": [
@@ -19,8 +19,8 @@
   },
   {
     "id": "BSIG2",
-    "name": "Classic Twin",
-    "type": "single",
+    "name": "Encore Suites Twin",
+    "type": "suite",
     "maxGuests": 2,
     "pricePerNight": 99,
     "images": [
@@ -37,8 +37,8 @@
   },
   {
     "id": "BSIGH",
-    "name": "Single Harbour View",
-    "type": "single",
+    "name": "Signature Harbor View Suite",
+    "type": "suite",
     "maxGuests": 1,
     "pricePerNight": 119,
     "images": [
@@ -63,7 +63,7 @@
   {
     "id": "BSIGH2",
     "name": "Twin Harbour View",
-    "type": "single",
+    "type": "suite",
     "maxGuests": 2,
     "pricePerNight": 129,
     "images": [
@@ -87,8 +87,8 @@
   },
   {
     "id": "BD",
-    "name": "Superior Double",
-    "type": "double",
+    "name": "Premier Double",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 149,
     "images": [
@@ -113,8 +113,8 @@
   },
   {
     "id": "BDC",
-    "name": "Double City View",
-    "type": "double",
+    "name": "Premier Double City View",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 169,
     "images": [
@@ -140,8 +140,8 @@
   },
   {
     "id": "BDH",
-    "name": "Double Harbour View",
-    "type": "double",
+    "name": "Premier Harbor View Double",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 179,
     "images": [
@@ -167,8 +167,8 @@
   },
   {
     "id": "BK",
-    "name": "Deluxe King",
-    "type": "deluxe",
+    "name": "Premier King",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 219,
     "images": [
@@ -195,8 +195,8 @@
   },
   {
     "id": "BKC",
-    "name": "King City View",
-    "type": "deluxe",
+    "name": "Premier King City View",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 249,
     "images": [
@@ -223,8 +223,8 @@
   },
   {
     "id": "BKH",
-    "name": "King Harbour View",
-    "type": "deluxe",
+    "name": "Premier Harbor View King",
+    "type": "room",
     "maxGuests": 2,
     "pricePerNight": 269,
     "images": [
@@ -252,7 +252,7 @@
   {
     "id": "BAPT2",
     "name": "Two-Bedroom Apartment",
-    "type": "apartment",
+    "type": "suite",
     "maxGuests": 4,
     "pricePerNight": 349,
     "images": [
@@ -284,7 +284,7 @@
   {
     "id": "BDUP3",
     "name": "Three-Bedroom Duplex",
-    "type": "duplex",
+    "type": "suite",
     "maxGuests": 6,
     "pricePerNight": 549,
     "images": [
@@ -318,7 +318,7 @@
   {
     "id": "BPENT",
     "name": "Penthouse",
-    "type": "penthouse",
+    "type": "suite",
     "maxGuests": 6,
     "pricePerNight": 999,
     "images": [

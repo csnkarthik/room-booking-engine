@@ -1,11 +1,12 @@
 export type RoomType =
-  | 'single'
-  | 'double'
+  //| 'single'
+  //| 'double'
   | 'suite'
-  | 'deluxe'
-  | 'penthouse'
-  | 'apartment'
-  | 'duplex'
+  // | 'deluxe'
+  // | 'penthouse'
+  // | 'apartment'
+  // | 'duplex'
+  | 'room' // Generic type for all non-suite rooms
 
 export interface Room {
   id: string

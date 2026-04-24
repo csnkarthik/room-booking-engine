@@ -10,11 +10,11 @@ import type { Room, RoomType } from '@/lib/types'
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'single', label: 'Single' },
-  { value: 'double', label: 'Double' },
-  { value: 'suite', label: 'Suite' },
-  { value: 'deluxe', label: 'Deluxe' },
-  { value: 'penthouse', label: 'Penthouse' },
+  { value: 'room', label: 'Encore Rooms' },
+  //{ value: 'double', label: 'Double' },
+  { value: 'suite', label: 'Encore Suites' },
+  //{ value: 'deluxe', label: 'Deluxe' },
+  //{ value: 'penthouse', label: 'Penthouse' },
 ]
 
 interface RoomsListWithFilterProps {
@@ -113,7 +113,7 @@ export function RoomsListWithFilter({
           {Array.from(grouped.entries()).map(([type, typeRooms]) => (
             <section key={type}>
               <h2 className="text-foreground mb-4 font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-wide capitalize">
-                {type} Rooms
+                {CATEGORIES.find((cat) => cat.value === type)?.label}
                 <span className="text-muted-foreground ml-2 font-sans text-sm font-normal">
                   ({typeRooms.length})
                 </span>
