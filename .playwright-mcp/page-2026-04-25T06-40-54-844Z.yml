@@ -1,0 +1,234 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]:
+            - link "My Reservation" [ref=e8] [cursor=pointer]:
+              - /url: "#"
+            - text: "|"
+          - link "Cart  1" [ref=e10] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13764&langID=1&currID=0
+            - generic [ref=e11]:
+              - text: Cart 
+              - generic [ref=e12]: "1"
+          - list [ref=e14]:
+            - listitem [ref=e15]:
+              - link " Sign In" [ref=e16] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+          - list [ref=e18]:
+            - listitem [ref=e19]:
+              - link "Join Wynn Rewards" [ref=e20] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/signup?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e21]:
+        - generic [ref=e23]:
+          - link "Encore Boston Harbor" [ref=e26] [cursor=pointer]:
+            - /url: https://stage-ebh.wynntesting.com/
+            - img "Encore Boston Harbor" [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - text: 
+              - generic [ref=e30]:
+                - link "Check In Check Out 04/25/2026 - 04/27/2026" [ref=e33] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e34]:
+                    - generic [ref=e35]: Check In
+                    - generic [ref=e36]: Check Out
+                  - generic [ref=e37]:
+                    - generic [ref=e38]: 04/25/2026
+                    - text: "-"
+                    - generic [ref=e39]: 04/27/2026
+                - table [ref=e41]:
+                  - rowgroup [ref=e42]:
+                    - row "Rooms Guests Per Room" [ref=e43]:
+                      - cell "Rooms" [ref=e44]:
+                        - generic [ref=e45]: Rooms
+                      - cell "Guests Per Room" [ref=e46]:
+                        - generic [ref=e47]: Guests Per Room
+                    - row "Remove 1 Room 1 Add 1 Room Remove 1 Guest Per Room 2 Add 1 Guest Per Room" [ref=e48]:
+                      - cell "Remove 1 Room 1 Add 1 Room" [ref=e49]:
+                        - generic [ref=e50]:
+                          - link "Remove 1 Room" [ref=e51]:
+                            - /url: "#"
+                            - text: – -
+                          - text: "1"
+                          - link "Add 1 Room" [ref=e52] [cursor=pointer]:
+                            - /url: "#"
+                            - text: +
+                      - cell "Remove 1 Guest Per Room 2 Add 1 Guest Per Room" [ref=e53]:
+                        - generic [ref=e54]:
+                          - link "Remove 1 Guest Per Room" [ref=e55] [cursor=pointer]:
+                            - /url: "#"
+                            - text: – -
+                          - text: "2"
+                          - link "Add 1 Guest Per Room" [ref=e56] [cursor=pointer]:
+                            - /url: "#"
+                            - text: +
+                - generic [ref=e57]:
+                  - generic [ref=e58]: Promo code
+                  - textbox "Promo code" [ref=e60]
+                - generic [ref=e62]:
+                  - generic: Update
+                - text: 1 2 3
+            - generic:
+              - status
+              - status
+        - text: ‹      – – !  
+    - generic [ref=e63]:
+      - text:      Close  
+      - generic:
+        - paragraph: 
+      - generic [ref=e64]:
+        - link "Back to Rooms" [ref=e66] [cursor=pointer]:
+          - /url: "#back"
+        - generic [ref=e67]:
+          - generic [ref=e69]:
+            - list [ref=e70]:
+              - listitem [ref=e71]
+              - listitem [ref=e75]:
+                - img "Room" [ref=e79]
+              - listitem [ref=e80]
+              - listitem [ref=e84]
+              - listitem [ref=e88]
+              - listitem [ref=e92]:
+                - img "Room" [ref=e96]
+            - button "Previous slide" [ref=e97] [cursor=pointer]: 
+            - button "Next slide" [ref=e98] [cursor=pointer]: 
+          - generic [ref=e100]:
+            - heading "Premier Double" [level=1] [ref=e101]
+            - 'heading "2 Night Stay: Apr. 25 - Apr. 27, 2026" [level=2] [ref=e102]'
+            - list [ref=e104]:
+              - listitem [ref=e105]:
+                - generic [ref=e106]: 
+                - generic [ref=e107]: 933 Square Feet
+              - listitem [ref=e108]:
+                - generic [ref=e109]: 
+                - generic [ref=e110]: 640 Square Feet
+              - listitem [ref=e111]:
+                - generic [ref=e112]: 
+                - generic [ref=e113]: Two Queen Beds
+            - paragraph
+            - generic [ref=e114]:
+              - table [ref=e115]:
+                - rowgroup [ref=e116]:
+                  - row [ref=e117]:
+                    - cell [ref=e118]:
+                      - img [ref=e119]
+                    - cell [ref=e120]:
+                      - img [ref=e121]
+                    - cell [ref=e122]:
+                      - img [ref=e123]
+                    - cell [ref=e124]:
+                      - img [ref=e125]
+                  - row "650 Sq. ft. Two Double Beds Wi-Fi 55\" HDTV" [ref=e126]:
+                    - cell "650 Sq. ft." [ref=e127]
+                    - cell "Two Double Beds" [ref=e128]
+                    - cell "Wi-Fi" [ref=e129]
+                    - cell "55\" HDTV" [ref=e130]
+                  - row
+              - text: Perfect for friend or family stays, the Premier Double has all the comforts of the Premier King room with the convenience of two Double Encore Dream Beds.
+              - text: This 650-square-foot room is the largest standard hotel room in Boston and New England, designed in neutral tones and featuring floor-to-ceiling windows to allow generous natural light. The Double Encore Dream Beds, designed exclusively for Encore Boston Harbor, are dressed in 507-thread-count linens. Tech-friendly conveniences include a 55-inch flat-screen 4K Ultra HDTV, high-speed Wi-Fi, a bedside mobile-charging device and wireless iPad for one-touch access to room controls, resort information and guest services. Voice-activated controls enable guests to operate curtains, lighting, heating and air conditioning, and privacy settings.
+              - text: The spacious bathroom includes a separate shower and deep-soaking tub, dual sinks, seated vanity area with lighted mirror, and a 24-inch flat-screen HDTV.
+            - generic [ref=e132]:
+              - heading [level=3]
+              - paragraph
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Choose your Room Rate:" [level=2] [ref=e136]
+            - generic [ref=e137]:
+              - generic [ref=e138]: Sort by
+              - combobox "Sort by" [ref=e139] [cursor=pointer]:
+                - 'option "Price: Low to High"'
+                - 'option "Price: High to Low"'
+                - option "Most Popular" [selected]
+              - generic [ref=e141] [cursor=pointer]: Most Popular 
+          - list [ref=e142]:
+            - listitem [ref=e143]:
+              - generic [ref=e144]:
+                - generic [ref=e145]:
+                  - heading "Most Flexible Rate" [level=3] [ref=e146]
+                  - button " View Offer Details Most Flexible Rate" [ref=e147] [cursor=pointer]:
+                    - text:  View Offer Details
+                    - generic [ref=e148]: Most Flexible Rate
+                - generic [ref=e149]:
+                  - paragraph [ref=e150]:
+                    - text: $574 Avg/Night
+                    - generic [ref=e151]: Excludes taxes.
+                  - paragraph [ref=e152]:
+                    - link "Book Now" [ref=e153] [cursor=pointer]:
+                      - /url: "#ws-cart-view"
+                  - generic [ref=e154]: Easily Modify or Cancel Reservation
+            - listitem [ref=e155]:
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - heading "Wynn Rewards Member Savings" [level=3] [ref=e158]
+                  - button " View Offer Details Wynn Rewards Member Savings" [ref=e159] [cursor=pointer]:
+                    - text:  View Offer Details
+                    - generic [ref=e160]: Wynn Rewards Member Savings
+                - generic [ref=e161]:
+                  - paragraph [ref=e162]
+                  - paragraph [ref=e163]:
+                    - link "Sign Up or Sign In" [ref=e164] [cursor=pointer]:
+                      - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+                  - generic [ref=e165]: 8 purchased in the last 2 days
+            - listitem [ref=e166]:
+              - generic [ref=e167]:
+                - generic [ref=e168]:
+                  - heading "Wynn Rewards Exclusive Savings" [level=3] [ref=e169]
+                  - button " View Offer Details Wynn Rewards Exclusive Savings" [ref=e170] [cursor=pointer]:
+                    - text:  View Offer Details
+                    - generic [ref=e171]: Wynn Rewards Exclusive Savings
+                - generic [ref=e172]:
+                  - paragraph [ref=e173]
+                  - paragraph [ref=e174]:
+                    - link "Sign Up or Sign In" [ref=e175] [cursor=pointer]:
+                      - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+                  - generic [ref=e176]: only 63 rooms left
+            - listitem [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - heading "APIM06 des rate ID" [level=3] [ref=e180]
+                  - button " View Offer Details APIM06 des rate ID" [ref=e181] [cursor=pointer]:
+                    - text:  View Offer Details
+                    - generic [ref=e182]: APIM06 des rate ID
+                - generic [ref=e183]:
+                  - paragraph [ref=e184]
+                  - paragraph [ref=e185]:
+                    - link "Sign Up or Sign In" [ref=e186] [cursor=pointer]:
+                      - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+                  - generic [ref=e187]: only 63 rooms left
+            - listitem [ref=e188]:
+              - generic [ref=e189]:
+                - generic [ref=e190]:
+                  - heading "2026 Jose's Test - 01/27 EBH2 (Opera Rate Code Details - Descrip" [level=3] [ref=e191]
+                  - button " View Offer Details 2026 Jose's Test - 01/27 EBH2 (Opera Rate Code Details - Descrip" [ref=e192] [cursor=pointer]:
+                    - text:  View Offer Details
+                    - generic [ref=e193]: 2026 Jose's Test - 01/27 EBH2 (Opera Rate Code Details - Descrip
+                - generic [ref=e194]:
+                  - paragraph [ref=e195]
+                  - paragraph [ref=e196]:
+                    - link "Sign Up or Sign In" [ref=e197] [cursor=pointer]:
+                      - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+                  - generic [ref=e198]: only 63 rooms left
+    - generic: 
+    - contentinfo [ref=e199]:
+      - generic [ref=e205]:
+        - list [ref=e207]:
+          - listitem [ref=e208]:
+            - link "Encore Boston Harbor" [ref=e209] [cursor=pointer]:
+              - /url: https://reservations.encorebostonharbor.com/ibe/index.aspx?propertyID=13764&nono=1
+          - listitem [ref=e210]: "|"
+          - listitem [ref=e211]:
+            - link "Privacy" [ref=e212] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=805659
+          - listitem [ref=e213]: "|"
+          - listitem [ref=e214]:
+            - link "Terms & Conditions" [ref=e215] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=842993&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - generic [ref=e216]:
+          - paragraph [ref=e217]: © 2025 Wynn Resorts Holdings, LLC. All rights reserved.
+          - paragraph [ref=e218]: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit mahelpline.org/problemgambling to speak with a trained Specialist. Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - generic:   

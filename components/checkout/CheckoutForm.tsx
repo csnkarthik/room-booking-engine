@@ -11,15 +11,30 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
+import { daysBetween } from '@/lib/utils/dates'
 
 type GuestFormValues = z.infer<typeof GuestSchema>
 
-export function CheckoutForm() {
+interface CheckoutFormProps {
+  grandTotal: number
+}
+
+export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
-  const { room, checkIn, checkOut, guests, extras, totalPrice, setExtras, clearBooking } =
-    useBookingStore()
+  const { cartItems, extras, setExtras, clearCart } = useBookingStore()
+
+  // Total nights across all cart items (for breakfast pricing)
+  const totalNights = cartItems.reduce(
+    (sum, item) => sum + daysBetween(item.checkIn, item.checkOut),
+    0
+  )
+  const extrasTotal =
+    (extras.breakfast ? 25 * totalNights : 0) +
+    (extras.airportTransfer ? 75 : 0) +
+    (extras.lateCheckout ? 50 : 0)
+  const totalWithExtras = grandTotal + extrasTotal
 
   const [processing, setProcessing] = useState(false)
 
@@ -33,7 +48,7 @@ export function CheckoutForm() {
   })
 
   const onSubmit = async (guestData: GuestFormValues) => {
-    if (!stripe || !elements || !room || !checkIn || !checkOut) return
+    if (!stripe || !elements || cartItems.length === 0) return
 
     setProcessing(true)
 
@@ -53,63 +68,41 @@ export function CheckoutForm() {
       }
 
       if (paymentIntent?.status === 'succeeded') {
-        // Best-effort: create Opera reservation (failure does not block local booking)
-        let operaReservationId: string | undefined
-        try {
-          const operaRes = await fetch('/api/opera/reservation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              roomId: room.id,
-              checkIn,
-              checkOut,
-              adults: guests,
-              totalPrice,
-              guest: guestData,
-            }),
-          })
-          if (operaRes.ok) {
-            const operaData = await operaRes.json()
-            operaReservationId = operaData.operaReservationId
-          } else {
-            console.error('[CheckoutForm] Opera reservation failed:', await operaRes.text())
+        // Best-effort: create one Opera reservation per cart item
+        const reservationIds: string[] = []
+        for (const item of cartItems) {
+          try {
+            const operaRes = await fetch('/api/opera/reservation', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                roomId: item.room.id,
+                checkIn: item.checkIn,
+                checkOut: item.checkOut,
+                adults: item.guests,
+                totalPrice: item.totalPrice + extrasTotal,
+                guest: guestData,
+              }),
+            })
+            if (operaRes.ok) {
+              const data = await operaRes.json()
+              if (data.operaReservationId) reservationIds.push(data.operaReservationId)
+            } else {
+              console.error('[CheckoutForm] Opera reservation failed:', await operaRes.text())
+            }
+          } catch (err) {
+            console.error('[CheckoutForm] Opera reservation error:', err)
           }
-        } catch (operaErr) {
-          console.error('[CheckoutForm] Opera reservation error:', operaErr)
         }
 
-        // Local booking save commented out — Opera reservation is sufficient
-        // const res = await fetch('/api/bookings', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({
-        //     roomId: room.id,
-        //     guest: guestData,
-        //     checkIn,
-        //     checkOut,
-        //     guests,
-        //     extras,
-        //     totalPrice,
-        //     stripePaymentIntentId: paymentIntent.id,
-        //     operaReservationId,
-        //   }),
-        // })
-        // if (!res.ok) {
-        //   const text = await res.text()
-        //   console.error('[CheckoutForm] Booking save failed:', res.status, text)
-        //   toast.error('Booking save failed — please contact support.')
-        //   setProcessing(false)
-        //   return
-        // }
-        // const booking = await res.json()
-
         toast.success('Payment successful! Your booking is confirmed.')
-        if (operaReservationId) {
-          router.push(`/confirmation?reservationId=${operaReservationId}`)
+        clearCart()
+
+        if (reservationIds.length > 0) {
+          router.push(`/confirmation?reservationIds=${reservationIds.join(',')}`)
         } else {
           router.push(`/confirmation?paymentIntentId=${paymentIntent.id}`)
         }
-        clearBooking()
       }
     } catch (err) {
       console.error('[CheckoutForm] Unexpected error during submission:', err)
@@ -318,12 +311,12 @@ export function CheckoutForm() {
         </div>
       </div>
 
-      {/* Extras */}
+      {/* Add-ons */}
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="mb-4 text-lg font-semibold">Add-ons</h2>
         <div className="space-y-3">
           {[
-            { key: 'breakfast', label: 'Breakfast', price: '+$25/night' },
+            { key: 'breakfast', label: 'Breakfast', price: `+$25/night (${totalNights} nights)` },
             { key: 'airportTransfer', label: 'Airport Transfer', price: '+$75 one-time' },
             { key: 'lateCheckout', label: 'Late Checkout (until 2pm)', price: '+$50 one-time' },
           ].map(({ key, label, price }) => (
@@ -363,9 +356,7 @@ export function CheckoutForm() {
       </div>
 
       <Button type="submit" disabled={!stripe || processing} size="lg" className="w-full">
-        {processing
-          ? 'Processing...'
-          : `Pay ${totalPrice ? `$${totalPrice.toFixed(2)}` : ''} & Confirm`}
+        {processing ? 'Processing...' : `Pay $${totalWithExtras.toFixed(2)} & Confirm`}
       </Button>
     </form>
   )

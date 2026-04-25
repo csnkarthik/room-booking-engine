@@ -1,0 +1,208 @@
+- generic [active] [ref=e1]:
+  - status [ref=e2]
+  - text:  –     ‹  ‹ ‹
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]:
+            - link "My Reservation" [ref=e9] [cursor=pointer]:
+              - /url: "#"
+            - text: "|"
+          - link "Cart  1" [ref=e11] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13764&langID=1&currID=0
+            - generic [ref=e12]:
+              - text: Cart 
+              - generic [ref=e13]: "1"
+          - list [ref=e15]:
+            - listitem [ref=e16]:
+              - link " Sign In" [ref=e17] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - link "Join Wynn Rewards" [ref=e21] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/signup?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e24]:
+        - link "Encore Boston Harbor" [ref=e27] [cursor=pointer]:
+          - /url: https://stage-ebh.wynntesting.com/
+          - img "Encore Boston Harbor" [ref=e28]
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - text: 
+            - generic [ref=e31]:
+              - text: – –
+              - list [ref=e35]:
+                - listitem [ref=e36]:
+                  - link "Booking, step 1" [ref=e37] [cursor=pointer]:
+                    - /url: "#"
+                    - generic [ref=e40]:
+                      - text: "1"
+                      - generic [ref=e41]: Booking
+                - listitem [ref=e42]:
+                  - link "Payment, step 2" [ref=e43] [cursor=pointer]:
+                    - /url: checkout.aspx?hotelID=13764&langID=1&hgID=0&currID=0
+                    - generic [ref=e46]:
+                      - text: "2"
+                      - generic [ref=e47]: Payment
+                - listitem [ref=e48]:
+                  - generic [ref=e51]:
+                    - text: "3"
+                    - generic [ref=e52]: Confirmation
+                  - generic [ref=e53]: Confirmation, step 3
+              - link "Add Another Room" [ref=e56] [cursor=pointer]:
+                - /url: "#"
+          - generic:
+            - status
+            - status
+    - generic [ref=e57]:
+      - text:  1 2 3
+      - generic [ref=e58]:
+        - link "Back to Rooms" [ref=e60] [cursor=pointer]:
+          - /url: "#back"
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - list
+            - generic [ref=e64]:
+              - generic [ref=e66]:
+                - list [ref=e67]:
+                  - listitem [ref=e68]
+                  - listitem [ref=e72]:
+                    - img "Room" [ref=e76]
+                  - listitem [ref=e77]
+                  - listitem [ref=e81]
+                  - listitem [ref=e85]
+                  - listitem [ref=e89]
+                  - listitem [ref=e93]:
+                    - img "Room" [ref=e97]
+                - button "Previous slide" [ref=e98] [cursor=pointer]: 
+                - button "Next slide" [ref=e99] [cursor=pointer]: 
+              - generic [ref=e101]: Premier King | 2 Nights, 2 Guests
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - paragraph [ref=e105]:
+                    - text: Check In
+                    - generic [ref=e106]: Sat, Apr. 25
+                  - paragraph [ref=e107]:
+                    - text: Check Out
+                    - generic [ref=e108]: Mon, Apr. 27
+                - generic [ref=e109]:
+                  - link "Modify" [ref=e110] [cursor=pointer]:
+                    - /url: "#ws-modal-avail-widget"
+                  - link "Remove" [ref=e111] [cursor=pointer]:
+                    - /url: "#dvRemoveItem"
+              - generic [ref=e112]:
+                - link " Upgrade Your Room" [expanded] [ref=e113] [cursor=pointer]:
+                  - /url: "#"
+                - region " Upgrade Your Room" [ref=e114]:
+                  - generic [ref=e115]:
+                    - article [ref=e116]:
+                      - generic [ref=e117]:
+                        - heading "Premier Double" [level=4] [ref=e118]
+                        - link "Information for Premier Double":
+                          - /url: "#dvUpgrade-68693"
+                          - text: i i
+                        - paragraph [ref=e119]: (+ $50 Per Night)
+                      - link "Select Premier Double" [ref=e121] [cursor=pointer]:
+                        - /url: "#"
+                        - text: Select 
+                    - article [ref=e122]:
+                      - generic [ref=e123]:
+                        - heading "Two Bedroom Signature Suite Harbor View" [level=4] [ref=e124]
+                        - link "Information for Two Bedroom Signature Suite Harbor View":
+                          - /url: "#dvUpgrade-68758"
+                          - text: i i
+                        - paragraph [ref=e125]: (+ $73 Per Night)
+                      - link "Select Two Bedroom Signature Suite Harbor View" [ref=e127] [cursor=pointer]:
+                        - /url: "#"
+                        - text: Select 
+                    - text: i  i  i  i 
+                  - paragraph [ref=e128]:
+                    - link "View More Rooms" [ref=e129] [cursor=pointer]:
+                      - /url: "#"
+                      - text: View More
+              - generic [ref=e130]:
+                - link " Add-Ons" [expanded] [ref=e131] [cursor=pointer]:
+                  - /url: "#"
+                - generic " Add-Ons" [ref=e132]:
+                  - paragraph [ref=e133]:
+                    - link "View More Add-Ons" [ref=e134] [cursor=pointer]:
+                      - /url: "#"
+                      - text: View More
+              - generic [ref=e135]:
+                - link " ADA Accessible Options" [ref=e137] [cursor=pointer]:
+                  - /url: "#"
+                - link " EA_Request" [ref=e139] [cursor=pointer]:
+                  - /url: "#"
+                - link " EA_Reason for stay" [ref=e141] [cursor=pointer]:
+                  - /url: "#"
+                - link " Reason For Stay UAT" [ref=e143] [cursor=pointer]:
+                  - /url: "#"
+              - generic [ref=e144]:
+                - generic: Guarantee Policy
+                - generic [ref=e145]:
+                  - text: A valid credit card is required to confirm your reservation. One night's room rate and tax will be charged at time of booking.
+                  - text: Outside food and beverage, as well as coolers, are not permitted at the resort and casino. Guests arriving with these items will be required to check them at the Bell Desk or leave them in their vehicle for the duration of their visit.
+                  - text: Photography for commercial purposes is strictly prohibited without prior written consent.
+                  - text: Maximum occupancy for all standard rooms and suites is 4 people, and for two bedroom suites is 8 people. Management may pre-approve additional guests at their discretion. Violations can result in eviction and cleaning fees.
+              - generic [ref=e146]:
+                - generic: Cancellation Policy
+                - generic [ref=e147]: Cancel 72 hours prior to arrival to avoid penalty of one night's room rate and tax.
+              - paragraph [ref=e148]:
+                - text: 
+                - link "Hide Details" [expanded] [ref=e149] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - heading "Order Summary" [level=3] [ref=e154]
+              - tablist [ref=e155]:
+                - listitem [ref=e156]:
+                  - tab "Summary" [selected] [ref=e157] [cursor=pointer]
+                - listitem [ref=e158]:
+                  - tab "Details" [ref=e159] [cursor=pointer]
+              - tabpanel "Summary" [ref=e160]:
+                - table [ref=e161]:
+                  - rowgroup [ref=e162]:
+                    - row "Amount For Amount" [ref=e163]:
+                      - columnheader "Amount For" [ref=e164]
+                      - columnheader "Amount" [ref=e165]
+                  - rowgroup [ref=e166]:
+                    - row "Total Room Rates $1048.00" [ref=e167]:
+                      - cell "Total Room Rates" [ref=e168]
+                      - cell "$1048.00" [ref=e169]
+                    - row "Taxes $122.61" [ref=e170]:
+                      - cell "Taxes" [ref=e171]
+                      - cell "$122.61" [ref=e172]
+                    - row "Grand Total $1170.61" [ref=e173]:
+                      - cell "Grand Total" [ref=e174]
+                      - cell "$1170.61" [ref=e175]
+                    - row "Today's Deposit $669.08" [ref=e176]:
+                      - cell "Today's Deposit" [ref=e177]
+                      - cell "$669.08" [ref=e178]
+                    - row "Remaining Balance $501.53" [ref=e179]:
+                      - cell "Remaining Balance" [ref=e180]
+                      - cell "$501.53" [ref=e181]
+            - link "Proceed to Checkout" [ref=e183] [cursor=pointer]:
+              - /url: "#"
+    - generic: 
+    - contentinfo [ref=e184]:
+      - generic [ref=e190]:
+        - list [ref=e192]:
+          - listitem [ref=e193]:
+            - link "Encore Boston Harbor" [ref=e194] [cursor=pointer]:
+              - /url: https://reservations.encorebostonharbor.com/ibe/index.aspx?propertyID=13764&nono=1
+          - listitem [ref=e195]: "|"
+          - listitem [ref=e196]:
+            - link "Privacy" [ref=e197] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=805659
+          - listitem [ref=e198]: "|"
+          - listitem [ref=e199]:
+            - link "Terms & Conditions" [ref=e200] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=842993&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - generic [ref=e201]:
+          - paragraph [ref=e202]: © 2025 Wynn Resorts Holdings, LLC. All rights reserved.
+          - paragraph [ref=e203]: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit mahelpline.org/problemgambling to speak with a trained Specialist. Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - generic [ref=e206]: Please Wait...
+  - generic:   

@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - text: 
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]:
+            - link "My Reservation" [ref=e8] [cursor=pointer]:
+              - /url: "#"
+            - text: "|"
+          - link "Cart  1" [ref=e10] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13764&langID=1&currID=0
+            - generic [ref=e11]:
+              - text: Cart 
+              - generic [ref=e12]: "1"
+          - list [ref=e14]:
+            - listitem [ref=e15]:
+              - link " Sign In" [ref=e16] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+          - list [ref=e18]:
+            - listitem [ref=e19]:
+              - link "Join Wynn Rewards" [ref=e20] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/signup?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e21]:
+        - generic [ref=e23]:
+          - link "Encore Boston Harbor" [ref=e26] [cursor=pointer]:
+            - /url: https://stage-ebh.wynntesting.com/
+            - img "Encore Boston Harbor" [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - text: 
+              - generic [ref=e30]:
+                - link "Check In Check Out 04/25/2026 - 04/27/2026" [ref=e33] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e34]:
+                    - generic [ref=e35]: Check In
+                    - generic [ref=e36]: Check Out
+                  - generic [ref=e37]:
+                    - generic [ref=e38]: 04/25/2026
+                    - text: "-"
+                    - generic [ref=e39]: 04/27/2026
+                - table [ref=e41]:
+                  - rowgroup [ref=e42]:
+                    - row "Rooms Guests Per Room" [ref=e43]:
+                      - cell "Rooms" [ref=e44]:
+                        - generic [ref=e45]: Rooms
+                      - cell "Guests Per Room" [ref=e46]:
+                        - generic [ref=e47]: Guests Per Room
+                    - row "Remove 1 Room 1 Add 1 Room Remove 1 Guest Per Room 2 Add 1 Guest Per Room" [ref=e48]:
+                      - cell "Remove 1 Room 1 Add 1 Room" [ref=e49]:
+                        - generic [ref=e50]:
+                          - link "Remove 1 Room" [ref=e51]:
+                            - /url: "#"
+                            - text: – -
+                          - text: "1"
+                          - link "Add 1 Room" [ref=e52] [cursor=pointer]:
+                            - /url: "#"
+                            - text: +
+                      - cell "Remove 1 Guest Per Room 2 Add 1 Guest Per Room" [ref=e53]:
+                        - generic [ref=e54]:
+                          - link "Remove 1 Guest Per Room" [ref=e55] [cursor=pointer]:
+                            - /url: "#"
+                            - text: – -
+                          - text: "2"
+                          - link "Add 1 Guest Per Room" [ref=e56] [cursor=pointer]:
+                            - /url: "#"
+                            - text: +
+                - generic [ref=e57]:
+                  - generic [ref=e58]: Promo code
+                  - textbox "Promo code" [ref=e60]
+                - generic [ref=e62]:
+                  - generic: Update
+                - text: 1 2 3
+            - generic:
+              - status
+              - status
+        - text: ‹      – – !  
+    - generic [ref=e63]:      Close         
+    - generic: 
+    - contentinfo [ref=e64]:
+      - generic [ref=e70]:
+        - list [ref=e72]:
+          - listitem [ref=e73]:
+            - link "Encore Boston Harbor" [ref=e74] [cursor=pointer]:
+              - /url: https://reservations.encorebostonharbor.com/ibe/index.aspx?propertyID=13764&nono=1
+          - listitem [ref=e75]: "|"
+          - listitem [ref=e76]:
+            - link "Privacy" [ref=e77] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=805659
+          - listitem [ref=e78]: "|"
+          - listitem [ref=e79]:
+            - link "Terms & Conditions" [ref=e80] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=842993&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - generic [ref=e81]:
+          - paragraph [ref=e82]: © 2025 Wynn Resorts Holdings, LLC. All rights reserved.
+          - paragraph [ref=e83]: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit mahelpline.org/problemgambling to speak with a trained Specialist. Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - text: 
+  - generic [ref=e85]: Please Wait...
+  - generic:   

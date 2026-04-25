@@ -1,9 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Room, BookingExtras } from '@/lib/types'
+import type { Room, BookingExtras, CartItem } from '@/lib/types'
 import { calculateTotalPrice } from '@/lib/utils/dates'
 
 interface BookingState {
+  // Search bar / room-detail state (single in-progress selection)
   room: Room | null
   checkIn: string | null
   checkOut: string | null
@@ -12,12 +13,19 @@ interface BookingState {
   extras: BookingExtras
   totalPrice: number
 
+  // Multi-room cart
+  cartItems: CartItem[]
+
   setRoom: (room: Room) => void
   setDates: (checkIn: string, checkOut: string) => void
   setGuests: (guests: number) => void
   setRooms: (rooms: number) => void
   setExtras: (extras: Partial<BookingExtras>) => void
   clearBooking: () => void
+
+  addToCart: (item: CartItem) => void
+  removeFromCart: (index: number) => void
+  clearCart: () => void
 }
 
 const defaultExtras: BookingExtras = {
@@ -36,6 +44,7 @@ export const useBookingStore = create<BookingState>()(
       rooms: 1,
       extras: defaultExtras,
       totalPrice: 0,
+      cartItems: [],
 
       setRoom: (room) => {
         const { checkIn, checkOut, extras } = get()
@@ -78,6 +87,15 @@ export const useBookingStore = create<BookingState>()(
           extras: defaultExtras,
           totalPrice: 0,
         }),
+
+      addToCart: (item) => set((state) => ({ cartItems: [...state.cartItems, item] })),
+
+      removeFromCart: (index) =>
+        set((state) => ({
+          cartItems: state.cartItems.filter((_, i) => i !== index),
+        })),
+
+      clearCart: () => set({ cartItems: [] }),
     }),
     {
       name: 'booking-session',
@@ -89,6 +107,7 @@ export const useBookingStore = create<BookingState>()(
         rooms: state.rooms,
         extras: state.extras,
         totalPrice: state.totalPrice,
+        cartItems: state.cartItems,
       }),
     }
   )

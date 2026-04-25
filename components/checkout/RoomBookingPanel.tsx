@@ -36,7 +36,7 @@ export function RoomBookingPanel({
   initialGuests = 1,
 }: RoomBookingPanelProps) {
   const router = useRouter()
-  const { setRoom, setDates, setGuests, checkIn, checkOut, guests, totalPrice } = useBookingStore()
+  const { setDates, setGuests, addToCart } = useBookingStore()
 
   const [localCheckIn, setLocalCheckIn] = useState<string | null>(initialCheckIn ?? null)
   const [localCheckOut, setLocalCheckOut] = useState<string | null>(initialCheckOut ?? null)
@@ -54,7 +54,7 @@ export function RoomBookingPanel({
       setDates(initialCheckIn, initialCheckOut)
     }
     setGuests(initialGuests)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDateSelect = (ci: string, co: string) => {
     setLocalCheckIn(ci)
@@ -63,15 +63,22 @@ export function RoomBookingPanel({
     setShowCalendar(false)
   }
 
-  const handleBook = () => {
+  const handleAddToCart = () => {
     if (!localCheckIn || !localCheckOut) {
       setShowCalendar(true)
       return
     }
-    setRoom(room)
-    setDates(localCheckIn, localCheckOut)
-    setGuests(localGuests)
-    router.push('/checkout')
+    const noExtras = { breakfast: false, airportTransfer: false, lateCheckout: false }
+    const price = calculateStayPrice(room.pricePerNight, localCheckIn, localCheckOut, noExtras)
+    addToCart({
+      room,
+      checkIn: localCheckIn,
+      checkOut: localCheckOut,
+      guests: localGuests,
+      extras: noExtras,
+      totalPrice: price,
+    })
+    router.push('/cart')
   }
 
   const nights = localCheckIn && localCheckOut ? daysBetween(localCheckIn, localCheckOut) : 0
@@ -161,8 +168,8 @@ export function RoomBookingPanel({
         </div>
       )}
 
-      <Button onClick={handleBook} className="w-full" size="lg">
-        {!localCheckIn || !localCheckOut ? 'Select dates to book' : 'Book Now'}
+      <Button onClick={handleAddToCart} className="w-full" size="lg">
+        {!localCheckIn || !localCheckOut ? 'Select dates to book' : 'Add to Cart'}
       </Button>
 
       <p className="text-muted-foreground mt-3 text-center text-xs">

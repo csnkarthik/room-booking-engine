@@ -14,30 +14,32 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { room, checkIn, checkOut, guests, totalPrice } = useBookingStore()
+  const { cartItems } = useBookingStore()
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-  // Capture booking validity at mount time — not reactive to store being cleared after payment
-  const [hasBooking] = useState(() => !!room && !!checkIn && !!checkOut)
+  const [hasCart] = useState(() => cartItems.length > 0)
+
+  const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
 
   useEffect(() => {
-    if (!hasBooking) {
+    if (!hasCart) {
       router.replace('/rooms')
       return
     }
+
+    const roomNames = cartItems.map((i) => i.room.name).join(', ')
 
     fetch('/api/payments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        amount: totalPrice || room!.pricePerNight,
+        amount: grandTotal,
         currency: 'usd',
         metadata: {
-          roomId: room!.id,
-          roomName: room!.name,
-          checkIn,
-          checkOut,
-          guests: String(guests),
+          rooms: roomNames,
+          roomCount: String(cartItems.length),
+          checkIn: cartItems[0]?.checkIn,
+          checkOut: cartItems[0]?.checkOut,
         },
       }),
     })
@@ -47,20 +49,20 @@ export default function CheckoutPage() {
         setLoading(false)
       })
       .catch(() => setLoading(false))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- intentionally runs once on mount
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!hasBooking) return null
+  if (!hasCart) return null
 
   return (
     <div className="min-h-screen bg-slate-50">
       <main className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-6">
           <Link
-            href={room ? `/rooms/${room.id}` : '/rooms'}
+            href="/cart"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to room
+            Back to cart
           </Link>
           <h1 className="mt-2 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-wide">
             Complete Your Booking
@@ -86,7 +88,7 @@ export default function CheckoutPage() {
                   },
                 }}
               >
-                <CheckoutForm />
+                <CheckoutForm grandTotal={grandTotal} />
               </Elements>
             ) : (
               <div className="border-destructive/50 bg-destructive/10 rounded-xl border p-6 text-center">

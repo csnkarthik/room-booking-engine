@@ -69,6 +69,15 @@ export interface Booking {
   operaConfirmationNumber?: string
 }
 
+export interface CartItem {
+  room: Room
+  checkIn: string
+  checkOut: string
+  guests: number
+  extras: BookingExtras
+  totalPrice: number
+}
+
 export interface BookingSession {
   room: Room | null
   checkIn: string | null

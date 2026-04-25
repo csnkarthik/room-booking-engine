@@ -1,0 +1,699 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]:
+            - link "My Reservation" [ref=e8] [cursor=pointer]:
+              - /url: "#"
+            - text: "|"
+          - link "Cart  2" [ref=e10] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13764&langID=1&currID=0
+            - generic [ref=e11]:
+              - text: Cart 
+              - generic [ref=e12]: "2"
+          - list [ref=e14]:
+            - listitem [ref=e15]:
+              - link " Sign In" [ref=e16] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/login?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+          - list [ref=e18]:
+            - listitem [ref=e19]:
+              - link "Join Wynn Rewards" [ref=e20] [cursor=pointer]:
+                - /url: https://reservations-stg.wynntesting.com/ibe/DelegAuth/okta/signup?hotelID=13764&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-EBH
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e23]:
+        - link "Encore Boston Harbor" [ref=e26] [cursor=pointer]:
+          - /url: https://stage-ebh.wynntesting.com/
+          - img "Encore Boston Harbor" [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - text: 
+            - generic [ref=e30]:
+              - text: – –
+              - list [ref=e34]:
+                - listitem [ref=e35]:
+                  - link "Booking, step 1, completed" [ref=e36] [cursor=pointer]:
+                    - /url: cart.aspx?hotelID=13764&langID=1&hgID=0&currID=0
+                    - generic [ref=e39]:
+                      - text: "1"
+                      - generic [ref=e40]: Booking
+                - listitem [ref=e41]:
+                  - link "Payment, step 2" [ref=e42] [cursor=pointer]:
+                    - /url: "#"
+                    - generic [ref=e45]:
+                      - text: "2"
+                      - generic [ref=e46]: Payment
+                - listitem [ref=e47]:
+                  - generic [ref=e50]:
+                    - text: "3"
+                    - generic [ref=e51]: Confirmation
+                  - generic [ref=e52]: Confirmation, step 3
+              - link "Add Another Room" [ref=e55] [cursor=pointer]:
+                - /url: "#"
+          - generic:
+            - status
+            - status
+    - generic [ref=e57]:
+      - text:   1 2 3
+      - generic [ref=e58]:
+        - link "Back To Booking" [ref=e60] [cursor=pointer]:
+          - /url: "#back"
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - generic [ref=e64]:
+                - generic [ref=e65]: Premier King
+                - generic [ref=e66]: "| 2 Nights 2 Guests"
+              - generic [ref=e67]:
+                - img "Room" [ref=e71]
+                - generic [ref=e72]:
+                  - generic [ref=e73]:
+                    - generic [ref=e74]: Check In
+                    - generic [ref=e75]: Sat, Apr. 25
+                  - generic [ref=e76]:
+                    - generic [ref=e77]: Check Out
+                    - generic [ref=e78]: Mon, Apr. 27
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - generic [ref=e81]: Premier Double
+                - generic [ref=e82]: "| 2 Nights 2 Guests"
+              - generic [ref=e83]:
+                - img "Room" [ref=e87]
+                - generic [ref=e88]:
+                  - generic [ref=e89]:
+                    - generic [ref=e90]: Check In
+                    - generic [ref=e91]: Sat, Apr. 25
+                  - generic [ref=e92]:
+                    - generic [ref=e93]: Check Out
+                    - generic [ref=e94]: Mon, Apr. 27
+          - text:  
+        - generic [ref=e95]:
+          - group "Guest Information" [ref=e96]:
+            - generic [ref=e97]: Guest Information
+            - generic [ref=e98]:
+              - text: 
+              - generic [ref=e99]:
+                - generic [ref=e100]: First Name (Required)
+                - textbox "First Name (Required)" [ref=e101]:
+                  - /placeholder: First Name
+                  - text: Test
+                - generic [ref=e238]: First Name
+              - generic [ref=e102]:
+                - generic [ref=e103]: Last Name (Required)
+                - textbox "Last Name (Required)" [ref=e104]:
+                  - /placeholder: Last Name
+                  - text: User
+                - generic [ref=e239]: Last Name
+              - generic [ref=e105]:
+                - generic [ref=e106]: Email Address (Required)
+                - textbox "Email Address (Required)" [ref=e107]:
+                  - /placeholder: Email Address
+                  - text: test@example.com
+                - generic [ref=e240]: Email Address
+              - generic [ref=e108]:
+                - generic [ref=e109]: Address (Required)
+                - textbox "Address (Required)" [ref=e110]:
+                  - /placeholder: Address line 1
+                  - text: 123 Main Street
+                - generic [ref=e241]: Address line 1
+              - textbox "Address line 2 (optional)" [ref=e112]
+              - generic [ref=e113]:
+                - generic [ref=e114]: City/Township (Required)
+                - textbox "City/Township (Required)" [ref=e115]:
+                  - /placeholder: City
+                  - text: Boston
+                - generic [ref=e242]: City
+              - generic [ref=e116]:
+                - generic [ref=e117]: State/Province (Required)
+                - combobox "State/Province (Required)" [ref=e118] [cursor=pointer]:
+                  - option "State/Province"
+                  - option "Alabama"
+                  - option "Alaska"
+                  - option "Arizona"
+                  - option "Arkansas"
+                  - option "California"
+                  - option "Colorado"
+                  - option "Connecticut"
+                  - option "Delaware"
+                  - option "D.C."
+                  - option "Florida"
+                  - option "Georgia"
+                  - option "Hawaii"
+                  - option "Idaho"
+                  - option "Illinois"
+                  - option "Indiana"
+                  - option "Iowa"
+                  - option "Kansas"
+                  - option "Kentucky"
+                  - option "Louisiana"
+                  - option "Maine"
+                  - option "Maryland"
+                  - option "Massachusetts" [selected]
+                  - option "Michigan"
+                  - option "Minnesota"
+                  - option "Mississippi"
+                  - option "Missouri"
+                  - option "Montana"
+                  - option "Nebraska"
+                  - option "Nevada"
+                  - option "New Hampshire"
+                  - option "New Jersey"
+                  - option "New Mexico"
+                  - option "New York"
+                  - option "North Carolina"
+                  - option "North Dakota"
+                  - option "Ohio"
+                  - option "Oklahoma"
+                  - option "Oregon"
+                  - option "Pennsylvania"
+                  - option "Puerto Rico"
+                  - option "Rhode Island"
+                  - option "South Carolina"
+                  - option "South Dakota"
+                  - option "Tennessee"
+                  - option "Texas"
+                  - option "Utah"
+                  - option "Vermont"
+                  - option "Virginia"
+                  - option "Washington"
+                  - option "West Virginia"
+                  - option "Wisconsin"
+                  - option "Wyoming"
+                - generic [ref=e120] [cursor=pointer]: Massachusetts 
+              - generic [ref=e121]:
+                - generic [ref=e122]: ZIP (Required)
+                - textbox "ZIP (Required)" [ref=e123]:
+                  - /placeholder: Zip/Postal Code
+                  - text: "02101"
+                - generic [ref=e243]: Zip/Postal Code
+              - generic [ref=e124]:
+                - generic [ref=e125]: Country (Required)
+                - combobox "Country (Required)" [ref=e126] [cursor=pointer]:
+                  - option "UNITED STATES" [selected]
+                  - option "CANADA"
+                  - option "MEXICO"
+                  - option "UNITED KINGDOM"
+                  - option "--------------------" [disabled]
+                  - option "AFGHANISTAN"
+                  - option "ALBANIA"
+                  - option "ALGERIA"
+                  - option "AMERICAN SAMOA"
+                  - option "ANDORRA"
+                  - option "ANGOLA"
+                  - option "ANGUILLA"
+                  - option "ANTARCTICA"
+                  - option "ANTIGUA AND BARBUDA"
+                  - option "ARGENTINA"
+                  - option "ARMENIA"
+                  - option "ARUBA"
+                  - option "AUSTRALIA"
+                  - option "AUSTRIA"
+                  - option "AZERBAIJAN"
+                  - option "BAHAMAS"
+                  - option "BAHRAIN"
+                  - option "BANGLADESH"
+                  - option "BARBADOS"
+                  - option "BELARUS"
+                  - option "BELGIUM"
+                  - option "BELIZE"
+                  - option "BENIN"
+                  - option "BERMUDA"
+                  - option "BHUTAN"
+                  - option "BOLIVIA"
+                  - option "BOSNIA AND HERZEGOVINA"
+                  - option "BOTSWANA"
+                  - option "BOUVET ISLAND"
+                  - option "BRAZIL"
+                  - option "BRITISH INDIAN OCEAN TERRITORY"
+                  - option "BRUNEI DARUSSALAM"
+                  - option "BULGARIA"
+                  - option "BURKINA FASO"
+                  - option "BURUNDI"
+                  - option "CAMBODIA"
+                  - option "CAMEROON"
+                  - option "CANADA"
+                  - option "CAPE VERDE"
+                  - option "CAYMAN ISLANDS"
+                  - option "CENTRAL AFRICAN REPUBLIC"
+                  - option "CHAD"
+                  - option "CHILE"
+                  - option "CHINA"
+                  - option "CHRISTMAS ISLAND"
+                  - option "COCOS (KEELING) ISLANDS"
+                  - option "COLOMBIA"
+                  - option "COMOROS"
+                  - option "CONGO"
+                  - option "COOK ISLANDS"
+                  - option "COSTA RICA"
+                  - option "COTE D'IVOIRE"
+                  - option "CROATIA"
+                  - option "CUBA"
+                  - option "CURACAO"
+                  - option "CYPRUS"
+                  - option "CZECH REPUBLIC"
+                  - option "DENMARK"
+                  - option "DJIBOUTI"
+                  - option "DOMINICA"
+                  - option "DOMINICAN REPUBLIC"
+                  - option "EAST TIMOR"
+                  - option "ECUADOR"
+                  - option "EGYPT"
+                  - option "EL SALVADOR"
+                  - option "EQUATORIAL GUINEA"
+                  - option "ERITREA"
+                  - option "ESTONIA"
+                  - option "ETHIOPIA"
+                  - option "FALKLAND ISLANDS (MALVINAS)"
+                  - option "FAROE ISLANDS"
+                  - option "FIJI"
+                  - option "FINLAND"
+                  - option "FRANCE"
+                  - option "FRENCH GUIANA"
+                  - option "FRENCH POLYNESIA"
+                  - option "FRENCH SOUTHERN TERRITORIES"
+                  - option "GABON"
+                  - option "GAMBIA"
+                  - option "GEORGIA"
+                  - option "GERMANY"
+                  - option "GHANA"
+                  - option "GIBRALTAR"
+                  - option "GREECE"
+                  - option "GREENLAND"
+                  - option "GRENADA"
+                  - option "GUADELOUPE"
+                  - option "GUAM"
+                  - option "GUATEMALA"
+                  - option "GUINEA"
+                  - option "GUINEA-BISSAU"
+                  - option "GUYANA"
+                  - option "HAITI"
+                  - option "HOLY SEE (VATICAN CITY STATE)"
+                  - option "HONDURAS"
+                  - option "HONG KONG"
+                  - option "HUNGARY"
+                  - option "ICELAND"
+                  - option "INDIA"
+                  - option "INDONESIA"
+                  - option "IRAN, ISLAMIC REPUBLIC OF"
+                  - option "IRAQ"
+                  - option "IRELAND"
+                  - option "ISRAEL"
+                  - option "ITALY"
+                  - option "JAMAICA"
+                  - option "JAPAN"
+                  - option "JORDAN"
+                  - option "KAZAKSTAN"
+                  - option "KENYA"
+                  - option "KIRIBATI"
+                  - option "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+                  - option "KOREA, REPUBLIC OF"
+                  - option "KOSOVO"
+                  - option "KUWAIT"
+                  - option "KYRGYZSTAN"
+                  - option "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
+                  - option "LATVIA"
+                  - option "LEBANON"
+                  - option "LESOTHO"
+                  - option "LIBERIA"
+                  - option "LIBYAN ARAB JAMAHIRIYA"
+                  - option "LIECHTENSTEIN"
+                  - option "LITHUANIA"
+                  - option "LUXEMBOURG"
+                  - option "MACAU"
+                  - option "MACEDONIA,"
+                  - option "MADAGASCAR"
+                  - option "MALAWI"
+                  - option "MALAYSIA"
+                  - option "MALDIVES"
+                  - option "MALI"
+                  - option "MALTA"
+                  - option "MARSHALL ISLANDS"
+                  - option "MARTINIQUE"
+                  - option "MAURITANIA"
+                  - option "MAURITIUS"
+                  - option "MAYOTTE"
+                  - option "MEXICO"
+                  - option "MICRONESIA, FEDERATED STATES OF"
+                  - option "MOLDOVA, REPUBLIC OF"
+                  - option "MONACO"
+                  - option "MONGOLIA"
+                  - option "MONTENEGRO"
+                  - option "MONTSERRAT"
+                  - option "MOROCCO"
+                  - option "MOZAMBIQUE"
+                  - option "MYANMAR"
+                  - option "NAMIBIA"
+                  - option "NAURU"
+                  - option "NEPAL"
+                  - option "NETHERLANDS"
+                  - option "NETHERLANDS ANTILLES"
+                  - option "NEW CALEDONIA"
+                  - option "NEW ZEALAND"
+                  - option "NICARAGUA"
+                  - option "NIGER"
+                  - option "NIGERIA"
+                  - option "NIUE"
+                  - option "NORFOLK ISLAND"
+                  - option "NORTHERN MARIANA ISLANDS"
+                  - option "NORWAY"
+                  - option "OMAN"
+                  - option "PAKISTAN"
+                  - option "PALAU"
+                  - option "PALESTINIAN TERRITORY, OCCUPIED"
+                  - option "PANAMA"
+                  - option "PAPUA NEW GUINEA"
+                  - option "PARAGUAY"
+                  - option "PERU"
+                  - option "PHILIPPINES"
+                  - option "PITCAIRN"
+                  - option "POLAND"
+                  - option "PORTUGAL"
+                  - option "PUERTO RICO"
+                  - option "QATAR"
+                  - option "REUNION"
+                  - option "ROMANIA"
+                  - option "RUSSIAN FEDERATION"
+                  - option "RWANDA"
+                  - option "SAINT HELENA"
+                  - option "SAINT KITTS AND NEVIS"
+                  - option "SAINT LUCIA"
+                  - option "SAINT PIERRE AND MIQUELON"
+                  - option "SAINT VINCENT AND THE GRENADINES"
+                  - option "SAMOA"
+                  - option "SAN MARINO"
+                  - option "SAO TOME AND PRINCIPE"
+                  - option "SAUDI ARABIA"
+                  - option "SENEGAL"
+                  - option "SERBIA"
+                  - option "SEYCHELLES"
+                  - option "SIERRA LEONE"
+                  - option "SINGAPORE"
+                  - option "SLOVAKIA"
+                  - option "SLOVENIA"
+                  - option "SOLOMON ISLANDS"
+                  - option "SOMALIA"
+                  - option "SOUTH AFRICA"
+                  - option "SPAIN"
+                  - option "SRI LANKA"
+                  - option "SUDAN"
+                  - option "SURINAME"
+                  - option "SVALBARD AND JAN MAYEN"
+                  - option "SWAZILAND"
+                  - option "SWEDEN"
+                  - option "SWITZERLAND"
+                  - option "SYRIAN ARAB REPUBLIC"
+                  - option "TAIWAN, PROVINCE OF CHINA"
+                  - option "TAJIKISTAN"
+                  - option "TANZANIA, UNITED REPUBLIC OF"
+                  - option "THAILAND"
+                  - option "TOGO"
+                  - option "TOKELAU"
+                  - option "TONGA"
+                  - option "TRINIDAD AND TOBAGO"
+                  - option "TUNISIA"
+                  - option "TURKEY"
+                  - option "TURKMENISTAN"
+                  - option "TURKS AND CAICOS ISLANDS"
+                  - option "TUVALU"
+                  - option "UGANDA"
+                  - option "UKRAINE"
+                  - option "UNITED ARAB EMIRATES"
+                  - option "UNITED STATES MINOR OUTLYING ISLANDS"
+                  - option "URUGUAY"
+                  - option "USA"
+                  - option "UZBEKISTAN"
+                  - option "VANUATU"
+                  - option "VENEZUELA"
+                  - option "VIET NAM"
+                  - option "VIRGIN ISLANDS, BRITISH"
+                  - option "VIRGIN ISLANDS, U.S."
+                  - option "WALLIS AND FUTUNA"
+                  - option "WESTERN SAHARA"
+                  - option "YEMEN"
+                  - option "YUGOSLAVIA"
+                  - option "ZAMBIA"
+                  - option "ZIMBABWE"
+                - generic [ref=e128] [cursor=pointer]: UNITED STATES 
+              - text: 
+              - generic [ref=e129]:
+                - generic [ref=e130]: Phone Number (Required)
+                - generic [ref=e131]:
+                  - combobox "Telephone country code" [ref=e133]
+                  - textbox "Phone Number (Required)" [ref=e136]:
+                    - /placeholder: Phone Number
+                    - text: (617) 555-1234
+                  - generic [ref=e244]: Phone Number
+              - generic [ref=e137]:
+                - generic [ref=e138]: "Date of Birth :"
+                - combobox "Date of Birth :" [ref=e139] [cursor=pointer]:
+                  - option "DOB Month"
+                  - option "January" [selected]
+                  - option "February"
+                  - option "March"
+                  - option "April"
+                  - option "May"
+                  - option "June"
+                  - option "July"
+                  - option "August"
+                  - option "September"
+                  - option "October"
+                  - option "November"
+                  - option "December"
+                - generic [ref=e141] [cursor=pointer]: January 
+                - combobox [ref=e142] [cursor=pointer]:
+                  - option "DOB Day" [selected]
+                  - option "1"
+                  - option "2"
+                  - option "3"
+                  - option "4"
+                  - option "5"
+                  - option "6"
+                  - option "7"
+                  - option "8"
+                  - option "9"
+                  - option "10"
+                  - option "11"
+                  - option "12"
+                  - option "13"
+                  - option "14"
+                  - option "15"
+                  - option "16"
+                  - option "17"
+                  - option "18"
+                  - option "19"
+                  - option "20"
+                  - option "21"
+                  - option "22"
+                  - option "23"
+                  - option "24"
+                  - option "25"
+                  - option "26"
+                  - option "27"
+                  - option "28"
+                  - option "29"
+                  - option "30"
+                  - option "31"
+                - generic [ref=e144] [cursor=pointer]: DOB Day 
+                - combobox [ref=e145] [cursor=pointer]:
+                  - option "DOB Year" [selected]
+                  - option "2026"
+                  - option "2025"
+                  - option "2024"
+                  - option "2023"
+                  - option "2022"
+                  - option "2021"
+                  - option "2020"
+                  - option "2019"
+                  - option "2018"
+                  - option "2017"
+                  - option "2016"
+                  - option "2015"
+                  - option "2014"
+                  - option "2013"
+                  - option "2012"
+                  - option "2011"
+                  - option "2010"
+                  - option "2009"
+                  - option "2008"
+                  - option "2007"
+                  - option "2006"
+                  - option "2005"
+                  - option "2004"
+                  - option "2003"
+                  - option "2002"
+                  - option "2001"
+                  - option "2000"
+                  - option "1999"
+                  - option "1998"
+                  - option "1997"
+                  - option "1996"
+                  - option "1995"
+                  - option "1994"
+                  - option "1993"
+                  - option "1992"
+                  - option "1991"
+                  - option "1990"
+                  - option "1989"
+                  - option "1988"
+                  - option "1987"
+                  - option "1986"
+                  - option "1985"
+                  - option "1984"
+                  - option "1983"
+                  - option "1982"
+                  - option "1981"
+                  - option "1980"
+                  - option "1979"
+                  - option "1978"
+                  - option "1977"
+                  - option "1976"
+                  - option "1975"
+                  - option "1974"
+                  - option "1973"
+                  - option "1972"
+                  - option "1971"
+                  - option "1970"
+                  - option "1969"
+                  - option "1968"
+                  - option "1967"
+                  - option "1966"
+                  - option "1965"
+                  - option "1964"
+                  - option "1963"
+                  - option "1962"
+                  - option "1961"
+                  - option "1960"
+                  - option "1959"
+                  - option "1958"
+                  - option "1957"
+                  - option "1956"
+                  - option "1955"
+                  - option "1954"
+                  - option "1953"
+                  - option "1952"
+                  - option "1951"
+                  - option "1950"
+                  - option "1949"
+                  - option "1948"
+                  - option "1947"
+                  - option "1946"
+                  - option "1945"
+                  - option "1944"
+                  - option "1943"
+                  - option "1942"
+                  - option "1941"
+                  - option "1940"
+                  - option "1939"
+                  - option "1938"
+                  - option "1937"
+                  - option "1936"
+                  - option "1935"
+                  - option "1934"
+                  - option "1933"
+                  - option "1932"
+                  - option "1931"
+                  - option "1930"
+                  - option "1929"
+                  - option "1928"
+                  - option "1927"
+                - generic [ref=e147] [cursor=pointer]: DOB Year 
+              - text:  
+          - group "Billing Information" [ref=e148]:
+            - generic [ref=e149]: Billing Information
+            - img "American Express" [ref=e151]
+            - img "Diners Club" [ref=e153]
+            - img "Discover" [ref=e155]
+            - img "Japan Credit Bureau (Jcb)" [ref=e157]
+            - img "Mastercard/Eurocard" [ref=e159]
+            - img "Visa" [ref=e161]
+            - generic [ref=e162]:
+              - generic [ref=e163]: Name on Card (Required)
+              - textbox "Name on Card (Required)" [ref=e164]:
+                - /placeholder: Name On Card
+                - text: Test User
+              - generic [ref=e245]: Name On Card
+            - generic [ref=e165]:
+              - generic [ref=e166]: Credit Card Number (Required)
+              - generic [ref=e167]:
+                - textbox "Credit Card Number (Required)" [ref=e168]:
+                  - /placeholder: Card Number
+                  - text: "4444333322221111"
+                - generic [ref=e247]: Card Number
+            - generic [ref=e169]:
+              - generic [ref=e170]: Expiration Date (MM/YY) (Required)
+              - textbox "Expiration Date (MM/YY) (Required)" [ref=e171]:
+                - /placeholder: Expiration Date (MM/YY)
+                - text: 12/27
+              - generic [ref=e248]: Expiration Date (MM/YY)
+            - generic [ref=e172]:
+              - checkbox "Billing address is different." [ref=e173] [cursor=pointer]
+              - text: Billing address is different.
+        - generic [ref=e175]:
+          - generic [ref=e176]:
+            - heading "Order Summary" [level=3] [ref=e178]
+            - tablist [ref=e179]:
+              - listitem [ref=e180]:
+                - tab "Summary" [selected] [ref=e181] [cursor=pointer]
+              - listitem [ref=e182]:
+                - tab "Details" [ref=e183] [cursor=pointer]
+            - generic "Summary" [ref=e184]:
+              - table [ref=e185]:
+                - rowgroup [ref=e186]:
+                  - row "Amount For Amount" [ref=e187]:
+                    - columnheader "Amount For" [ref=e188]
+                    - columnheader "Amount" [ref=e189]
+                - rowgroup [ref=e190]:
+                  - row "Total Room Rates $2196.00" [ref=e191]:
+                    - cell "Total Room Rates" [ref=e192]
+                    - cell "$2196.00" [ref=e193]
+                  - row "Taxes $256.92" [ref=e194]:
+                    - cell "Taxes" [ref=e195]
+                    - cell "$256.92" [ref=e196]
+                  - row "Grand Total $2452.92" [ref=e197]:
+                    - cell "Grand Total" [ref=e198]
+                    - cell "$2452.92" [ref=e199]
+                  - row "Today's Deposit $1394.01" [ref=e200]:
+                    - cell "Today's Deposit" [ref=e201]
+                    - cell "$1394.01" [ref=e202]
+                  - row "Remaining Balance $1058.91" [ref=e203]:
+                    - cell "Remaining Balance" [ref=e204]
+                    - cell "$1058.91" [ref=e205]
+          - generic [ref=e206]:
+            - checkbox "I agree to the terms & conditions. I also certify that I am at least 21 years of age." [checked] [active] [ref=e207] [cursor=pointer]: 
+            - generic [ref=e209]:
+              - text: I agree to the
+              - link "terms & conditions" [ref=e210] [cursor=pointer]:
+                - /url: "#ws-full-terms-conditions"
+              - text: . I also certify that I am at least 21 years of age.
+          - paragraph [ref=e211]:
+            - button "Reserve Now" [disabled] [ref=e212]
+          - paragraph:
+            - emphasis
+      - generic [ref=e213]:
+        - paragraph [ref=e215]:
+          - strong [ref=e216]: Not ready to submit your reservation?
+          - link "Save for Later" [ref=e217] [cursor=pointer]:
+            - /url: "#ws-save-later"
+        - generic:
+          - paragraph
+    - button "Scroll to Top" [ref=e246]:  Top
+    - contentinfo [ref=e218]:
+      - generic [ref=e224]:
+        - list [ref=e226]:
+          - listitem [ref=e227]:
+            - link "Encore Boston Harbor" [ref=e228] [cursor=pointer]:
+              - /url: https://reservations.encorebostonharbor.com/ibe/index.aspx?propertyID=13764&nono=1
+          - listitem [ref=e229]: "|"
+          - listitem [ref=e230]:
+            - link "Privacy" [ref=e231] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=805659
+          - listitem [ref=e232]: "|"
+          - listitem [ref=e233]:
+            - link "Terms & Conditions" [ref=e234] [cursor=pointer]:
+              - /url: https://www.visitwynn.com/tc/index.cfm?term_id=842993&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - generic [ref=e235]:
+          - paragraph [ref=e236]: © 2025 Wynn Resorts Holdings, LLC. All rights reserved.
+          - paragraph [ref=e237]: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit mahelpline.org/problemgambling to speak with a trained Specialist. Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - generic:   
