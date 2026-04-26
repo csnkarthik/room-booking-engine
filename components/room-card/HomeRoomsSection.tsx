@@ -15,13 +15,8 @@ function isoDate(offsetDays: number): string {
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  //{ value: 'single', label: 'Single' },
-  //{ value: 'double', label: 'Double' },
-  { value: 'room', label: 'Encore Rooms' },
-
-  { value: 'suite', label: 'Encore Suites' },
-  //{ value: 'deluxe', label: 'Deluxe' },
-  //{ value: 'penthouse', label: 'Penthouse' },
+  { value: 'room', label: 'Resort Rooms' },
+  { value: 'suite', label: 'Suites' },
 ]
 
 interface HomeRoomsSectionProps {
@@ -37,7 +32,6 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
   const defaultCheckOut = checkOut ?? isoDate(3)
   const defaultGuests = checkIn ? guests : 2
 
-  // Triggered when user clicks Search — snapshot the store values
   const [activeCheckIn, setActiveCheckIn] = useState<string | null>(defaultCheckIn)
   const [activeCheckOut, setActiveCheckOut] = useState<string | null>(defaultCheckOut)
   const [activeGuests, setActiveGuests] = useState<number | undefined>(defaultGuests)
@@ -76,23 +70,27 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
 
   return (
     <div>
-      {/* Booking bar */}
-      <div className="sticky top-0 z-40 -mx-4 bg-white px-4 pt-3 pb-3 shadow-sm">
+      {/* Sticky booking bar — sits just below the 48px site header (top-12) */}
+      <div className="sticky top-12 z-40 -mx-4">
         <BookingBar basePrice={minPrice} onSearch={handleSearch} />
       </div>
 
-      {/* Category pills */}
-      <div className="mt-4 mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+      {/* Category tabs */}
+      <div
+        className="mt-6 mb-8 flex gap-0 border-b border-[#D8D8D8]"
+        role="group"
+        aria-label="Filter by category"
+      >
         {CATEGORIES.map((cat) => (
           <button
             key={cat.value}
             type="button"
             onClick={() => setCategory(cat.value)}
             className={cn(
-              'rounded-full border px-4 py-1.5 text-sm font-medium transition-colors',
+              'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
               category === cat.value
-                ? 'border-primary bg-primary text-primary-foreground'
-                : 'hover:border-primary hover:text-primary border-slate-200 bg-white text-slate-600'
+                ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                : 'text-[#626262] hover:text-[#101010]'
             )}
           >
             {cat.label}
@@ -102,15 +100,15 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
 
       {filtered.length === 0 ? (
         <div className="py-24 text-center">
-          <p className="text-muted-foreground text-lg">No rooms match your criteria.</p>
+          <p className="text-[#626262]">No rooms match your criteria.</p>
         </div>
       ) : grouped ? (
-        <div className="space-y-10">
+        <div className="space-y-12">
           {Array.from(grouped.entries()).map(([type, typeRooms]) => (
             <section key={type}>
-              <h2 className="mb-4 text-lg font-semibold text-slate-800 capitalize">
+              <h2 className="mb-5 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010]">
                 {CATEGORIES.find((cat) => cat.value === type)?.label}
-                <span className="text-muted-foreground ml-2 text-sm font-normal">
+                <span className="ml-2 font-sans text-sm font-normal text-[#8D8D8D]">
                   ({typeRooms.length})
                 </span>
               </h2>
