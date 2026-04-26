@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Users, Maximize2 } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
 import { formatCurrency } from '@/lib/utils/dates'
 import { calculateStayPrice } from '@/lib/utils/pricing'
 import { cn } from '@/lib/utils'
@@ -23,6 +21,7 @@ const roomTypeLabels: Record<string, string> = {
   suite: 'Suite',
   deluxe: 'Deluxe',
   penthouse: 'Penthouse',
+  room: 'Resort Room',
 }
 
 const noExtras = { breakfast: false, airportTransfer: false, lateCheckout: false }
@@ -39,7 +38,6 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
     ? calculateStayPrice(room.pricePerNight, checkIn, checkOut, noExtras)
     : null
 
-  // Calculate number of nights
   let nights = 0
   if (hasDates) {
     const start = new Date(checkIn + 'T00:00:00')
@@ -47,9 +45,17 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
     nights = Math.round((end.getTime() - start.getTime()) / 86400000)
   }
 
+  const displayPrice = apiPricePerNight ?? (stayTotal ? stayTotal : room.pricePerNight)
+  const priceLabel = apiPricePerNight
+    ? '/night'
+    : stayTotal
+      ? `${nights} night${nights > 1 ? 's' : ''} total`
+      : '/night'
+
   return (
-    <Card className="group overflow-hidden border-[#E8D9C5] pt-0 transition-shadow hover:shadow-xl">
-      <div className="bg-muted relative aspect-[4/3] overflow-hidden">
+    <div className="group overflow-hidden border border-[#D8D8D8] bg-white transition-shadow hover:shadow-xl">
+      {/* Image with concave bottom curve */}
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={room.images[0]}
           alt={room.name}
@@ -57,45 +63,31 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <Badge className="absolute top-3 left-3 rounded-none border-0 bg-[#3D2314] px-2 py-0.5 text-[10px] tracking-widest text-[#C8B89A] uppercase">
+        {/* Room type badge — top left */}
+        <div className="absolute top-3 left-3 z-10 bg-[#5A3A27]/80 px-2 py-1 text-[10px] font-black tracking-[1.5px] text-white/90 uppercase backdrop-blur-sm">
           {roomTypeLabels[room.type] ?? room.type}
-        </Badge>
+        </div>
+        {/* Concave bottom curve: white ellipse clipped by overflow-hidden */}
+        <div
+          className="pointer-events-none absolute left-1/2 z-10 -translate-x-1/2 rounded-full bg-white"
+          style={{ width: 'calc(100% + 64px)', height: '48px', bottom: '-24px' }}
+        />
       </div>
 
-      <CardContent className="p-4">
-        <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="font-[family-name:var(--font-heading)] text-lg leading-tight font-semibold tracking-wide">
-            {room.name}
-          </h3>
-          <div className="shrink-0 text-right">
-            {apiPricePerNight ? (
-              <>
-                <div className="text-primary text-lg font-bold">
-                  {formatCurrency(apiPricePerNight)}
-                </div>
-                <div className="text-muted-foreground text-xs">/night</div>
-              </>
-            ) : stayTotal ? (
-              <>
-                <div className="text-primary text-lg font-bold">{formatCurrency(stayTotal)}</div>
-                <div className="text-muted-foreground text-xs">
-                  {nights} night{nights > 1 ? 's' : ''} total
-                </div>
-              </>
-            ) : (
-              <>
-                <span className="text-primary text-lg font-bold">
-                  {formatCurrency(room.pricePerNight)}
-                </span>
-                <span className="text-muted-foreground text-xs"> /night</span>
-              </>
-            )}
-          </div>
-        </div>
+      {/* Card content */}
+      <div className="px-5 pt-2 pb-5">
+        {/* Room name */}
+        <h3 className="mb-1 font-[family-name:var(--font-heading)] text-xl leading-snug font-medium tracking-wide text-[#101010]">
+          {room.name}
+        </h3>
 
-        <p className="text-muted-foreground mb-3 line-clamp-2 text-sm">{room.description}</p>
+        {/* Description */}
+        <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-[#626262]">
+          {room.description}
+        </p>
 
-        <div className="text-muted-foreground mb-4 flex items-center gap-4 text-xs">
+        {/* Meta */}
+        <div className="mb-3 flex items-center gap-4 text-xs text-[#8D8D8D]">
           <span className="flex items-center gap-1">
             <Users className="h-3 w-3" />
             Up to {room.maxGuests} {room.maxGuests === 1 ? 'guest' : 'guests'}
@@ -106,12 +98,13 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
           </span>
         </div>
 
+        {/* Amenity badges */}
         <div className="mb-4 flex flex-wrap gap-1">
           {room.amenities.slice(0, 3).map((amenity) => (
             <Badge
               key={amenity}
               variant="outline"
-              className="rounded-none border-[#E8D9C5] text-[10px] tracking-wider text-[#7B5135] uppercase"
+              className="rounded-none border-[#D8D8D8] text-[10px] tracking-wider text-[#5A3A27] uppercase"
             >
               {amenity}
             </Badge>
@@ -119,20 +112,40 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
           {room.amenities.length > 3 && (
             <Badge
               variant="outline"
-              className="rounded-none border-[#E8D9C5] text-[10px] tracking-wider text-[#7B5135] uppercase"
+              className="rounded-none border-[#D8D8D8] text-[10px] tracking-wider text-[#5A3A27] uppercase"
             >
               +{room.amenities.length - 3} more
             </Badge>
           )}
         </div>
 
-        <Link
-          href={`/rooms/${room.id}${query ? `?${query}` : ''}`}
-          className={cn(buttonVariants(), 'w-full rounded-none text-xs tracking-widest uppercase')}
-        >
-          View Room
-        </Link>
-      </CardContent>
-    </Card>
+        {/* Divider */}
+        <div className="mb-4 border-t border-[#D8D8D8]" />
+
+        {/* Price + CTA row */}
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <div className="text-xl font-bold text-[#101010]">{formatCurrency(displayPrice)}</div>
+            <div className="text-xs text-[#8D8D8D] italic">Excludes Taxes.</div>
+            <div className="text-[10px] text-[#8D8D8D]">{priceLabel}</div>
+          </div>
+
+          <Link
+            href={`/rooms/${room.id}${query ? `?${query}` : ''}`}
+            className={cn(
+              'shrink-0 bg-[#006F62] px-5 py-2.5 text-[11px] font-black tracking-[1.5px] text-white uppercase',
+              'transition-colors hover:bg-[#008475]'
+            )}
+          >
+            View Rates
+          </Link>
+        </div>
+
+        {/* Special rates */}
+        <p className="mt-3 text-center text-[10px] tracking-wider text-[#8D8D8D]">
+          Special Rates Available
+        </p>
+      </div>
+    </div>
   )
 }

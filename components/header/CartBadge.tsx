@@ -7,16 +7,18 @@ import { useBookingStore } from '@/lib/store/bookingStore'
 export function CartBadge() {
   const count = useBookingStore((s) => s.cartItems.length)
 
-  if (count === 0) return null
-
   return (
     <Link
       href="/cart"
-      aria-label={`View cart — ${count} room${count !== 1 ? 's' : ''}`}
-      className="absolute top-3 right-4 flex items-center gap-1.5 rounded-full bg-[#C8B89A] px-3 py-1 text-xs font-semibold text-[#3D2314] transition-opacity hover:opacity-90"
+      aria-label={`View cart${count > 0 ? ` — ${count} room${count !== 1 ? 's' : ''}` : ''}`}
+      className="relative text-[11px] font-black tracking-[1.5px] text-[#2D2D2D] uppercase transition-colors hover:text-[#006F62]"
     >
-      <ShoppingCart className="h-3.5 w-3.5" />
-      <span>{count}</span>
+      <ShoppingCart className="h-4 w-4" />
+      {count > 0 && (
+        <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-[#006F62] text-[9px] font-bold text-white">
+          {count}
+        </span>
+      )}
     </Link>
   )
 }

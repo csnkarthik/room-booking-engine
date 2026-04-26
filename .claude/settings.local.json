@@ -31,7 +31,15 @@
       "mcp__playwright__browser_fill_form",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_evaluate",
-      "mcp__playwright__browser_wait_for"
+      "mcp__playwright__browser_wait_for",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cp C:/Users/csnkarthik/Lab/room-booking-engine/.claude/worktrees/peaceful-sanderson/components/header/CartBadge.tsx components/header/CartBadge.tsx)",
+      "Bash(cp C:/Users/csnkarthik/Lab/room-booking-engine/.claude/worktrees/peaceful-sanderson/components/room-card/RoomCard.tsx components/room-card/RoomCard.tsx)",
+      "Bash(cp C:/Users/csnkarthik/Lab/room-booking-engine/.claude/worktrees/peaceful-sanderson/app/globals.css app/globals.css)",
+      "Bash(cp C:/Users/csnkarthik/Lab/room-booking-engine/.claude/worktrees/peaceful-sanderson/app/layout.tsx app/layout.tsx)",
+      "Bash(cp C:/Users/csnkarthik/Lab/room-booking-engine/.claude/worktrees/peaceful-sanderson/components/booking-bar/BookingBar.tsx components/booking-bar/BookingBar.tsx)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)"
     ]
   }
 }

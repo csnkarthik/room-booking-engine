@@ -1,25 +1,30 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { ShoppingCart, User, Star, CalendarCheck } from 'lucide-react'
 import { CartBadge } from './CartBadge'
+
+const NAV_LINK =
+  'text-[11px] font-black tracking-[1.5px] uppercase text-[#2D2D2D] transition-colors hover:text-[#006F62]'
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-[#E8D9C5] bg-[#3D2314] shadow-sm">
-      <div className="relative flex flex-col items-center gap-1 py-4">
-        <Link href="/" aria-label="Home">
-          <Image
-            src="/logo.gif"
-            alt="Encore Boston Harbor"
-            width={120}
-            height={72}
-            unoptimized
-            className="h-14 w-auto brightness-0 invert"
-          />
+    <header className="sticky top-0 z-50 h-12 border-b border-[#D8D8D8] bg-white">
+      <div className="flex h-full items-center justify-end gap-5 px-4 sm:gap-7 sm:px-6 lg:px-8">
+        <Link href="/signin" className={NAV_LINK}>
+          <span className="hidden sm:inline">Sign In</span>
+          <User className="h-4 w-4 sm:hidden" />
         </Link>
-        <p className="text-xs font-light tracking-[0.2em] text-[#C8B89A] uppercase">
-          A Wynn Resort
-        </p>
+
+        <Link href="/rewards" className={NAV_LINK}>
+          <span className="hidden md:inline">Join Wynn Rewards</span>
+          <Star className="h-4 w-4 md:hidden" />
+        </Link>
+
         <CartBadge />
+
+        <Link href="/reservations" className={NAV_LINK}>
+          <span className="hidden sm:inline">My Reservation</span>
+          <CalendarCheck className="h-4 w-4 sm:hidden" />
+        </Link>
       </div>
     </header>
   )

@@ -33,14 +33,14 @@ export function GuestSelector({ value, max = 10, onChange, className }: GuestSel
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="hover:bg-muted/50 flex h-full w-full items-center gap-2 px-3 py-2 text-left focus:outline-none"
+        className="flex h-full w-full items-center gap-3 px-6 py-4 text-left transition-colors hover:bg-white/5 focus:outline-none"
       >
-        <Users className="text-muted-foreground h-4 w-4" />
+        <Users className="h-4 w-4 shrink-0 text-[#DDBE77]" />
         <div>
-          <div className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
+          <div className="text-[11px] font-black tracking-[1.5px] text-[#DDBE77] uppercase">
             Guests
           </div>
-          <div className="text-sm font-medium">
+          <div className="text-sm font-medium tracking-wide text-white">
             {value} {value === 1 ? 'guest' : 'guests'}
           </div>
         </div>
@@ -50,10 +50,10 @@ export function GuestSelector({ value, max = 10, onChange, className }: GuestSel
         <div
           role="dialog"
           aria-label="Select number of guests"
-          className="absolute top-full z-50 mt-2 w-56 rounded-xl border bg-white p-4 shadow-xl"
+          className="absolute top-full z-50 mt-2 w-56 border border-[#D8D8D8] bg-white p-4 shadow-xl"
         >
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">Guests</span>
+            <span className="text-sm font-medium text-[#2D2D2D]">Guests</span>
             <div className="flex items-center gap-3">
               <Button
                 variant="outline"

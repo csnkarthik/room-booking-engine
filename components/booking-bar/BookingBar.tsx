@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Calendar, Search, DoorOpen, Minus, Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { DateRangeCalendar } from '@/components/calendar/DateRangeCalendar'
 import { GuestSelector } from '@/components/booking-bar/GuestSelector'
 import { useBookingStore } from '@/lib/store/bookingStore'
@@ -29,6 +28,9 @@ function monthBounds(year: number, month: number): { startDate: string; endDate:
     endDate: end.toISOString().slice(0, 10),
   }
 }
+
+const LABEL = 'text-[11px] font-black tracking-[1.5px] uppercase text-[#DDBE77]'
+const VALUE = 'text-sm font-medium tracking-wide text-white'
 
 export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: BookingBarProps) {
   const router = useRouter()
@@ -66,34 +68,30 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
     router.push(`/rooms?${params.toString()}`)
   }
 
-  const dateLabel =
-    checkIn && checkOut
-      ? `${formatDisplayDate(checkIn)} → ${formatDisplayDate(checkOut)}`
-      : 'Check-in → Check-out'
+  const checkInLabel = checkIn ? formatDisplayDate(checkIn) : 'Add Date'
+  const checkOutLabel = checkOut ? formatDisplayDate(checkOut) : 'Add Date'
 
   return (
-    <div
-      className={cn('w-full border border-[#E8D9C5] bg-white shadow-lg', className)}
-      role="search"
-      aria-label="Room search"
-    >
-      <div className="flex flex-col divide-y md:flex-row md:divide-x md:divide-y-0">
-        {/* Dates */}
+    <div className={cn('w-full bg-[#5D3F23]', className)} role="search" aria-label="Room search">
+      <div className="flex flex-col divide-y divide-white/15 md:flex-row md:divide-x md:divide-y-0">
+        {/* Check In / Check Out */}
         <div ref={calendarRef} className="relative flex-[2]">
           <button
             type="button"
             onClick={() => setShowCalendar((o) => !o)}
             aria-haspopup="dialog"
             aria-expanded={showCalendar}
-            className="hover:bg-muted/50 flex h-full w-full items-center gap-2 px-4 py-3 focus:outline-none"
+            className="flex h-full w-full items-center gap-3 px-6 py-4 transition-colors hover:bg-white/5 focus:outline-none"
           >
-            <Calendar className="text-muted-foreground h-4 w-4 shrink-0" />
-            <div className="text-left">
-              <div className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
-                Dates
+            <Calendar className="h-4 w-4 shrink-0 text-[#DDBE77]" />
+            <div className="flex gap-6 text-left">
+              <div>
+                <div className={LABEL}>Check In</div>
+                <div className={cn(VALUE, !checkIn && 'text-white/50')}>{checkInLabel}</div>
               </div>
-              <div className={cn('text-sm font-medium', !checkIn && 'text-muted-foreground')}>
-                {dateLabel}
+              <div>
+                <div className={LABEL}>Check Out</div>
+                <div className={cn(VALUE, !checkOut && 'text-white/50')}>{checkOutLabel}</div>
               </div>
             </div>
           </button>
@@ -125,31 +123,27 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
 
         {/* Rooms */}
         <div className="flex-1">
-          <div className="flex h-full items-center gap-2 px-3 py-2">
-            <DoorOpen className="text-muted-foreground h-4 w-4 shrink-0" />
+          <div className="flex h-full items-center gap-3 px-6 py-4">
+            <DoorOpen className="h-4 w-4 shrink-0 text-[#DDBE77]" />
             <div className="flex-1">
-              <div className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
-                Rooms
-              </div>
-              <div className="flex items-center gap-2">
+              <div className={LABEL}>Rooms</div>
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setRooms(Math.max(1, rooms - 1))}
                   disabled={rooms <= 1}
                   aria-label="Decrease rooms"
-                  className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+                  className="text-white/60 transition-colors hover:text-white disabled:opacity-30"
                 >
                   <Minus className="h-3 w-3" />
                 </button>
-                <span className="text-sm font-medium">
-                  {rooms} {rooms === 1 ? 'room' : 'rooms'}
-                </span>
+                <span className={VALUE}>{rooms}</span>
                 <button
                   type="button"
                   onClick={() => setRooms(Math.min(4, rooms + 1))}
                   disabled={rooms >= 4}
                   aria-label="Increase rooms"
-                  className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+                  className="text-white/60 transition-colors hover:text-white disabled:opacity-30"
                 >
                   <Plus className="h-3 w-3" />
                 </button>
@@ -159,16 +153,16 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
         </div>
 
         {/* Search CTA */}
-        <div className="flex items-center p-2">
-          <Button
+        <div className="flex items-center p-3">
+          <button
+            type="button"
             onClick={handleSearch}
-            size="lg"
-            className="w-full gap-2 rounded-none text-xs tracking-widest uppercase md:w-auto"
             aria-label="Search available rooms"
+            className="flex w-full items-center justify-center gap-2 bg-[#006F62] px-6 py-3 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475] focus:outline-none md:w-auto"
           >
             <Search className="h-4 w-4" />
             <span>Search</span>
-          </Button>
+          </button>
         </div>
       </div>
     </div>

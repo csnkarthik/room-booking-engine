@@ -10,11 +10,8 @@ import type { Room, RoomType } from '@/lib/types'
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'room', label: 'Encore Rooms' },
-  //{ value: 'double', label: 'Double' },
-  { value: 'suite', label: 'Encore Suites' },
-  //{ value: 'deluxe', label: 'Deluxe' },
-  //{ value: 'penthouse', label: 'Penthouse' },
+  { value: 'room', label: 'Resort Rooms' },
+  { value: 'suite', label: 'Suites' },
 ]
 
 interface RoomsListWithFilterProps {
@@ -50,7 +47,6 @@ export function RoomsListWithFilter({
     })
   }, [rooms, query, category])
 
-  // Group by category when "all" is selected and no search query
   const grouped = useMemo(() => {
     if (category !== 'all' || query.trim()) return null
     const map = new Map<RoomType, Room[]>()
@@ -64,57 +60,59 @@ export function RoomsListWithFilter({
 
   return (
     <div>
-      {/* Search + filter bar */}
-      <div className="mb-6 space-y-3">
-        <div className="relative">
-          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-          <Input
-            type="search"
-            placeholder="Search rooms, amenities…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="pl-9"
-            aria-label="Search rooms"
-          />
-        </div>
+      {/* Search input */}
+      <div className="relative mb-6">
+        <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#8D8D8D]" />
+        <Input
+          type="search"
+          placeholder="Search rooms, amenities…"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="rounded-none border-[#D8D8D8] pl-9 focus-visible:ring-[#006F62]"
+          aria-label="Search rooms"
+        />
+      </div>
 
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.value}
-              type="button"
-              onClick={() => setCategory(cat.value)}
-              className={cn(
-                'rounded-none border px-5 py-1.5 text-xs font-medium tracking-widest uppercase transition-colors',
-                category === cat.value
-                  ? 'border-primary bg-primary text-primary-foreground'
-                  : 'hover:border-primary hover:bg-primary hover:text-primary-foreground border-[#E8D9C5] bg-white text-[#7B5135]'
-              )}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+      {/* Category tabs */}
+      <div
+        className="mb-8 flex gap-0 border-b border-[#D8D8D8]"
+        role="group"
+        aria-label="Filter by category"
+      >
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat.value}
+            type="button"
+            onClick={() => setCategory(cat.value)}
+            className={cn(
+              'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
+              category === cat.value
+                ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                : 'text-[#626262] hover:text-[#101010]'
+            )}
+          >
+            {cat.label}
+          </button>
+        ))}
       </div>
 
       {filtered.length === 0 ? (
         <div className="py-24 text-center">
-          <p className="text-muted-foreground text-lg">No rooms match your search.</p>
+          <p className="text-lg text-[#626262]">No rooms match your search.</p>
           <Link
             href="/"
-            className="text-primary mt-4 inline-flex items-center gap-2 hover:underline"
+            className="mt-4 inline-flex items-center gap-2 text-[#006F62] hover:underline"
           >
             <ArrowLeft className="h-4 w-4" /> Modify search
           </Link>
         </div>
       ) : grouped ? (
-        // Categorized view
-        <div className="space-y-10">
+        <div className="space-y-12">
           {Array.from(grouped.entries()).map(([type, typeRooms]) => (
             <section key={type}>
-              <h2 className="text-foreground mb-4 font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-wide capitalize">
+              <h2 className="mb-5 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010]">
                 {CATEGORIES.find((cat) => cat.value === type)?.label}
-                <span className="text-muted-foreground ml-2 font-sans text-sm font-normal">
+                <span className="ml-2 font-sans text-sm font-normal text-[#8D8D8D]">
                   ({typeRooms.length})
                 </span>
               </h2>
@@ -134,7 +132,6 @@ export function RoomsListWithFilter({
           ))}
         </div>
       ) : (
-        // Flat filtered view
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((room) => (
             <RoomCard
