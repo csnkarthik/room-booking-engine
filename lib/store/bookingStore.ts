@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Room, BookingExtras, CartItem } from '@/lib/types'
 import { calculateTotalPrice } from '@/lib/utils/dates'
+import { calculateStayPrice } from '@/lib/utils/pricing'
 
 interface BookingState {
   // Search bar / room-detail state (single in-progress selection)
@@ -25,6 +26,7 @@ interface BookingState {
 
   addToCart: (item: CartItem) => void
   removeFromCart: (index: number) => void
+  updateCartItemExtras: (index: number, extras: Partial<BookingExtras>) => void
   clearCart: () => void
 }
 
@@ -93,6 +95,24 @@ export const useBookingStore = create<BookingState>()(
       removeFromCart: (index) =>
         set((state) => ({
           cartItems: state.cartItems.filter((_, i) => i !== index),
+        })),
+
+      updateCartItemExtras: (index, partialExtras) =>
+        set((state) => ({
+          cartItems: state.cartItems.map((item, i) => {
+            if (i !== index) return item
+            const merged = { ...item.extras, ...partialExtras }
+            return {
+              ...item,
+              extras: merged,
+              totalPrice: calculateStayPrice(
+                item.room.pricePerNight,
+                item.checkIn,
+                item.checkOut,
+                merged
+              ),
+            }
+          }),
         })),
 
       clearCart: () => set({ cartItems: [] }),

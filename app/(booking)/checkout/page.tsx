@@ -58,11 +58,11 @@ export default function CheckoutPage() {
       <main className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-6">
           <Link
-            href="/cart"
+            href={cartItems[0]?.room?.id ? `/rooms/${cartItems[0].room.id}` : '/rooms'}
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to cart
+            Back to suite
           </Link>
           <h1 className="mt-2 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-wide">
             Complete Your Booking
