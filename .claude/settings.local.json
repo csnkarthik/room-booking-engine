@@ -41,6 +41,7 @@
       "Bash(git stash:*)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)"
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
