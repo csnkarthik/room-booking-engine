@@ -15,8 +15,8 @@ function isoDate(offsetDays: number): string {
 
 const CATEGORIES: { value: RoomType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'room', label: 'Resort Rooms' },
-  { value: 'suite', label: 'Suites' },
+  { value: 'room', label: 'Encore Rooms' },
+  { value: 'suite', label: 'Encore Suites' },
 ]
 
 interface HomeRoomsSectionProps {
