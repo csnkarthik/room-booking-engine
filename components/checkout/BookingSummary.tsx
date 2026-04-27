@@ -6,19 +6,20 @@ import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/date
 import { Badge } from '@/components/ui/badge'
 
 export function BookingSummary() {
-  const { cartItems, extras } = useBookingStore()
+  const { cartItems } = useBookingStore()
 
   if (cartItems.length === 0) return null
 
-  const roomsTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
-  const totalNights = cartItems.reduce(
-    (sum, item) => sum + daysBetween(item.checkIn, item.checkOut),
-    0
-  )
-  const breakfastTotal = extras.breakfast ? 25 * totalNights : 0
-  const transferTotal = extras.airportTransfer ? 75 : 0
-  const lateCheckoutTotal = extras.lateCheckout ? 50 : 0
-  const grandTotal = roomsTotal + breakfastTotal + transferTotal + lateCheckoutTotal
+  const grandTotal = cartItems.reduce((sum, item) => {
+    const nights = daysBetween(item.checkIn, item.checkOut)
+    return (
+      sum +
+      item.totalPrice +
+      (item.extras.breakfast ? 25 * nights : 0) +
+      (item.extras.airportTransfer ? 75 : 0) +
+      (item.extras.lateCheckout ? 50 : 0)
+    )
+  }, 0)
 
   return (
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
@@ -56,7 +57,7 @@ export function BookingSummary() {
               </div>
 
               {/* Dates */}
-              <div className="mb-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+              <div className="mb-2 grid grid-cols-1 gap-x-4 gap-y-1 text-xs sm:grid-cols-2">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Check-in</span>
                   <span className="font-medium">{formatDisplayDate(item.checkIn)}</span>
@@ -86,35 +87,36 @@ export function BookingSummary() {
                 </span>
                 <span className="font-medium">{formatCurrency(roomTotal)}</span>
               </div>
+
+              {/* Per-item extras */}
+              {(item.extras.breakfast ||
+                item.extras.airportTransfer ||
+                item.extras.lateCheckout) && (
+                <div className="mt-2 space-y-1 border-t pt-2 text-xs">
+                  {item.extras.breakfast && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Breakfast × {nights} nights</span>
+                      <span>{formatCurrency(25 * nights)}</span>
+                    </div>
+                  )}
+                  {item.extras.airportTransfer && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Airport transfer</span>
+                      <span>{formatCurrency(75)}</span>
+                    </div>
+                  )}
+                  {item.extras.lateCheckout && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Late checkout</span>
+                      <span>{formatCurrency(50)}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )
         })}
       </div>
-
-      {/* Extras */}
-      {(extras.breakfast || extras.airportTransfer || extras.lateCheckout) && (
-        <div className="mt-3 space-y-1.5 rounded-xl bg-slate-50 p-3 text-sm">
-          <p className="text-muted-foreground text-xs font-semibold uppercase">Add-ons</p>
-          {extras.breakfast && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Breakfast × {totalNights} nights</span>
-              <span>{formatCurrency(breakfastTotal)}</span>
-            </div>
-          )}
-          {extras.airportTransfer && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Airport transfer</span>
-              <span>{formatCurrency(transferTotal)}</span>
-            </div>
-          )}
-          {extras.lateCheckout && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Late checkout</span>
-              <span>{formatCurrency(lateCheckoutTotal)}</span>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Grand total */}
       <div className="mt-4 flex justify-between border-t pt-4 text-base font-bold">

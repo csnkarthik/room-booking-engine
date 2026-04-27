@@ -11,7 +11,7 @@ export function CartBadge() {
     <Link
       href="/cart"
       aria-label={`View cart${count > 0 ? ` — ${count} room${count !== 1 ? 's' : ''}` : ''}`}
-      className="relative text-[11px] font-black tracking-[1.5px] text-[#2D2D2D] uppercase transition-colors hover:text-[#006F62]"
+      className="relative text-[11px] font-black tracking-[1.5px] text-white/80 uppercase transition-colors hover:text-[#DDBE77]"
     >
       <ShoppingCart className="h-4 w-4" />
       {count > 0 && (

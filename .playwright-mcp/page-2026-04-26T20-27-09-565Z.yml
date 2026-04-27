@@ -1,0 +1,347 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /signin
+        - img [ref=e5]
+      - link [ref=e8] [cursor=pointer]:
+        - /url: /rewards
+        - img [ref=e9]
+      - link "View cart" [ref=e11] [cursor=pointer]:
+        - /url: /cart
+        - img [ref=e12]
+      - link [ref=e16] [cursor=pointer]:
+        - /url: /reservations
+        - img [ref=e17]
+  - main [ref=e20]:
+    - generic [ref=e22]:
+      - search "Room search" [ref=e24]:
+        - generic [ref=e25]:
+          - img "Encore Boston Harbor" [ref=e26]
+          - button "Select Dates" [ref=e27]:
+            - text: Select Dates
+            - img [ref=e28]
+      - generic [ref=e30]:
+        - group "Filter by category" [ref=e31]:
+          - button "All" [ref=e32]
+          - button "Resort Rooms" [ref=e33]
+          - button "Suites" [ref=e34]
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - heading "Suites(5)" [level=2] [ref=e37]:
+              - text: Suites
+              - generic [ref=e38]: (5)
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - img "Encore Suites Twin" [ref=e42]
+                  - generic [ref=e43]: Suite
+                - generic [ref=e44]:
+                  - heading "Encore Suites Twin" [level=3] [ref=e45]
+                  - paragraph [ref=e46]: A bright twin room with two single beds, ideal for friends or colleagues traveling together. Features a work desk and a well-appointed en-suite bathroom.
+                  - generic [ref=e47]:
+                    - generic [ref=e48]:
+                      - img [ref=e49]
+                      - text: Up to 2 guests
+                    - generic [ref=e54]:
+                      - img [ref=e55]
+                      - text: 240 sq ft
+                  - generic [ref=e60]:
+                    - generic [ref=e61]: Free Wi-Fi
+                    - generic [ref=e62]: Air Conditioning
+                    - generic [ref=e63]: Flat-screen TV
+                    - generic [ref=e64]: +2 more
+                  - generic [ref=e66]:
+                    - generic [ref=e67]:
+                      - generic [ref=e68]: $297.00
+                      - generic [ref=e69]: Excludes Taxes.
+                      - generic [ref=e70]: 3 nights total
+                    - button "Book Room" [ref=e71]
+                  - paragraph [ref=e72]: Special Rates Available
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - img "Twin Harbour View" [ref=e75]
+                  - generic [ref=e76]: Suite
+                - generic [ref=e77]:
+                  - heading "Twin Harbour View" [level=3] [ref=e78]
+                  - paragraph [ref=e79]: A twin room with two single beds and sweeping harbour views. Ideal for two guests who want a scenic stay, featuring a bright en-suite bathroom and ample wardrobe space.
+                  - generic [ref=e80]:
+                    - generic [ref=e81]:
+                      - img [ref=e82]
+                      - text: Up to 2 guests
+                    - generic [ref=e87]:
+                      - img [ref=e88]
+                      - text: 250 sq ft
+                  - generic [ref=e93]:
+                    - generic [ref=e94]: Free Wi-Fi
+                    - generic [ref=e95]: Air Conditioning
+                    - generic [ref=e96]: Flat-screen TV
+                    - generic [ref=e97]: +3 more
+                  - generic [ref=e99]:
+                    - generic [ref=e100]:
+                      - generic [ref=e101]: $387.00
+                      - generic [ref=e102]: Excludes Taxes.
+                      - generic [ref=e103]: 3 nights total
+                    - button "Book Room" [ref=e104]
+                  - paragraph [ref=e105]: Special Rates Available
+              - generic [ref=e106]:
+                - generic [ref=e107]:
+                  - img "Two-Bedroom Apartment" [ref=e108]
+                  - generic [ref=e109]: Suite
+                - generic [ref=e110]:
+                  - heading "Two-Bedroom Apartment" [level=3] [ref=e111]
+                  - paragraph [ref=e112]: A spacious two-bedroom apartment with a fully separate living area, kitchenette, and two private bathrooms. Perfect for families or groups seeking a home-away-from-home experience.
+                  - generic [ref=e113]:
+                    - generic [ref=e114]:
+                      - img [ref=e115]
+                      - text: Up to 4 guests
+                    - generic [ref=e120]:
+                      - img [ref=e121]
+                      - text: 620 sq ft
+                  - generic [ref=e126]:
+                    - generic [ref=e127]: Free Wi-Fi
+                    - generic [ref=e128]: Climate Control
+                    - generic [ref=e129]: 65" Smart TV
+                    - generic [ref=e130]: +10 more
+                  - generic [ref=e132]:
+                    - generic [ref=e133]:
+                      - generic [ref=e134]: $1,047.00
+                      - generic [ref=e135]: Excludes Taxes.
+                      - generic [ref=e136]: 3 nights total
+                    - button "Book Room" [ref=e137]
+                  - paragraph [ref=e138]: Special Rates Available
+              - generic [ref=e139]:
+                - generic [ref=e140]:
+                  - img "Three-Bedroom Duplex" [ref=e141]
+                  - generic [ref=e142]: Suite
+                - generic [ref=e143]:
+                  - heading "Three-Bedroom Duplex" [level=3] [ref=e144]
+                  - paragraph [ref=e145]: Our Three-Bedroom Duplex spans two floors with three private bedrooms, a grand living and dining area, and two premium bathrooms. Includes daily complimentary champagne and 24-hour butler service.
+                  - generic [ref=e146]:
+                    - generic [ref=e147]:
+                      - img [ref=e148]
+                      - text: Up to 6 guests
+                    - generic [ref=e153]:
+                      - img [ref=e154]
+                      - text: 1100 sq ft
+                  - generic [ref=e159]:
+                    - generic [ref=e160]: Free Wi-Fi
+                    - generic [ref=e161]: Climate Control
+                    - generic [ref=e162]: 75" Smart TV
+                    - generic [ref=e163]: +12 more
+                  - generic [ref=e165]:
+                    - generic [ref=e166]:
+                      - generic [ref=e167]: $1,647.00
+                      - generic [ref=e168]: Excludes Taxes.
+                      - generic [ref=e169]: 3 nights total
+                    - button "Book Room" [ref=e170]
+                  - paragraph [ref=e171]: Special Rates Available
+              - generic [ref=e172]:
+                - generic [ref=e173]:
+                  - img "Penthouse" [ref=e174]
+                  - generic [ref=e175]: Suite
+                - generic [ref=e176]:
+                  - heading "Penthouse" [level=3] [ref=e177]
+                  - paragraph [ref=e178]: The Penthouse occupies the entire top floor with a private wraparound terrace, hot tub, three bedrooms, and three luxurious bathrooms. Features a fully equipped kitchen, private dining room, and comes with a dedicated butler and personal chef.
+                  - generic [ref=e179]:
+                    - generic [ref=e180]:
+                      - img [ref=e181]
+                      - text: Up to 6 guests
+                    - generic [ref=e186]:
+                      - img [ref=e187]
+                      - text: 2200 sq ft
+                  - generic [ref=e192]:
+                    - generic [ref=e193]: Free Wi-Fi (dedicated line)
+                    - generic [ref=e194]: Smart Home Climate Control
+                    - generic [ref=e195]: 85" 4K Smart TV
+                    - generic [ref=e196]: +12 more
+                  - generic [ref=e198]:
+                    - generic [ref=e199]:
+                      - generic [ref=e200]: $2,997.00
+                      - generic [ref=e201]: Excludes Taxes.
+                      - generic [ref=e202]: 3 nights total
+                    - button "Book Room" [ref=e203]
+                  - paragraph [ref=e204]: Special Rates Available
+          - generic [ref=e205]:
+            - heading "Resort Rooms(6)" [level=2] [ref=e206]:
+              - text: Resort Rooms
+              - generic [ref=e207]: (6)
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - generic [ref=e210]:
+                  - img "Premier Double" [ref=e211]
+                  - generic [ref=e212]: Resort Room
+                - generic [ref=e213]:
+                  - heading "Premier Double" [level=3] [ref=e214]
+                  - paragraph [ref=e215]: Spacious double room with a king-size bed, seating area, and luxurious marble bathroom with rain shower.
+                  - generic [ref=e216]:
+                    - generic [ref=e217]:
+                      - img [ref=e218]
+                      - text: Up to 2 guests
+                    - generic [ref=e223]:
+                      - img [ref=e224]
+                      - text: 320 sq ft
+                  - generic [ref=e229]:
+                    - generic [ref=e230]: Free Wi-Fi
+                    - generic [ref=e231]: Air Conditioning
+                    - generic [ref=e232]: Flat-screen TV
+                    - generic [ref=e233]: +4 more
+                  - generic [ref=e235]:
+                    - generic [ref=e236]:
+                      - generic [ref=e237]: $447.00
+                      - generic [ref=e238]: Excludes Taxes.
+                      - generic [ref=e239]: 3 nights total
+                    - button "Book Room" [ref=e240]
+                  - paragraph [ref=e241]: Special Rates Available
+              - generic [ref=e242]:
+                - generic [ref=e243]:
+                  - img "Premier Double City View" [ref=e244]
+                  - generic [ref=e245]: Resort Room
+                - generic [ref=e246]:
+                  - heading "Premier Double City View" [level=3] [ref=e247]
+                  - paragraph [ref=e248]: A superior double room with floor-to-ceiling windows framing vibrant city skyline views. Boasts a king-size bed, plush seating area, and a marble bathroom with rain shower.
+                  - generic [ref=e249]:
+                    - generic [ref=e250]:
+                      - img [ref=e251]
+                      - text: Up to 2 guests
+                    - generic [ref=e256]:
+                      - img [ref=e257]
+                      - text: 330 sq ft
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: Free Wi-Fi
+                    - generic [ref=e264]: Air Conditioning
+                    - generic [ref=e265]: Flat-screen TV
+                    - generic [ref=e266]: +5 more
+                  - generic [ref=e268]:
+                    - generic [ref=e269]:
+                      - generic [ref=e270]: $507.00
+                      - generic [ref=e271]: Excludes Taxes.
+                      - generic [ref=e272]: 3 nights total
+                    - button "Book Room" [ref=e273]
+                  - paragraph [ref=e274]: Special Rates Available
+              - generic [ref=e275]:
+                - generic [ref=e276]:
+                  - img "Premier Harbor View Double" [ref=e277]
+                  - generic [ref=e278]: Resort Room
+                - generic [ref=e279]:
+                  - heading "Premier Harbor View Double" [level=3] [ref=e280]
+                  - paragraph [ref=e281]: A superior double room with breathtaking harbour views. Wake up to shimmering waterfront scenery from your king-size bed. Features a marble bathroom with walk-in shower.
+                  - generic [ref=e282]:
+                    - generic [ref=e283]:
+                      - img [ref=e284]
+                      - text: Up to 2 guests
+                    - generic [ref=e289]:
+                      - img [ref=e290]
+                      - text: 330 sq ft
+                  - generic [ref=e295]:
+                    - generic [ref=e296]: Free Wi-Fi
+                    - generic [ref=e297]: Air Conditioning
+                    - generic [ref=e298]: Flat-screen TV
+                    - generic [ref=e299]: +5 more
+                  - generic [ref=e301]:
+                    - generic [ref=e302]:
+                      - generic [ref=e303]: $537.00
+                      - generic [ref=e304]: Excludes Taxes.
+                      - generic [ref=e305]: 3 nights total
+                    - button "Book Room" [ref=e306]
+                  - paragraph [ref=e307]: Special Rates Available
+              - generic [ref=e308]:
+                - generic [ref=e309]:
+                  - img "Premier King" [ref=e310]
+                  - generic [ref=e311]: Resort Room
+                - generic [ref=e312]:
+                  - heading "Premier King" [level=3] [ref=e313]
+                  - paragraph [ref=e314]: Our Deluxe King room offers stunning panoramic views, a plush king-size bed with premium linens, and a spa-inspired bathroom with both a soaking tub and walk-in shower.
+                  - generic [ref=e315]:
+                    - generic [ref=e316]:
+                      - img [ref=e317]
+                      - text: Up to 2 guests
+                    - generic [ref=e322]:
+                      - img [ref=e323]
+                      - text: 420 sq ft
+                  - generic [ref=e328]:
+                    - generic [ref=e329]: Free Wi-Fi
+                    - generic [ref=e330]: Air Conditioning
+                    - generic [ref=e331]: 55" Smart TV
+                    - generic [ref=e332]: +6 more
+                  - generic [ref=e334]:
+                    - generic [ref=e335]:
+                      - generic [ref=e336]: $657.00
+                      - generic [ref=e337]: Excludes Taxes.
+                      - generic [ref=e338]: 3 nights total
+                    - button "Book Room" [ref=e339]
+                  - paragraph [ref=e340]: Special Rates Available
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - img "Premier King City View" [ref=e343]
+                  - generic [ref=e344]: Resort Room
+                - generic [ref=e345]:
+                  - heading "Premier King City View" [level=3] [ref=e346]
+                  - paragraph [ref=e347]: The King City View room pairs a luxurious king-size bed with sweeping urban skyline vistas. Enjoy premium linens, a spa-inspired bathroom with soaking tub, and a dedicated sitting area.
+                  - generic [ref=e348]:
+                    - generic [ref=e349]:
+                      - img [ref=e350]
+                      - text: Up to 2 guests
+                    - generic [ref=e355]:
+                      - img [ref=e356]
+                      - text: 430 sq ft
+                  - generic [ref=e361]:
+                    - generic [ref=e362]: Free Wi-Fi
+                    - generic [ref=e363]: Air Conditioning
+                    - generic [ref=e364]: 55" Smart TV
+                    - generic [ref=e365]: +6 more
+                  - generic [ref=e367]:
+                    - generic [ref=e368]:
+                      - generic [ref=e369]: $747.00
+                      - generic [ref=e370]: Excludes Taxes.
+                      - generic [ref=e371]: 3 nights total
+                    - button "Book Room" [ref=e372]
+                  - paragraph [ref=e373]: Special Rates Available
+              - generic [ref=e374]:
+                - generic [ref=e375]:
+                  - img "Premier Harbor View King" [ref=e376]
+                  - generic [ref=e377]: Resort Room
+                - generic [ref=e378]:
+                  - heading "Premier Harbor View King" [level=3] [ref=e379]
+                  - paragraph [ref=e380]: The King Harbour View room offers an unobstructed waterfront panorama from a plush king-size bed. Features premium linens, a spa-inspired soaking tub, and a dedicated lounge area.
+                  - generic [ref=e381]:
+                    - generic [ref=e382]:
+                      - img [ref=e383]
+                      - text: Up to 2 guests
+                    - generic [ref=e388]:
+                      - img [ref=e389]
+                      - text: 430 sq ft
+                  - generic [ref=e394]:
+                    - generic [ref=e395]: Free Wi-Fi
+                    - generic [ref=e396]: Air Conditioning
+                    - generic [ref=e397]: 55" Smart TV
+                    - generic [ref=e398]: +6 more
+                  - generic [ref=e400]:
+                    - generic [ref=e401]:
+                      - generic [ref=e402]: $807.00
+                      - generic [ref=e403]: Excludes Taxes.
+                      - generic [ref=e404]: 3 nights total
+                    - button "Book Room" [ref=e405]
+                  - paragraph [ref=e406]: Special Rates Available
+  - contentinfo [ref=e407]:
+    - generic [ref=e408]:
+      - navigation [ref=e409]:
+        - link "Encore Boston Harbor" [ref=e410] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e411]: "|"
+        - link "Privacy" [ref=e412] [cursor=pointer]:
+          - /url: /privacy
+        - generic [ref=e413]: "|"
+        - link "Terms & Conditions" [ref=e414] [cursor=pointer]:
+          - /url: /terms
+      - paragraph [ref=e415]: © 2026 Wynn Resorts Holdings, LLC. All rights reserved.
+      - paragraph [ref=e416]:
+        - text: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit
+        - link "mahelpline.org/problemgambling" [ref=e417] [cursor=pointer]:
+          - /url: https://www.mahelpline.org/problemgambling
+        - text: to speak with a trained Specialist.
+        - text: Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e423] [cursor=pointer]:
+    - img [ref=e424]
+  - alert [ref=e427]

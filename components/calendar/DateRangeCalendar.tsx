@@ -35,6 +35,8 @@ function formatPrice(price: number): string {
   return price >= 1000 ? `$${(price / 1000).toFixed(1)}k` : `$${price}`
 }
 
+const DAY_HEADERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+
 export function DateRangeCalendar({
   checkIn,
   checkOut,
@@ -63,6 +65,19 @@ export function DateRangeCalendar({
     [availability?.blockedRanges]
   )
   const minStay = availability?.minStayNights ?? 1
+
+  // Right (second) month
+  const rightMonth = viewMonth === 11 ? 0 : viewMonth + 1
+  const rightYear = viewMonth === 11 ? viewYear + 1 : viewYear
+
+  // Navigation limits via absolute month count (year * 12 + month)
+  const todayAbs = today.getFullYear() * 12 + today.getMonth()
+  const viewAbs = viewYear * 12 + viewMonth
+  const rightAbs = rightYear * 12 + rightMonth
+  const limitAbs = todayAbs + 3 // right month must not exceed today + 3 months
+
+  const canGoPrev = viewAbs > todayAbs
+  const canGoNext = rightAbs < limitAbs
 
   const isBlocked = useCallback(
     (dateStr: string): boolean => {
@@ -116,6 +131,7 @@ export function DateRangeCalendar({
   }
 
   const prevMonth = () => {
+    if (!canGoPrev) return
     const newMonth = viewMonth === 0 ? 11 : viewMonth - 1
     const newYear = viewMonth === 0 ? viewYear - 1 : viewYear
     setViewMonth(newMonth)
@@ -124,6 +140,7 @@ export function DateRangeCalendar({
   }
 
   const nextMonth = () => {
+    if (!canGoNext) return
     const newMonth = viewMonth === 11 ? 0 : viewMonth + 1
     const newYear = viewMonth === 11 ? viewYear + 1 : viewYear
     setViewMonth(newMonth)
@@ -131,69 +148,30 @@ export function DateRangeCalendar({
     onMonthChange?.(newYear, newMonth)
   }
 
-  const monthName = new Date(viewYear, viewMonth).toLocaleString('default', {
+  const leftMonthName = new Date(viewYear, viewMonth).toLocaleString('default', {
+    month: 'long',
+    year: 'numeric',
+  })
+  const rightMonthName = new Date(rightYear, rightMonth).toLocaleString('default', {
     month: 'long',
     year: 'numeric',
   })
 
-  const daysInMonth = getDaysInMonth(viewYear, viewMonth)
-  const firstDay = getFirstDayOfMonth(viewYear, viewMonth)
-  const days = Array.from({ length: daysInMonth }, (_, i) => {
-    return formatDate(new Date(viewYear, viewMonth, i + 1))
-  })
+  const showPricing = basePrice !== undefined || dailyPrices !== undefined
 
-  return (
-    <div
-      className={cn('w-full rounded-xl border bg-white p-4 shadow-lg', className)}
-      role="dialog"
-      aria-label="Date range calendar"
-    >
-      {/* Header */}
-      <div className="mb-3 flex items-center justify-between">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={prevMonth}
-          aria-label="Previous month"
-          className="h-8 w-8"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <span className="text-sm font-semibold">{monthName}</span>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={nextMonth}
-          aria-label="Next month"
-          className="h-8 w-8"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
+  const renderMonthGrid = (year: number, month: number) => {
+    const daysInM = getDaysInMonth(year, month)
+    const firstDayM = getFirstDayOfMonth(year, month)
+    const daysM = Array.from({ length: daysInM }, (_, i) =>
+      formatDate(new Date(year, month, i + 1))
+    )
 
-      {/* Prompt */}
-      <div className="text-muted-foreground mb-2 text-center text-xs">
-        {selecting === 'checkIn'
-          ? 'Select check-in date'
-          : `Select check-out (min ${minStay} night${minStay > 1 ? 's' : ''})`}
-      </div>
-
-      {/* Day labels */}
-      <div className="mb-1 grid grid-cols-7 text-center">
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d) => (
-          <div key={d} className="text-muted-foreground py-1 text-xs font-medium">
-            {d}
-          </div>
-        ))}
-      </div>
-
-      {/* Grid */}
+    return (
       <div className="grid grid-cols-7">
-        {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`e-${i}`} />
+        {Array.from({ length: firstDayM }).map((_, i) => (
+          <div key={`e-${year}-${month}-${i}`} />
         ))}
-
-        {days.map((dateStr) => {
+        {daysM.map((dateStr) => {
           const blocked = isBlocked(dateStr)
           const inRange = isInRange(dateStr)
           const isStart = isCheckIn(dateStr)
@@ -202,7 +180,6 @@ export function DateRangeCalendar({
           const price = !blocked
             ? (dailyPrices?.[dateStr] ?? (basePrice ? getDailyPrice(basePrice, dateStr) : null))
             : null
-          const showPricing = basePrice !== undefined || dailyPrices !== undefined
 
           return (
             <button
@@ -239,6 +216,86 @@ export function DateRangeCalendar({
             </button>
           )
         })}
+      </div>
+    )
+  }
+
+  return (
+    <div
+      className={cn('w-full rounded-xl border bg-white p-4 shadow-lg', className)}
+      role="dialog"
+      aria-label="Date range calendar"
+    >
+      {/* Prompt */}
+      <div className="text-muted-foreground mb-3 text-center text-xs">
+        {selecting === 'checkIn'
+          ? 'Select check-in date'
+          : `Select check-out (min ${minStay} night${minStay > 1 ? 's' : ''})`}
+      </div>
+
+      <div className="flex gap-6">
+        {/* Left month */}
+        <div className="flex-1">
+          <div className="mb-3 flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={prevMonth}
+              disabled={!canGoPrev}
+              aria-label="Previous month"
+              className="h-8 w-8"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <span className="text-sm font-semibold">{leftMonthName}</span>
+            {/* Next button visible only on mobile (right month is hidden) */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={nextMonth}
+              disabled={!canGoNext}
+              aria-label="Next month"
+              className="h-8 w-8 lg:hidden"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+            <div className="hidden h-8 w-8 lg:block" />
+          </div>
+          <div className="mb-1 grid grid-cols-7 text-center">
+            {DAY_HEADERS.map((d, i) => (
+              <div key={i} className="text-muted-foreground py-1 text-xs font-medium">
+                {d}
+              </div>
+            ))}
+          </div>
+          {renderMonthGrid(viewYear, viewMonth)}
+        </div>
+
+        {/* Right month — desktop only */}
+        <div className="hidden flex-1 flex-col lg:flex">
+          <div className="mb-3 flex items-center justify-between">
+            <div className="h-8 w-8" />
+            <span className="text-sm font-semibold">{rightMonthName}</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={nextMonth}
+              disabled={!canGoNext}
+              aria-label="Next month"
+              className="h-8 w-8"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="mb-1 grid grid-cols-7 text-center">
+            {DAY_HEADERS.map((d, i) => (
+              <div key={i} className="text-muted-foreground py-1 text-xs font-medium">
+                {d}
+              </div>
+            ))}
+          </div>
+          {renderMonthGrid(rightYear, rightMonth)}
+        </div>
       </div>
 
       {minStay > 1 && (

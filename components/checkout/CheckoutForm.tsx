@@ -1,42 +1,33 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
 import { daysBetween } from '@/lib/utils/dates'
+import type { User } from '@auth0/nextjs-auth0/types'
 
 type GuestFormValues = z.infer<typeof GuestSchema>
 
 interface CheckoutFormProps {
-  grandTotal: number
+  user?: User | null
+  onProcessingChange?: (processing: boolean) => void
 }
 
-export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
+export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
-  const { cartItems, extras, setExtras, clearCart } = useBookingStore()
+  const { cartItems, clearCart } = useBookingStore()
 
-  // Total nights across all cart items (for breakfast pricing)
-  const totalNights = cartItems.reduce(
-    (sum, item) => sum + daysBetween(item.checkIn, item.checkOut),
-    0
-  )
-  const extrasTotal =
-    (extras.breakfast ? 25 * totalNights : 0) +
-    (extras.airportTransfer ? 75 : 0) +
-    (extras.lateCheckout ? 50 : 0)
-  const totalWithExtras = grandTotal + extrasTotal
-
-  const [processing, setProcessing] = useState(false)
+  function updateProcessing(value: boolean) {
+    onProcessingChange?.(value)
+  }
 
   const {
     register,
@@ -44,13 +35,18 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
     formState: { errors },
   } = useForm<GuestFormValues>({
     resolver: zodResolver(GuestSchema),
-    defaultValues: { countryCode: 'US' },
+    defaultValues: {
+      countryCode: 'US',
+      firstName: user?.given_name ?? '',
+      lastName: user?.family_name ?? '',
+      email: user?.email ?? '',
+    },
   })
 
   const onSubmit = async (guestData: GuestFormValues) => {
     if (!stripe || !elements || cartItems.length === 0) return
 
-    setProcessing(true)
+    updateProcessing(true)
 
     try {
       const { error, paymentIntent } = await stripe.confirmPayment({
@@ -63,7 +59,7 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
 
       if (error) {
         toast.error(error.message ?? 'Payment failed. Please try again.')
-        setProcessing(false)
+        updateProcessing(false)
         return
       }
 
@@ -80,7 +76,11 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
                 checkIn: item.checkIn,
                 checkOut: item.checkOut,
                 adults: item.guests,
-                totalPrice: item.totalPrice + extrasTotal,
+                totalPrice:
+                  item.totalPrice +
+                  (item.extras.breakfast ? 25 * daysBetween(item.checkIn, item.checkOut) : 0) +
+                  (item.extras.airportTransfer ? 75 : 0) +
+                  (item.extras.lateCheckout ? 50 : 0),
                 guest: guestData,
               }),
             })
@@ -107,12 +107,12 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
     } catch (err) {
       console.error('[CheckoutForm] Unexpected error during submission:', err)
       toast.error('An unexpected error occurred. Please try again.')
-      setProcessing(false)
+      updateProcessing(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+    <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {/* Guest Info */}
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="mb-4 text-lg font-semibold">Guest Information</h2>
@@ -230,7 +230,7 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="lg:col-span-2">
+            <div className="sm:col-span-2 lg:col-span-2">
               <label htmlFor="city" className="mb-1 block text-sm font-medium">
                 City{' '}
                 <span aria-hidden="true" className="text-destructive">
@@ -288,7 +288,7 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
               )}
             </div>
           </div>
-          <div className="sm:w-1/4">
+          <div className="w-full sm:w-auto sm:max-w-[120px]">
             <label htmlFor="countryCode" className="mb-1 block text-sm font-medium">
               Country{' '}
               <span aria-hidden="true" className="text-destructive">
@@ -311,35 +311,6 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
         </div>
       </div>
 
-      {/* Add-ons */}
-      <div className="rounded-2xl border bg-white p-6">
-        <h2 className="mb-4 text-lg font-semibold">Add-ons</h2>
-        <div className="space-y-3">
-          {[
-            { key: 'breakfast', label: 'Breakfast', price: `+$25/night (${totalNights} nights)` },
-            { key: 'airportTransfer', label: 'Airport Transfer', price: '+$75 one-time' },
-            { key: 'lateCheckout', label: 'Late Checkout (until 2pm)', price: '+$50 one-time' },
-          ].map(({ key, label, price }) => (
-            <label
-              key={key}
-              className="hover:bg-muted/50 flex cursor-pointer items-center justify-between rounded-xl border p-3"
-            >
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={extras[key as keyof typeof extras]}
-                  onChange={(e) => setExtras({ [key]: e.target.checked })}
-                  className="accent-primary h-4 w-4 rounded"
-                  aria-label={label}
-                />
-                <span className="text-sm font-medium">{label}</span>
-              </div>
-              <span className="text-muted-foreground text-xs">{price}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-
       {/* Stripe Payment Element */}
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="mb-4 text-lg font-semibold">Payment Details</h2>
@@ -354,10 +325,6 @@ export function CheckoutForm({ grandTotal }: CheckoutFormProps) {
           future date, any CVC
         </p>
       </div>
-
-      <Button type="submit" disabled={!stripe || processing} size="lg" className="w-full">
-        {processing ? 'Processing...' : `Pay $${totalWithExtras.toFixed(2)} & Confirm`}
-      </Button>
     </form>
   )
 }

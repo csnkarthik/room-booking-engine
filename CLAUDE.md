@@ -55,6 +55,16 @@ Unit tests live in `tests/unit/`, e2e tests in `tests/e2e/`. Vitest uses jsdom a
 - `checkout/` — `CheckoutForm` (Stripe Elements) + `BookingSummary`
 - `room-card/` — room listing cards
 
+## Responsive Design
+
+**Every UI component and page must be designed for all screen sizes** — mobile (320px+), tablet (768px+), and desktop (1024px+). Use Tailwind's mobile-first breakpoints (`sm:`, `md:`, `lg:`) for all layout decisions. Required practices:
+
+- Default styles target mobile; add `sm:`/`md:`/`lg:` overrides for larger screens
+- Use `px-4 sm:px-6 lg:px-12` padding on all page containers
+- Replace `hover:`-only interactions with always-visible fallbacks on touch devices
+- Test every new page/component at 320px, 768px, and 1280px viewport widths
+- For two-column layouts, ensure mobile stacks to one column; add a sticky footer CTA when the sidebar CTA is hidden on mobile
+
 **Payment flow**: checkout page POSTs to `/api/payments` → creates Stripe PaymentIntent → returns `clientSecret` → Stripe Elements collects card → on success, POST to `/api/bookings` creates booking record in `bookings.json`.
 
 **Styling**: Tailwind CSS v4 (PostCSS plugin, no `tailwind.config`). `prettier-plugin-tailwindcss` sorts classes on format. `class-variance-authority` + `clsx`/`tailwind-merge` used for conditional classes.

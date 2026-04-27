@@ -1,0 +1,56 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - text: 
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "My Reservation Reservation" [ref=e8] [cursor=pointer]:
+            - /url: "#"
+          - link "Cart  0" [ref=e10] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13763&langID=1&currID=0
+            - generic [ref=e11]:
+              - generic [ref=e12]: Cart 
+              - generic [ref=e13]: "0"
+          - link "Air + Hotel" [ref=e15] [cursor=pointer]:
+            - /url: https://www.wynnvacations.com/default.aspx?plcode=GBWYNN
+          - list [ref=e17]:
+            - listitem [ref=e18]:
+              - link "Sign In" [ref=e19] [cursor=pointer]:
+                - /url: https://reservations.wynnlasvegas.com/ibe/DelegAuth/okta/login?hotelID=13763&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-WLV
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e20]:
+        - generic [ref=e22]:
+          - link "Wynn Las Vegas" [ref=e25] [cursor=pointer]:
+            - /url: https://www.wynnlasvegas.com/
+            - img "Wynn Las Vegas" [ref=e26]
+          - generic [ref=e28]:
+            - link " 4/28/2026 - 5/1/2026" [ref=e31] [cursor=pointer]:
+              - /url: "#"
+            - text: – – 1 2 3
+        - text: ‹        – – !  
+    - generic [ref=e32]:
+      - text:      Close   
+      - button "i Resort Fee Information " [ref=e35] [cursor=pointer]
+      - text:      
+    - generic: 
+    - contentinfo [ref=e36]:
+      - generic [ref=e42]:
+        - list [ref=e44]:
+          - listitem [ref=e45]:
+            - link "Wynn Las Vegas" [ref=e46] [cursor=pointer]:
+              - /url: https://reservations.wynnlasvegas.com/
+          - listitem [ref=e47]: "|"
+          - listitem [ref=e48]:
+            - link "Privacy" [ref=e49] [cursor=pointer]:
+              - /url: https://www.wynnlasvegas.com/privacy-policy
+          - listitem [ref=e50]: "|"
+          - listitem [ref=e51]:
+            - link "Terms & Conditions" [ref=e52] [cursor=pointer]:
+              - /url: http://www.visitwynn.com/tc/index.cfm?term_id=708708&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - paragraph [ref=e54]:
+          - text: © 2026 Wynn Resorts Holdings, LLC.
+          - text: All rights reserved.
+  - text: 
+  - generic [ref=e56]: Please Wait...

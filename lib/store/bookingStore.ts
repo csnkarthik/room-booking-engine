@@ -25,6 +25,7 @@ interface BookingState {
 
   addToCart: (item: CartItem) => void
   removeFromCart: (index: number) => void
+  updateCartItemExtras: (index: number, extras: Partial<BookingExtras>) => void
   clearCart: () => void
 }
 
@@ -95,10 +96,28 @@ export const useBookingStore = create<BookingState>()(
           cartItems: state.cartItems.filter((_, i) => i !== index),
         })),
 
+      updateCartItemExtras: (index, newExtras) =>
+        set((state) => ({
+          cartItems: state.cartItems.map((item, i) =>
+            i === index ? { ...item, extras: { ...item.extras, ...newExtras } } : item
+          ),
+        })),
+
       clearCart: () => set({ cartItems: [] }),
     }),
     {
       name: 'booking-session',
+      version: 2,
+      migrate: () => ({
+        room: null,
+        checkIn: null,
+        checkOut: null,
+        guests: 1,
+        rooms: 1,
+        extras: defaultExtras,
+        totalPrice: 0,
+        cartItems: [],
+      }),
       partialize: (state) => ({
         room: state.room,
         checkIn: state.checkIn,

@@ -32,7 +32,22 @@
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_wait_for",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(npx next *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
+      "Bash(grep -o \"\\\\\\\\.\\\\\\\\w\\\\\\\\+-\\\\\\\\w\\\\\\\\+[^}]*{[^}]*}\" \"c:\\\\Users\\\\csnkarthik\\\\Lab\\\\room-booking-engine\\\\public\\\\new-design\\\\index.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_tabs",
+      "mcp__playwright__browser_resize",
+      "Bash(openssl rand *)",
+      "Bash(npx shadcn *)",
+      "Bash(xargs cat *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,'->',v\\) for k,v in d.get\\('exports',{}\\).items\\(\\)]\")",
+      "mcp__playwright__browser_console_messages",
+      "Bash(del /F \"C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile\")",
+      "Bash(powershell -command \"Remove-Item -Force 'C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile' -ErrorAction SilentlyContinue; Write-Host done\")"
     ]
   }
 }

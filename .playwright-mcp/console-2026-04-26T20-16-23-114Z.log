@@ -1,0 +1,44 @@
+[     809ms] [LOG] wsTrackEnd @ https://reservations.wynnlasvegas.com/CrsMedia/P13763/bbe/wynn_datalayer.js:778
+[     810ms] [LOG] wsTrackEndSegment @ https://reservations.wynnlasvegas.com/CrsMedia/P13763/bbe/wynn_datalayer.js:3570
+[    1051ms] [ERROR] Access to XMLHttpRequest at 'https://cloud.zineone.com/c3/api/v1/connect/eaa48b40-dcab-454c-e589-5d8522904610?deviceId=eaa48b40-dcab-454c-e589-5d8522904610&os=html5&devicetype=desktop&loadConfig' from origin 'https://reservations.wynnlasvegas.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2:0
+[    1052ms] [LOG] ZineOne Connection Failure : Failed to connect to session!  @ https://d2p4r375zfkzm8.cloudfront.net/html5sdk/3.2/z1m.js:44
+[    1052ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cloud.zineone.com/c3/api/v1/connect/eaa48b40-dcab-454c-e589-5d8522904610?deviceId=eaa48b40-dcab-454c-e589-5d8522904610&os=html5&devicetype=desktop&loadConfig:0
+[    1242ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2:0
+[    1242ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2:0
+[    1242ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2:0
+[    1242ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2:0
+[    1247ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://reservations.wynnlasvegas.com/ibe/DelegAuth/okta/callback#error=login_required&error_description=Login%20required:0
+[    1439ms] [LOG] %c[Wynn Analytics Framework v10.13-ES5-NR] color: #008758; font-weight: bold; font-size: 1.2em; GTM compatible script initialized (No-Redirect mode). @ :16
+[    2230ms] [WARNING] Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading @ https://maps.googleapis.com/maps/api/js?callback=cbWsLoadMapApi&key=AIzaSyA7P5p8sxlSimUFd0fyNRuuGBCm-YQCJcw:336
+[   15684ms] [LOG] %c[Wynn Analytics Match] color: #D4AF37; font-weight: bold; Rule matched for click: "[id^="onetrust"] button, [id^="onetrust"] [role="tab"]" @ :3
+[   15686ms] [LOG] %c[Wynn DataLayer Push] color: #006847; font-weight: bold; font-size: 1.1em; {
+  "event": "content_interaction",
+  "platform": "wlv",
+  "site_code": "WLV",
+  "login_state": "logged_out",
+  "wynn_user_id": null,
+  "wynn_session_id": null,
+  "anonymous_id": null,
+  "component_name": "cookie_consent_banner",
+  "interaction_type": "button_click",
+  "click_text": "continue_to_site",
+  "event_section": "body",
+  "gtm.uniqueEventId": 32
+} @ :2
+[   15687ms] [LOG] in body action click @ https://d2p4r375zfkzm8.cloudfront.net/html5sdk/3.2/z1m.js:133
+[   27253ms] [LOG] in body action click @ https://d2p4r375zfkzm8.cloudfront.net/html5sdk/3.2/z1m.js:133
+[   61392ms] [LOG] %c[Wynn Analytics Match] color: #D4AF37; font-weight: bold; Rule matched for click: "a" @ :3
+[   61402ms] [LOG] %c[Wynn DataLayer Push] color: #006847; font-weight: bold; font-size: 1.1em; {
+  "event": "navigation_interaction",
+  "platform": "wlv",
+  "site_code": "WLV",
+  "login_state": "logged_out",
+  "wynn_user_id": null,
+  "wynn_session_id": null,
+  "anonymous_id": null,
+  "interaction_type": "link_click",
+  "click_text": "Tue, Apr. 28",
+  "click_url": "https://reservations.wynnlasvegas.com/ibe/index.aspx?hotelID=13763&langID=1&currID=0&checkIn=04/28/2026&checkOut=05/01/2026&rooms=1&adults=2#",
+  "event_section": "body",
+  "gtm.uniqueEventId": 41
+} @ :2

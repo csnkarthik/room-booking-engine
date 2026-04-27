@@ -1,0 +1,671 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - dialog "Availability calendar – select dates and occupancy" [ref=e233]:
+      - generic [ref=e234]:
+        - text: ‹
+        - heading "Select Dates" [level=2] [ref=e235]
+        - link "Close" [ref=e236] [cursor=pointer]:
+          - /url: "#"
+        - text: 
+      - table [ref=e268]:
+        - rowgroup [ref=e269]:
+          - row "Sunday Monday Tuesday Wednesday Thursday Friday Saturday" [ref=e270]:
+            - columnheader "Sunday" [ref=e271]: S
+            - columnheader "Monday" [ref=e272]: M
+            - columnheader "Tuesday" [ref=e273]: T
+            - columnheader "Wednesday" [ref=e274]: W
+            - columnheader "Thursday" [ref=e275]: T
+            - columnheader "Friday" [ref=e276]: F
+            - columnheader "Saturday" [ref=e277]: S
+      - text:       – – ! 
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - application [ref=e280]:
+            - table "April 2026" [ref=e281]:
+              - caption [ref=e282]: April 2026
+              - rowgroup [ref=e283]:
+                - row "Wednesday, Apr. 1, 2026 Unavailable Thursday, Apr. 2, 2026 Unavailable Friday, Apr. 3, 2026 Unavailable Saturday, Apr. 4, 2026 Unavailable" [ref=e284]:
+                  - cell [ref=e285]
+                  - cell [ref=e286]
+                  - cell [ref=e287]
+                  - button "Wednesday, Apr. 1, 2026 Unavailable":
+                    - generic: "1"
+                  - button "Thursday, Apr. 2, 2026 Unavailable":
+                    - generic: "2"
+                  - button "Friday, Apr. 3, 2026 Unavailable":
+                    - generic: "3"
+                  - button "Saturday, Apr. 4, 2026 Unavailable":
+                    - generic: "4"
+                - row "Sunday, Apr. 5, 2026 Unavailable Monday, Apr. 6, 2026 Unavailable Tuesday, Apr. 7, 2026 Unavailable Wednesday, Apr. 8, 2026 Unavailable Thursday, Apr. 9, 2026 Unavailable Friday, Apr. 10, 2026 Unavailable Saturday, Apr. 11, 2026 Unavailable" [ref=e288]:
+                  - button "Sunday, Apr. 5, 2026 Unavailable":
+                    - generic: "5"
+                  - button "Monday, Apr. 6, 2026 Unavailable":
+                    - generic: "6"
+                  - button "Tuesday, Apr. 7, 2026 Unavailable":
+                    - generic: "7"
+                  - button "Wednesday, Apr. 8, 2026 Unavailable":
+                    - generic: "8"
+                  - button "Thursday, Apr. 9, 2026 Unavailable":
+                    - generic: "9"
+                  - button "Friday, Apr. 10, 2026 Unavailable":
+                    - generic: "10"
+                  - button "Saturday, Apr. 11, 2026 Unavailable":
+                    - generic: "11"
+                - row "Sunday, Apr. 12, 2026 Unavailable Monday, Apr. 13, 2026 Unavailable Tuesday, Apr. 14, 2026 Unavailable Wednesday, Apr. 15, 2026 Unavailable Thursday, Apr. 16, 2026 Unavailable Friday, Apr. 17, 2026 Unavailable Saturday, Apr. 18, 2026 Unavailable" [ref=e289]:
+                  - button "Sunday, Apr. 12, 2026 Unavailable":
+                    - generic: "12"
+                  - button "Monday, Apr. 13, 2026 Unavailable":
+                    - generic: "13"
+                  - button "Tuesday, Apr. 14, 2026 Unavailable":
+                    - generic: "14"
+                  - button "Wednesday, Apr. 15, 2026 Unavailable":
+                    - generic: "15"
+                  - button "Thursday, Apr. 16, 2026 Unavailable":
+                    - generic: "16"
+                  - button "Friday, Apr. 17, 2026 Unavailable":
+                    - generic: "17"
+                  - button "Saturday, Apr. 18, 2026 Unavailable":
+                    - generic: "18"
+                - row "Sunday, Apr. 19, 2026 Unavailable Monday, Apr. 20, 2026 Unavailable Tuesday, Apr. 21, 2026 Unavailable Wednesday, Apr. 22, 2026 Unavailable Thursday, Apr. 23, 2026 Unavailable Friday, Apr. 24, 2026 Unavailable Saturday, Apr. 25, 2026 Unavailable" [ref=e290]:
+                  - button "Sunday, Apr. 19, 2026 Unavailable":
+                    - generic: "19"
+                  - button "Monday, Apr. 20, 2026 Unavailable":
+                    - generic: "20"
+                  - button "Tuesday, Apr. 21, 2026 Unavailable":
+                    - generic: "21"
+                  - button "Wednesday, Apr. 22, 2026 Unavailable":
+                    - generic: "22"
+                  - button "Thursday, Apr. 23, 2026 Unavailable":
+                    - generic: "23"
+                  - button "Friday, Apr. 24, 2026 Unavailable":
+                    - generic: "24"
+                  - button "Saturday, Apr. 25, 2026 Unavailable":
+                    - generic: "25"
+                - row "Sunday, Apr. 26, 2026 Select as check in date. Best available rate $899 Monday, Apr. 27, 2026 Select as check in date. Best available rate Tuesday, Apr. 28, 2026 Your current check in date. Best available rate $1799 Wednesday, Apr. 29, 2026 Select as check in date. Best available rate $399 Thursday, Apr. 30, 2026 Select as check in date. Best available rate $249" [ref=e291]:
+                  - button "Sunday, Apr. 26, 2026 Select as check in date. Best available rate $899" [ref=e292] [cursor=pointer]:
+                    - generic [ref=e293]:
+                      - text: "26"
+                      - generic [ref=e294]: $899
+                  - button "Monday, Apr. 27, 2026 Select as check in date. Best available rate" [ref=e296] [cursor=pointer]:
+                    - generic [ref=e297]: "27"
+                  - button "Tuesday, Apr. 28, 2026 Your current check in date. Best available rate $1799" [ref=e299] [cursor=pointer]:
+                    - generic [ref=e300]:
+                      - text: "28"
+                      - generic [ref=e301]: $1799
+                  - button "Wednesday, Apr. 29, 2026 Select as check in date. Best available rate $399" [ref=e303] [cursor=pointer]:
+                    - generic [ref=e304]:
+                      - text: "29"
+                      - generic [ref=e305]: $399
+                  - button "Thursday, Apr. 30, 2026 Select as check in date. Best available rate $249" [ref=e307] [cursor=pointer]:
+                    - generic [ref=e308]:
+                      - text: "30"
+                      - generic [ref=e309]: $249
+                  - cell [ref=e311]
+                  - cell [ref=e312]
+            - table "May 2026" [ref=e313]:
+              - caption [ref=e314]: May 2026
+              - rowgroup [ref=e315]:
+                - row "Friday, May 1, 2026 Your current check out date. Saturday, May 2, 2026 Select as check in date. Best available rate $1099 Close $816 Avg. Room Rate + $55 Daily Resort Fee $871 Avg/Night Excludes taxes" [ref=e316]:
+                  - cell [ref=e317]
+                  - cell [ref=e318]
+                  - cell [ref=e319]
+                  - cell [ref=e320]
+                  - cell [ref=e321]
+                  - button "Friday, May 1, 2026 Your current check out date." [ref=e322] [cursor=pointer]:
+                    - generic [ref=e323]: "1"
+                  - button "Saturday, May 2, 2026 Select as check in date. Best available rate $1099" [ref=e325] [cursor=pointer]:
+                    - generic [ref=e326]:
+                      - text: "2"
+                      - generic [ref=e327]: $1099
+                  - tooltip "Close $816 Avg. Room Rate + $55 Daily Resort Fee $871 Avg/Night Excludes taxes" [ref=e330]:
+                    - generic [ref=e332]:
+                      - link "Close":
+                        - /url: "#"
+                        - generic [ref=e333] [cursor=pointer]: 
+                        - generic [ref=e334] [cursor=pointer]: Close
+                      - generic [ref=e335]: $816 Avg. Room Rate
+                      - generic [ref=e336]: + $55 Daily Resort Fee
+                      - generic [ref=e337]: $871 Avg/Night
+                      - generic [ref=e338]: Excludes taxes
+                - row "Sunday, May 3, 2026 Select as check in date. Best available rate $299 Monday, May 4, 2026 Select as check in date. Best available rate $499 Tuesday, May 5, 2026 Select as check in date. Best available rate $1099 Wednesday, May 6, 2026 Select as check in date. Best available rate $1099 Thursday, May 7, 2026 Select as check in date. Best available rate $799 Friday, May 8, 2026 Select as check in date. Best available rate $399 Saturday, May 9, 2026 Select as check in date. Best available rate $399" [ref=e339]:
+                  - button "Sunday, May 3, 2026 Select as check in date. Best available rate $299" [ref=e340] [cursor=pointer]:
+                    - generic [ref=e341]:
+                      - text: "3"
+                      - generic [ref=e342]: $299
+                  - button "Monday, May 4, 2026 Select as check in date. Best available rate $499" [ref=e344] [cursor=pointer]:
+                    - generic [ref=e345]:
+                      - text: "4"
+                      - generic [ref=e346]: $499
+                  - button "Tuesday, May 5, 2026 Select as check in date. Best available rate $1099" [ref=e348] [cursor=pointer]:
+                    - generic [ref=e349]:
+                      - text: "5"
+                      - generic [ref=e350]: $1099
+                  - button "Wednesday, May 6, 2026 Select as check in date. Best available rate $1099" [ref=e352] [cursor=pointer]:
+                    - generic [ref=e353]:
+                      - text: "6"
+                      - generic [ref=e354]: $1099
+                  - button "Thursday, May 7, 2026 Select as check in date. Best available rate $799" [ref=e356] [cursor=pointer]:
+                    - generic [ref=e357]:
+                      - text: "7"
+                      - generic [ref=e358]: $799
+                  - button "Friday, May 8, 2026 Select as check in date. Best available rate $399" [ref=e360] [cursor=pointer]:
+                    - generic [ref=e361]:
+                      - text: "8"
+                      - generic [ref=e362]: $399
+                  - button "Saturday, May 9, 2026 Select as check in date. Best available rate $399" [ref=e364] [cursor=pointer]:
+                    - generic [ref=e365]:
+                      - text: "9"
+                      - generic [ref=e366]: $399
+                - row "Sunday, May 10, 2026 Select as check in date. Best available rate $249 Monday, May 11, 2026 Select as check in date. Best available rate $349 Tuesday, May 12, 2026 Select as check in date. Best available rate $499 Wednesday, May 13, 2026 Select as check in date. Best available rate $599 Thursday, May 14, 2026 Select as check in date. Best available rate $249 Friday, May 15, 2026 Select as check in date. Best available rate $549 Saturday, May 16, 2026 Select as check in date. Best available rate $999" [ref=e368]:
+                  - button "Sunday, May 10, 2026 Select as check in date. Best available rate $249" [ref=e369] [cursor=pointer]:
+                    - generic [ref=e370]:
+                      - text: "10"
+                      - generic [ref=e371]: $249
+                  - button "Monday, May 11, 2026 Select as check in date. Best available rate $349" [ref=e373] [cursor=pointer]:
+                    - generic [ref=e374]:
+                      - text: "11"
+                      - generic [ref=e375]: $349
+                  - button "Tuesday, May 12, 2026 Select as check in date. Best available rate $499" [ref=e377] [cursor=pointer]:
+                    - generic [ref=e378]:
+                      - text: "12"
+                      - generic [ref=e379]: $499
+                  - button "Wednesday, May 13, 2026 Select as check in date. Best available rate $599" [ref=e381] [cursor=pointer]:
+                    - generic [ref=e382]:
+                      - text: "13"
+                      - generic [ref=e383]: $599
+                  - button "Thursday, May 14, 2026 Select as check in date. Best available rate $249" [ref=e385] [cursor=pointer]:
+                    - generic [ref=e386]:
+                      - text: "14"
+                      - generic [ref=e387]: $249
+                  - button "Friday, May 15, 2026 Select as check in date. Best available rate $549" [ref=e389] [cursor=pointer]:
+                    - generic [ref=e390]:
+                      - text: "15"
+                      - generic [ref=e391]: $549
+                  - button "Saturday, May 16, 2026 Select as check in date. Best available rate $999" [ref=e393] [cursor=pointer]:
+                    - generic [ref=e394]:
+                      - text: "16"
+                      - generic [ref=e395]: $999
+                - row "Sunday, May 17, 2026 Select as check in date. Best available rate $799 Monday, May 18, 2026 Select as check in date. Best available rate $2499 Tuesday, May 19, 2026 Select as check in date. Best available rate $799 Wednesday, May 20, 2026 Select as check in date. Best available rate $349 Thursday, May 21, 2026 Select as check in date. Best available rate $299 Friday, May 22, 2026 Select as check in date. Best available rate $549 Saturday, May 23, 2026 Select as check in date. Best available rate $1099" [ref=e397]:
+                  - button "Sunday, May 17, 2026 Select as check in date. Best available rate $799" [ref=e398] [cursor=pointer]:
+                    - generic [ref=e399]:
+                      - text: "17"
+                      - generic [ref=e400]: $799
+                  - button "Monday, May 18, 2026 Select as check in date. Best available rate $2499" [ref=e402] [cursor=pointer]:
+                    - generic [ref=e403]:
+                      - text: "18"
+                      - generic [ref=e404]: $2499
+                  - button "Tuesday, May 19, 2026 Select as check in date. Best available rate $799" [ref=e406] [cursor=pointer]:
+                    - generic [ref=e407]:
+                      - text: "19"
+                      - generic [ref=e408]: $799
+                  - button "Wednesday, May 20, 2026 Select as check in date. Best available rate $349" [ref=e410] [cursor=pointer]:
+                    - generic [ref=e411]:
+                      - text: "20"
+                      - generic [ref=e412]: $349
+                  - button "Thursday, May 21, 2026 Select as check in date. Best available rate $299" [ref=e414] [cursor=pointer]:
+                    - generic [ref=e415]:
+                      - text: "21"
+                      - generic [ref=e416]: $299
+                  - button "Friday, May 22, 2026 Select as check in date. Best available rate $549" [ref=e418] [cursor=pointer]:
+                    - generic [ref=e419]:
+                      - text: "22"
+                      - generic [ref=e420]: $549
+                  - button "Saturday, May 23, 2026 Select as check in date. Best available rate $1099" [ref=e422] [cursor=pointer]:
+                    - generic [ref=e423]:
+                      - text: "23"
+                      - generic [ref=e424]: $1099
+                - row "Sunday, May 24, 2026 Select as check in date. Best available rate $549 Monday, May 25, 2026 Select as check in date. Best available rate $249 Tuesday, May 26, 2026 Select as check in date. Best available rate $299 Wednesday, May 27, 2026 Select as check in date. Best available rate $499 Thursday, May 28, 2026 Select as check in date. Best available rate $799 Friday, May 29, 2026 Select as check in date. Best available rate $1099 Saturday, May 30, 2026 Select as check in date. Best available rate $1299" [ref=e426]:
+                  - button "Sunday, May 24, 2026 Select as check in date. Best available rate $549" [ref=e427] [cursor=pointer]:
+                    - generic [ref=e428]:
+                      - text: "24"
+                      - generic [ref=e429]: $549
+                  - button "Monday, May 25, 2026 Select as check in date. Best available rate $249" [ref=e431] [cursor=pointer]:
+                    - generic [ref=e432]:
+                      - text: "25"
+                      - generic [ref=e433]: $249
+                  - button "Tuesday, May 26, 2026 Select as check in date. Best available rate $299" [ref=e435] [cursor=pointer]:
+                    - generic [ref=e436]:
+                      - text: "26"
+                      - generic [ref=e437]: $299
+                  - button "Wednesday, May 27, 2026 Select as check in date. Best available rate $499" [ref=e439] [cursor=pointer]:
+                    - generic [ref=e440]:
+                      - text: "27"
+                      - generic [ref=e441]: $499
+                  - button "Thursday, May 28, 2026 Select as check in date. Best available rate $799" [ref=e443] [cursor=pointer]:
+                    - generic [ref=e444]:
+                      - text: "28"
+                      - generic [ref=e445]: $799
+                  - button "Friday, May 29, 2026 Select as check in date. Best available rate $1099" [ref=e447] [cursor=pointer]:
+                    - generic [ref=e448]:
+                      - text: "29"
+                      - generic [ref=e449]: $1099
+                  - button "Saturday, May 30, 2026 Select as check in date. Best available rate $1299" [ref=e451] [cursor=pointer]:
+                    - generic [ref=e452]:
+                      - text: "30"
+                      - generic [ref=e453]: $1299
+                - row "Sunday, May 31, 2026 Select as check in date. Best available rate $799" [ref=e455]:
+                  - button "Sunday, May 31, 2026 Select as check in date. Best available rate $799" [ref=e456] [cursor=pointer]:
+                    - generic [ref=e457]:
+                      - text: "31"
+                      - generic [ref=e458]: $799
+                  - cell [ref=e460]
+                  - cell [ref=e461]
+                  - cell [ref=e462]
+                  - cell [ref=e463]
+                  - cell [ref=e464]
+                  - cell [ref=e465]
+            - table "June 2026" [ref=e466]:
+              - caption [ref=e467]: June 2026
+              - rowgroup [ref=e468]:
+                - row "Monday, Jun. 1, 2026 Select as check in date. Best available rate $349 Tuesday, Jun. 2, 2026 Select as check in date. Best available rate $349 Wednesday, Jun. 3, 2026 Select as check in date. Best available rate $349 Thursday, Jun. 4, 2026 Select as check in date. Best available rate $349 Friday, Jun. 5, 2026 Select as check in date. Best available rate $499 Saturday, Jun. 6, 2026 Select as check in date. Best available rate $499" [ref=e469]:
+                  - cell [ref=e470]
+                  - button "Monday, Jun. 1, 2026 Select as check in date. Best available rate $349" [ref=e471] [cursor=pointer]:
+                    - generic [ref=e472]:
+                      - text: "1"
+                      - generic [ref=e473]: $349
+                  - button "Tuesday, Jun. 2, 2026 Select as check in date. Best available rate $349" [ref=e475] [cursor=pointer]:
+                    - generic [ref=e476]:
+                      - text: "2"
+                      - generic [ref=e477]: $349
+                  - button "Wednesday, Jun. 3, 2026 Select as check in date. Best available rate $349" [ref=e479] [cursor=pointer]:
+                    - generic [ref=e480]:
+                      - text: "3"
+                      - generic [ref=e481]: $349
+                  - button "Thursday, Jun. 4, 2026 Select as check in date. Best available rate $349" [ref=e483] [cursor=pointer]:
+                    - generic [ref=e484]:
+                      - text: "4"
+                      - generic [ref=e485]: $349
+                  - button "Friday, Jun. 5, 2026 Select as check in date. Best available rate $499" [ref=e487] [cursor=pointer]:
+                    - generic [ref=e488]:
+                      - text: "5"
+                      - generic [ref=e489]: $499
+                  - button "Saturday, Jun. 6, 2026 Select as check in date. Best available rate $499" [ref=e491] [cursor=pointer]:
+                    - generic [ref=e492]:
+                      - text: "6"
+                      - generic [ref=e493]: $499
+                - row "Sunday, Jun. 7, 2026 Select as check in date. Best available rate $249 Monday, Jun. 8, 2026 Select as check in date. Best available rate $399 Tuesday, Jun. 9, 2026 Select as check in date. Best available rate $399 Wednesday, Jun. 10, 2026 Select as check in date. Best available rate $299 Thursday, Jun. 11, 2026 Select as check in date. Best available rate $249 Friday, Jun. 12, 2026 Select as check in date. Best available rate $499 Saturday, Jun. 13, 2026 Select as check in date. Best available rate $499" [ref=e495]:
+                  - button "Sunday, Jun. 7, 2026 Select as check in date. Best available rate $249" [ref=e496] [cursor=pointer]:
+                    - generic [ref=e497]:
+                      - text: "7"
+                      - generic [ref=e498]: $249
+                  - button "Monday, Jun. 8, 2026 Select as check in date. Best available rate $399" [ref=e500] [cursor=pointer]:
+                    - generic [ref=e501]:
+                      - text: "8"
+                      - generic [ref=e502]: $399
+                  - button "Tuesday, Jun. 9, 2026 Select as check in date. Best available rate $399" [ref=e504] [cursor=pointer]:
+                    - generic [ref=e505]:
+                      - text: "9"
+                      - generic [ref=e506]: $399
+                  - button "Wednesday, Jun. 10, 2026 Select as check in date. Best available rate $299" [ref=e508] [cursor=pointer]:
+                    - generic [ref=e509]:
+                      - text: "10"
+                      - generic [ref=e510]: $299
+                  - button "Thursday, Jun. 11, 2026 Select as check in date. Best available rate $249" [ref=e512] [cursor=pointer]:
+                    - generic [ref=e513]:
+                      - text: "11"
+                      - generic [ref=e514]: $249
+                  - button "Friday, Jun. 12, 2026 Select as check in date. Best available rate $499" [ref=e516] [cursor=pointer]:
+                    - generic [ref=e517]:
+                      - text: "12"
+                      - generic [ref=e518]: $499
+                  - button "Saturday, Jun. 13, 2026 Select as check in date. Best available rate $499" [ref=e520] [cursor=pointer]:
+                    - generic [ref=e521]:
+                      - text: "13"
+                      - generic [ref=e522]: $499
+                - row "Sunday, Jun. 14, 2026 Select as check in date. Best available rate $279 Monday, Jun. 15, 2026 Select as check in date. Best available rate $499 Tuesday, Jun. 16, 2026 Select as check in date. Best available rate $499 Wednesday, Jun. 17, 2026 Select as check in date. Best available rate $499 Thursday, Jun. 18, 2026 Select as check in date. Best available rate $299 Friday, Jun. 19, 2026 Select as check in date. Best available rate $499 Saturday, Jun. 20, 2026 Select as check in date. Best available rate $499" [ref=e524]:
+                  - button "Sunday, Jun. 14, 2026 Select as check in date. Best available rate $279" [ref=e525] [cursor=pointer]:
+                    - generic [ref=e526]:
+                      - text: "14"
+                      - generic [ref=e527]: $279
+                  - button "Monday, Jun. 15, 2026 Select as check in date. Best available rate $499" [ref=e529] [cursor=pointer]:
+                    - generic [ref=e530]:
+                      - text: "15"
+                      - generic [ref=e531]: $499
+                  - button "Tuesday, Jun. 16, 2026 Select as check in date. Best available rate $499" [ref=e533] [cursor=pointer]:
+                    - generic [ref=e534]:
+                      - text: "16"
+                      - generic [ref=e535]: $499
+                  - button "Wednesday, Jun. 17, 2026 Select as check in date. Best available rate $499" [ref=e537] [cursor=pointer]:
+                    - generic [ref=e538]:
+                      - text: "17"
+                      - generic [ref=e539]: $499
+                  - button "Thursday, Jun. 18, 2026 Select as check in date. Best available rate $299" [ref=e541] [cursor=pointer]:
+                    - generic [ref=e542]:
+                      - text: "18"
+                      - generic [ref=e543]: $299
+                  - button "Friday, Jun. 19, 2026 Select as check in date. Best available rate $499" [ref=e545] [cursor=pointer]:
+                    - generic [ref=e546]:
+                      - text: "19"
+                      - generic [ref=e547]: $499
+                  - button "Saturday, Jun. 20, 2026 Select as check in date. Best available rate $499" [ref=e549] [cursor=pointer]:
+                    - generic [ref=e550]:
+                      - text: "20"
+                      - generic [ref=e551]: $499
+                - row "Sunday, Jun. 21, 2026 Select as check in date. Best available rate $249 Monday, Jun. 22, 2026 Select as check in date. Best available rate $299 Tuesday, Jun. 23, 2026 Select as check in date. Best available rate $299 Wednesday, Jun. 24, 2026 Select as check in date. Best available rate $399 Thursday, Jun. 25, 2026 Select as check in date. Best available rate $399 Friday, Jun. 26, 2026 Select as check in date. Best available rate $799 Saturday, Jun. 27, 2026 Select as check in date. Best available rate $799" [ref=e553]:
+                  - button "Sunday, Jun. 21, 2026 Select as check in date. Best available rate $249" [ref=e554] [cursor=pointer]:
+                    - generic [ref=e555]:
+                      - text: "21"
+                      - generic [ref=e556]: $249
+                  - button "Monday, Jun. 22, 2026 Select as check in date. Best available rate $299" [ref=e558] [cursor=pointer]:
+                    - generic [ref=e559]:
+                      - text: "22"
+                      - generic [ref=e560]: $299
+                  - button "Tuesday, Jun. 23, 2026 Select as check in date. Best available rate $299" [ref=e562] [cursor=pointer]:
+                    - generic [ref=e563]:
+                      - text: "23"
+                      - generic [ref=e564]: $299
+                  - button "Wednesday, Jun. 24, 2026 Select as check in date. Best available rate $399" [ref=e566] [cursor=pointer]:
+                    - generic [ref=e567]:
+                      - text: "24"
+                      - generic [ref=e568]: $399
+                  - button "Thursday, Jun. 25, 2026 Select as check in date. Best available rate $399" [ref=e570] [cursor=pointer]:
+                    - generic [ref=e571]:
+                      - text: "25"
+                      - generic [ref=e572]: $399
+                  - button "Friday, Jun. 26, 2026 Select as check in date. Best available rate $799" [ref=e574] [cursor=pointer]:
+                    - generic [ref=e575]:
+                      - text: "26"
+                      - generic [ref=e576]: $799
+                  - button "Saturday, Jun. 27, 2026 Select as check in date. Best available rate $799" [ref=e578] [cursor=pointer]:
+                    - generic [ref=e579]:
+                      - text: "27"
+                      - generic [ref=e580]: $799
+                - row "Sunday, Jun. 28, 2026 Select as check in date. Best available rate $249 Monday, Jun. 29, 2026 Select as check in date. Best available rate $249 Tuesday, Jun. 30, 2026 Select as check in date. Best available rate $249" [ref=e582]:
+                  - button "Sunday, Jun. 28, 2026 Select as check in date. Best available rate $249" [ref=e583] [cursor=pointer]:
+                    - generic [ref=e584]:
+                      - text: "28"
+                      - generic [ref=e585]: $249
+                  - button "Monday, Jun. 29, 2026 Select as check in date. Best available rate $249" [ref=e587] [cursor=pointer]:
+                    - generic [ref=e588]:
+                      - text: "29"
+                      - generic [ref=e589]: $249
+                  - button "Tuesday, Jun. 30, 2026 Select as check in date. Best available rate $249" [ref=e591] [cursor=pointer]:
+                    - generic [ref=e592]:
+                      - text: "30"
+                      - generic [ref=e593]: $249
+                  - cell [ref=e595]
+                  - cell [ref=e596]
+                  - cell [ref=e597]
+                  - cell [ref=e598]
+            - table "July 2026" [ref=e599]:
+              - caption [ref=e600]: July 2026
+              - rowgroup [ref=e601]:
+                - row "Wednesday, Jul. 1, 2026 Select as check in date. Best available rate Thursday, Jul. 2, 2026 Select as check in date. Best available rate Friday, Jul. 3, 2026 Select as check in date. Best available rate Saturday, Jul. 4, 2026 Select as check in date. Best available rate" [ref=e602]:
+                  - cell [ref=e603]
+                  - cell [ref=e604]
+                  - cell [ref=e605]
+                  - button "Wednesday, Jul. 1, 2026 Select as check in date. Best available rate" [ref=e606] [cursor=pointer]:
+                    - generic [ref=e607]: "1"
+                  - button "Thursday, Jul. 2, 2026 Select as check in date. Best available rate" [ref=e609] [cursor=pointer]:
+                    - generic [ref=e610]: "2"
+                  - button "Friday, Jul. 3, 2026 Select as check in date. Best available rate" [ref=e612] [cursor=pointer]:
+                    - generic [ref=e613]: "3"
+                  - button "Saturday, Jul. 4, 2026 Select as check in date. Best available rate" [ref=e615] [cursor=pointer]:
+                    - generic [ref=e616]: "4"
+                - row "Sunday, Jul. 5, 2026 Select as check in date. Best available rate Monday, Jul. 6, 2026 Select as check in date. Best available rate Tuesday, Jul. 7, 2026 Select as check in date. Best available rate Wednesday, Jul. 8, 2026 Select as check in date. Best available rate Thursday, Jul. 9, 2026 Select as check in date. Best available rate Friday, Jul. 10, 2026 Select as check in date. Best available rate Saturday, Jul. 11, 2026 Select as check in date. Best available rate" [ref=e618]:
+                  - button "Sunday, Jul. 5, 2026 Select as check in date. Best available rate" [ref=e619] [cursor=pointer]:
+                    - generic [ref=e620]: "5"
+                  - button "Monday, Jul. 6, 2026 Select as check in date. Best available rate" [ref=e622] [cursor=pointer]:
+                    - generic [ref=e623]: "6"
+                  - button "Tuesday, Jul. 7, 2026 Select as check in date. Best available rate" [ref=e625] [cursor=pointer]:
+                    - generic [ref=e626]: "7"
+                  - button "Wednesday, Jul. 8, 2026 Select as check in date. Best available rate" [ref=e628] [cursor=pointer]:
+                    - generic [ref=e629]: "8"
+                  - button "Thursday, Jul. 9, 2026 Select as check in date. Best available rate" [ref=e631] [cursor=pointer]:
+                    - generic [ref=e632]: "9"
+                  - button "Friday, Jul. 10, 2026 Select as check in date. Best available rate" [ref=e634] [cursor=pointer]:
+                    - generic [ref=e635]: "10"
+                  - button "Saturday, Jul. 11, 2026 Select as check in date. Best available rate" [ref=e637] [cursor=pointer]:
+                    - generic [ref=e638]: "11"
+                - row "Sunday, Jul. 12, 2026 Select as check in date. Best available rate Monday, Jul. 13, 2026 Select as check in date. Best available rate Tuesday, Jul. 14, 2026 Select as check in date. Best available rate Wednesday, Jul. 15, 2026 Select as check in date. Best available rate Thursday, Jul. 16, 2026 Select as check in date. Best available rate Friday, Jul. 17, 2026 Select as check in date. Best available rate Saturday, Jul. 18, 2026 Select as check in date. Best available rate" [ref=e640]:
+                  - button "Sunday, Jul. 12, 2026 Select as check in date. Best available rate" [ref=e641] [cursor=pointer]:
+                    - generic [ref=e642]: "12"
+                  - button "Monday, Jul. 13, 2026 Select as check in date. Best available rate" [ref=e644] [cursor=pointer]:
+                    - generic [ref=e645]: "13"
+                  - button "Tuesday, Jul. 14, 2026 Select as check in date. Best available rate" [ref=e647] [cursor=pointer]:
+                    - generic [ref=e648]: "14"
+                  - button "Wednesday, Jul. 15, 2026 Select as check in date. Best available rate" [ref=e650] [cursor=pointer]:
+                    - generic [ref=e651]: "15"
+                  - button "Thursday, Jul. 16, 2026 Select as check in date. Best available rate" [ref=e653] [cursor=pointer]:
+                    - generic [ref=e654]: "16"
+                  - button "Friday, Jul. 17, 2026 Select as check in date. Best available rate" [ref=e656] [cursor=pointer]:
+                    - generic [ref=e657]: "17"
+                  - button "Saturday, Jul. 18, 2026 Select as check in date. Best available rate" [ref=e659] [cursor=pointer]:
+                    - generic [ref=e660]: "18"
+                - row "Sunday, Jul. 19, 2026 Select as check in date. Best available rate Monday, Jul. 20, 2026 Select as check in date. Best available rate Tuesday, Jul. 21, 2026 Select as check in date. Best available rate Wednesday, Jul. 22, 2026 Select as check in date. Best available rate Thursday, Jul. 23, 2026 Select as check in date. Best available rate Friday, Jul. 24, 2026 Select as check in date. Best available rate Saturday, Jul. 25, 2026 Select as check in date. Best available rate" [ref=e662]:
+                  - button "Sunday, Jul. 19, 2026 Select as check in date. Best available rate" [ref=e663] [cursor=pointer]:
+                    - generic [ref=e664]: "19"
+                  - button "Monday, Jul. 20, 2026 Select as check in date. Best available rate" [ref=e666] [cursor=pointer]:
+                    - generic [ref=e667]: "20"
+                  - button "Tuesday, Jul. 21, 2026 Select as check in date. Best available rate" [ref=e669] [cursor=pointer]:
+                    - generic [ref=e670]: "21"
+                  - button "Wednesday, Jul. 22, 2026 Select as check in date. Best available rate" [ref=e672] [cursor=pointer]:
+                    - generic [ref=e673]: "22"
+                  - button "Thursday, Jul. 23, 2026 Select as check in date. Best available rate" [ref=e675] [cursor=pointer]:
+                    - generic [ref=e676]: "23"
+                  - button "Friday, Jul. 24, 2026 Select as check in date. Best available rate" [ref=e678] [cursor=pointer]:
+                    - generic [ref=e679]: "24"
+                  - button "Saturday, Jul. 25, 2026 Select as check in date. Best available rate" [ref=e681] [cursor=pointer]:
+                    - generic [ref=e682]: "25"
+                - row "Sunday, Jul. 26, 2026 Select as check in date. Best available rate Monday, Jul. 27, 2026 Select as check in date. Best available rate Tuesday, Jul. 28, 2026 Select as check in date. Best available rate Wednesday, Jul. 29, 2026 Select as check in date. Best available rate Thursday, Jul. 30, 2026 Select as check in date. Best available rate Friday, Jul. 31, 2026 Select as check in date. Best available rate" [ref=e684]:
+                  - button "Sunday, Jul. 26, 2026 Select as check in date. Best available rate" [ref=e685] [cursor=pointer]:
+                    - generic [ref=e686]: "26"
+                  - button "Monday, Jul. 27, 2026 Select as check in date. Best available rate" [ref=e688] [cursor=pointer]:
+                    - generic [ref=e689]: "27"
+                  - button "Tuesday, Jul. 28, 2026 Select as check in date. Best available rate" [ref=e691] [cursor=pointer]:
+                    - generic [ref=e692]: "28"
+                  - button "Wednesday, Jul. 29, 2026 Select as check in date. Best available rate" [ref=e694] [cursor=pointer]:
+                    - generic [ref=e695]: "29"
+                  - button "Thursday, Jul. 30, 2026 Select as check in date. Best available rate" [ref=e697] [cursor=pointer]:
+                    - generic [ref=e698]: "30"
+                  - button "Friday, Jul. 31, 2026 Select as check in date. Best available rate" [ref=e700] [cursor=pointer]:
+                    - generic [ref=e701]: "31"
+                  - cell [ref=e703]
+          - paragraph [ref=e704]: All rates displayed above in the calendar do not include $55 Resort Fee
+        - generic [ref=e705]:
+          - button "Show Legend" [ref=e707]
+          - generic [ref=e708]:
+            - generic [ref=e709]: 3 Nights
+            - generic [ref=e710]:
+              - link "Reset" [ref=e711] [cursor=pointer]:
+                - /url: "#"
+              - link "Update" [ref=e712] [cursor=pointer]:
+                - /url: "#"
+    - banner [ref=e3]:
+      - text: 
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "My Reservation Reservation" [ref=e8] [cursor=pointer]:
+            - /url: "#"
+          - link "Cart  0" [ref=e10] [cursor=pointer]:
+            - /url: cart.aspx?hotelID=13763&langID=1&currID=0
+            - generic [ref=e11]:
+              - generic [ref=e12]: Cart 
+              - generic [ref=e13]: "0"
+          - link "Air + Hotel" [ref=e15] [cursor=pointer]:
+            - /url: https://www.wynnvacations.com/default.aspx?plcode=GBWYNN
+          - list [ref=e17]:
+            - listitem [ref=e18]:
+              - link "Sign In" [ref=e19] [cursor=pointer]:
+                - /url: https://reservations.wynnlasvegas.com/ibe/DelegAuth/okta/login?hotelID=13763&hotelGroupID=39&channelID=30&lang=en-us&config=WynnFrontEndAuth0-WLV
+        - generic:
+          - paragraph
+      - text: 
+      - generic [ref=e22]:
+        - link "Wynn Las Vegas" [ref=e25] [cursor=pointer]:
+          - /url: https://www.wynnlasvegas.com/
+          - img "Wynn Las Vegas" [ref=e26]
+        - generic [ref=e28]:
+          - link " 4/28/2026 - 5/1/2026" [ref=e266] [cursor=pointer]:
+            - /url: "#"
+          - text: – – 1 2 3
+    - generic [ref=e32]:
+      - text:      Close    
+      - button "i Resort Fee Information " [ref=e35] [cursor=pointer]
+      - text:           
+      - generic [ref=e57]:
+        - heading "Limited Time Pricing and Offers" [level=2] [ref=e59]
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - article [ref=e63]:
+              - link "Wynn Rewards Exclusive Rate Sign Up or Sign In 313 purchased in the last 2 days" [ref=e64] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rate=WREWARDS&access=&corp=&voucher=&currID=0&hgID=0
+                - heading "Wynn Rewards Exclusive Rate" [level=1] [ref=e68]
+                - generic [ref=e69]:
+                  - paragraph
+                  - generic [ref=e70]: Sign Up or Sign In
+                  - paragraph [ref=e71]: 313 purchased in the last 2 days
+            - article [ref=e72]:
+              - link "Flexible Getaway Rate From $871 Avg. Per Night. Includes Resort Fee. View Rooms Easily Modify or Cancel Reservation" [ref=e73] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rate=WEBRATES&access=&corp=&voucher=&currID=0&hgID=0
+                - heading "Flexible Getaway Rate" [level=1] [ref=e77]
+                - generic [ref=e78]:
+                  - paragraph [ref=e79]:
+                    - text: From $871
+                    - generic [ref=e80]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e81]: View Rooms
+                  - paragraph [ref=e82]: Easily Modify or Cancel Reservation
+            - article [ref=e83]:
+              - link "Escape to Spring From $744 Avg. Per Night. Includes Resort Fee. View Rooms 144 purchased in the last 2 days" [ref=e84] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rate=WEBONLY&access=&corp=&voucher=&currID=0&hgID=0
+                - heading "Escape to Spring" [level=1] [ref=e88]
+                - generic [ref=e89]:
+                  - paragraph [ref=e90]:
+                    - text: From $744
+                    - generic [ref=e91]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e92]: View Rooms
+                  - paragraph [ref=e93]: 144 purchased in the last 2 days
+          - text:  
+      - generic [ref=e94]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - button "Room Options All" [pressed] [ref=e98] [cursor=pointer]: All
+            - button "Room Options Resort Rooms" [ref=e99] [cursor=pointer]: Resort Rooms
+            - button "Room Options Tower Suites" [ref=e100] [cursor=pointer]: Tower Suites
+            - button "Room Options Villas" [ref=e101] [cursor=pointer]: Villas
+          - link "Sort & Filter" [ref=e103] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - article [ref=e107]:
+              - link "Encore Resort King $744 Avg. Per Night. Includes Resort Fee. View Rates Separate Living Space" [ref=e108] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68668&promo=&voucher=&currID=0
+                - heading "Encore Resort King" [level=1] [ref=e112]
+                - generic [ref=e113]:
+                  - paragraph [ref=e114]:
+                    - text: $744
+                    - generic [ref=e115]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e116]: View Rates
+                  - paragraph [ref=e117]: Separate Living Space
+            - article [ref=e118]:
+              - link "Wynn Resort Two Queens $842 Avg. Per Night. Includes Resort Fee. View Rates Double the Comfort" [ref=e119] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68659&promo=&voucher=&currID=0
+                - heading "Wynn Resort Two Queens" [level=1] [ref=e123]
+                - generic [ref=e124]:
+                  - paragraph [ref=e125]:
+                    - text: $842
+                    - generic [ref=e126]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e127]: View Rates
+                  - paragraph [ref=e128]: Double the Comfort
+            - article [ref=e129]:
+              - link "Wynn Resort King $801 Avg. Per Night. Includes Resort Fee. View Rates Most Popular Room" [ref=e130] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68658&promo=&voucher=&currID=0
+                - heading "Wynn Resort King" [level=1] [ref=e134]
+                - generic [ref=e135]:
+                  - paragraph [ref=e136]:
+                    - text: $801
+                    - generic [ref=e137]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e138]: View Rates
+                  - paragraph [ref=e139]: Most Popular Room
+            - article [ref=e140]:
+              - link "Wynn Panoramic View King $851 Avg. Per Night. Includes Resort Fee. View Rates Elegant High Floor Views" [ref=e141] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68660&promo=&voucher=&currID=0
+                - heading "Wynn Panoramic View King" [level=1] [ref=e145]
+                - generic [ref=e146]:
+                  - paragraph [ref=e147]:
+                    - text: $851
+                    - generic [ref=e148]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e149]: View Rates
+                  - paragraph [ref=e150]: Elegant High Floor Views
+            - article [ref=e151]:
+              - link "Wynn Panoramic View Two Queens $851 Avg. Per Night. Includes Resort Fee. View Rates Double Comfort with Spectacular Views" [ref=e152] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68661&promo=&voucher=&currID=0
+                - heading "Wynn Panoramic View Two Queens" [level=1] [ref=e156]
+                - generic [ref=e157]:
+                  - paragraph [ref=e158]:
+                    - text: $851
+                    - generic [ref=e159]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e160]: View Rates
+                  - paragraph [ref=e161]: Double Comfort with Spectacular Views
+            - article [ref=e162]:
+              - link "Wynn Panoramic Corner King $1217 Avg. Per Night. Includes Resort Fee. View Rates Spacious, Sweeping Strip Views" [ref=e163] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68662&promo=&voucher=&currID=0
+                - heading "Wynn Panoramic Corner King" [level=1] [ref=e167]
+                - generic [ref=e168]:
+                  - paragraph [ref=e169]:
+                    - text: $1217
+                    - generic [ref=e170]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e171]: View Rates
+                  - paragraph [ref=e172]: Spacious, Sweeping Strip Views
+            - article [ref=e173]:
+              - link "Wynn Tower Suite Two Queens $1437 Avg. Per Night. Includes Resort Fee. View Rates Friends and Family Stay" [ref=e174] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68664&promo=&voucher=&currID=0
+                - heading "Wynn Tower Suite Two Queens" [level=1] [ref=e178]
+                - generic [ref=e179]:
+                  - paragraph [ref=e180]:
+                    - text: $1437
+                    - generic [ref=e181]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e182]: View Rates
+                  - paragraph [ref=e183]: Friends and Family Stay
+            - article [ref=e184]:
+              - link "Encore Panoramic View King $827 Avg. Per Night. Includes Resort Fee. View Rates High Floor Strip Views" [ref=e185] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68670&promo=&voucher=&currID=0
+                - heading "Encore Panoramic View King" [level=1] [ref=e189]
+                - generic [ref=e190]:
+                  - paragraph [ref=e191]:
+                    - text: $827
+                    - generic [ref=e192]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e193]: View Rates
+                  - paragraph [ref=e194]: High Floor Strip Views
+            - article [ref=e195]:
+              - link "Encore Tower Suite King $1071 Avg. Per Night. Includes Resort Fee. View Rates Daily Breakfast Included" [ref=e196] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68672&promo=&voucher=&currID=0
+                - heading "Encore Tower Suite King" [level=1] [ref=e200]
+                - generic [ref=e201]:
+                  - paragraph [ref=e202]:
+                    - text: $1071
+                    - generic [ref=e203]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e204]: View Rates
+                  - paragraph [ref=e205]: Daily Breakfast Included
+            - article [ref=e206]:
+              - link "Wynn Tower Suite Executive $2455 Avg. Per Night. Includes Resort Fee. View Rates Work, Play, Entertain" [ref=e207] [cursor=pointer]:
+                - /url: details.aspx?hotelID=13763&langID=1&rmID=68665&promo=&voucher=&currID=0
+                - heading "Wynn Tower Suite Executive" [level=1] [ref=e211]
+                - generic [ref=e212]:
+                  - paragraph [ref=e213]:
+                    - text: $2455
+                    - generic [ref=e214]: Avg. Per Night. Includes Resort Fee. .
+                  - generic [ref=e215]: View Rates
+                  - paragraph [ref=e216]: Work, Play, Entertain
+          - text:  
+        - text:   
+      - text:  
+    - generic: 
+    - contentinfo [ref=e36]:
+      - generic [ref=e42]:
+        - list [ref=e44]:
+          - listitem [ref=e45]:
+            - link "Wynn Las Vegas" [ref=e46] [cursor=pointer]:
+              - /url: https://reservations.wynnlasvegas.com/
+          - listitem [ref=e47]: "|"
+          - listitem [ref=e48]:
+            - link "Privacy" [ref=e49] [cursor=pointer]:
+              - /url: https://www.wynnlasvegas.com/privacy-policy
+          - listitem [ref=e50]: "|"
+          - listitem [ref=e51]:
+            - link "Terms & Conditions" [ref=e52] [cursor=pointer]:
+              - /url: http://www.visitwynn.com/tc/index.cfm?term_id=708708&_ga=2.36130211.20667754.1532812767-416811869.1531186234
+        - paragraph [ref=e54]:
+          - text: © 2026 Wynn Resorts Holdings, LLC.
+          - text: All rights reserved.
+  - generic:  

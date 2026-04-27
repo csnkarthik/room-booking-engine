@@ -1,0 +1,125 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /auth/login
+        - img [ref=e5]
+      - link [ref=e8] [cursor=pointer]:
+        - /url: /rewards
+        - img [ref=e9]
+      - link "View cart — 1 room" [ref=e11] [cursor=pointer]:
+        - /url: /cart
+        - img [ref=e12]
+        - generic [ref=e16]: "1"
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - generic [ref=e21]:
+    - navigation "Booking progress" [ref=e22]:
+      - generic [ref=e23]:
+        - link "Wynn Las Vegas" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Wynn Las Vegas" [ref=e25]
+        - generic [ref=e27]:
+          - generic [ref=e29]: "01"
+          - generic [ref=e32]: "02"
+          - generic [ref=e35]: "03"
+        - link [ref=e36] [cursor=pointer]:
+          - /url: /
+          - img [ref=e37]
+    - main [ref=e38]:
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - button "Open Encore Suites gallery" [ref=e43]:
+              - img "Encore Suites - view 1" [ref=e44]
+            - generic: 1 / 1
+          - button "View Encore Suites image 1" [ref=e46]:
+            - img "Encore Suites - thumbnail 1" [ref=e47]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: Suite
+            - generic [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e54]: "4.9"
+          - heading "Encore Suites" [level=1] [ref=e55]
+          - generic [ref=e56]:
+            - generic [ref=e57]:
+              - img [ref=e58]
+              - text: Up to 1 guest
+            - generic [ref=e63]:
+              - img [ref=e64]
+              - text: 220 sq ft
+            - generic [ref=e69]: ·
+            - generic [ref=e70]: Floor 3
+        - generic [ref=e71]:
+          - heading "About This Room" [level=2] [ref=e72]
+          - paragraph [ref=e74]: A comfortable and cozy single room.
+        - generic [ref=e75]:
+          - heading "Amenities" [level=2] [ref=e76]
+          - generic [ref=e78]:
+            - generic [ref=e79]:
+              - generic [ref=e80]: 📶
+              - generic [ref=e81]: Free Wi-Fi
+            - generic [ref=e82]:
+              - generic [ref=e83]: ❄️
+              - generic [ref=e84]: Air Conditioning
+        - generic [ref=e85]:
+          - heading "Rate Details" [level=2] [ref=e86]
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: Room rate
+              - generic [ref=e91]: $89.00 / night
+            - generic [ref=e92]:
+              - generic [ref=e93]: Breakfast add-on
+              - generic [ref=e94]: +$25 / night
+            - generic [ref=e95]:
+              - generic [ref=e96]: Airport transfer
+              - generic [ref=e97]: +$75 one-time
+            - generic [ref=e98]:
+              - generic [ref=e99]: Late checkout
+              - generic [ref=e100]: +$50 one-time
+          - paragraph [ref=e101]: All rates exclude applicable taxes and resort fees.
+        - generic [ref=e102]:
+          - heading "Add-ons" [level=2] [ref=e103]
+          - generic [ref=e105]:
+            - generic [ref=e106] [cursor=pointer]:
+              - checkbox "Breakfast" [ref=e107]
+              - generic [ref=e108]: Breakfast
+              - generic [ref=e109]: +$25 / night × 3 nights
+            - generic [ref=e110] [cursor=pointer]:
+              - checkbox "Airport Transfer" [ref=e111]
+              - generic [ref=e112]: Airport Transfer
+              - generic [ref=e113]: +$75 one-time
+            - generic [ref=e114] [cursor=pointer]:
+              - checkbox "Late Checkout (until 2pm)" [ref=e115]
+              - generic [ref=e116]: Late Checkout (until 2pm)
+              - generic [ref=e117]: +$50 one-time
+    - generic [ref=e118]:
+      - generic [ref=e119]:
+        - generic [ref=e120]: Total
+        - generic [ref=e121]: $267.00
+      - button "Proceed to Checkout" [ref=e122]:
+        - text: Proceed to Checkout
+        - img [ref=e123]
+  - contentinfo [ref=e125]:
+    - generic [ref=e126]:
+      - navigation [ref=e127]:
+        - link "Encore Boston Harbor" [ref=e128] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e129]: "|"
+        - link "Privacy" [ref=e130] [cursor=pointer]:
+          - /url: /privacy
+        - generic [ref=e131]: "|"
+        - link "Terms & Conditions" [ref=e132] [cursor=pointer]:
+          - /url: /terms
+      - paragraph [ref=e133]: © 2026 Wynn Resorts Holdings, LLC. All rights reserved.
+      - paragraph [ref=e134]:
+        - text: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit
+        - link "mahelpline.org/problemgambling" [ref=e135] [cursor=pointer]:
+          - /url: https://www.mahelpline.org/problemgambling
+        - text: to speak with a trained Specialist.
+        - text: Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e141] [cursor=pointer]:
+    - img [ref=e142]
+  - alert [ref=e145]

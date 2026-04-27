@@ -1,160 +1,273 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import Link from 'next/link'
-import { Trash2, ArrowLeft, ShoppingCart, Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Users, Maximize2, Star, Trash2, ArrowRight } from 'lucide-react'
+import { ImageGallery } from '@/components/room-card/ImageGallery'
+import { BookingStepNav } from '@/components/booking/BookingStepNav'
+import { OrderSummaryPanel } from '@/components/booking/OrderSummaryPanel'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/dates'
+import { cn } from '@/lib/utils'
+
+const amenityIcons: Record<string, string> = {
+  'Free Wi-Fi': '📶',
+  'Air Conditioning': '❄️',
+  'Flat-screen TV': '📺',
+  'Mini-fridge': '🧊',
+  Safe: '🔒',
+  'Mini-bar': '🍸',
+  'Coffee Machine': '☕',
+  'Bathrobe & Slippers': '🛁',
+  'Nespresso Machine': '☕',
+  'Soaking Tub': '🛁',
+  'Panoramic View': '🌆',
+  'Butler Service': '🎩',
+  'Airport Transfer Included': '✈️',
+  'Private Terrace with Hot Tub': '🌊',
+}
+
+const roomTypeLabels: Record<string, string> = {
+  single: 'Single',
+  double: 'Double',
+  suite: 'Suite',
+  deluxe: 'Deluxe',
+  penthouse: 'Penthouse',
+  room: 'Resort Room',
+}
 
 export default function CartPage() {
   const router = useRouter()
-  const { cartItems, removeFromCart } = useBookingStore()
+  const { cartItems, removeFromCart, updateCartItemExtras } = useBookingStore()
+  const [activeTab, setActiveTab] = useState(0)
 
   useEffect(() => {
     if (cartItems.length === 0) {
-      router.replace('/rooms')
+      router.replace('/')
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [cartItems.length, router])
 
   if (cartItems.length === 0) return null
 
-  const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
+  const safeTab = Math.min(activeTab, cartItems.length - 1)
+  const activeItem = cartItems[safeTab]
+  const activeRoom = activeItem.room
+  const typeLabel = roomTypeLabels[activeRoom.type] ?? activeRoom.type
+
+  const activeNights = daysBetween(activeItem.checkIn, activeItem.checkOut)
+  const activeExtras = activeItem.extras
+
+  function itemExtrasCost(item: (typeof cartItems)[number]) {
+    const nights = daysBetween(item.checkIn, item.checkOut)
+    return (
+      (item.extras.breakfast ? 25 * nights : 0) +
+      (item.extras.airportTransfer ? 75 : 0) +
+      (item.extras.lateCheckout ? 50 : 0)
+    )
+  }
+
+  const grandTotal = cartItems.reduce(
+    (sum, item) => sum + item.totalPrice + itemExtrasCost(item),
+    0
+  )
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <main className="mx-auto max-w-5xl px-4 py-8">
-        <div className="mb-6">
-          <Link
-            href="/rooms"
-            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to rooms
-          </Link>
-          <h1 className="mt-2 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-wide">
-            Review Your Cart
-          </h1>
-        </div>
+    <div className="min-h-screen bg-white">
+      <BookingStepNav currentStep={1} />
 
-        <div className="grid gap-8 lg:grid-cols-5">
-          {/* Cart items — 3 cols */}
-          <div className="space-y-4 lg:col-span-3">
-            {cartItems.map((item, index) => {
-              const nights = daysBetween(item.checkIn, item.checkOut)
-              return (
-                <div key={index} className="rounded-2xl border bg-white p-5 shadow-sm">
-                  <div className="flex gap-4">
-                    <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl">
-                      <Image
-                        src={item.room.images[0]}
-                        alt={item.room.name}
-                        fill
-                        className="object-cover"
-                        sizes="128px"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <p className="font-semibold">{item.room.name}</p>
-                          <Badge variant="outline" className="mt-1 text-xs capitalize">
-                            {item.room.type}
-                          </Badge>
-                        </div>
-                        <button
-                          onClick={() => removeFromCart(index)}
-                          aria-label={`Remove ${item.room.name} from cart`}
-                          className="text-muted-foreground hover:text-destructive shrink-0 rounded-lg p-1 transition-colors"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                      <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                        <div>
-                          <span className="text-muted-foreground">Check-in: </span>
-                          <span className="font-medium">{formatDisplayDate(item.checkIn)}</span>
-                        </div>
-                        <div>
-                          <span className="text-muted-foreground">Check-out: </span>
-                          <span className="font-medium">{formatDisplayDate(item.checkOut)}</span>
-                        </div>
-                        <div>
-                          <span className="text-muted-foreground">Guests: </span>
-                          <span className="font-medium">{item.guests}</span>
-                        </div>
-                        <div>
-                          <span className="text-muted-foreground">Duration: </span>
-                          <span className="font-medium">
-                            {nights} night{nights !== 1 ? 's' : ''}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="mt-3 flex justify-between border-t pt-3 text-sm font-semibold">
-                        <span className="text-muted-foreground">
-                          {formatCurrency(item.room.pricePerNight)} × {nights} night
-                          {nights !== 1 ? 's' : ''}
-                        </span>
-                        <span className="text-primary">{formatCurrency(item.totalPrice)}</span>
-                      </div>
-                    </div>
-                  </div>
+      {/* ── Main content — extra bottom padding on mobile for sticky footer ── */}
+      <main className="mx-auto max-w-[1440px] px-4 pt-6 pb-28 sm:px-6 sm:pt-8 lg:px-12 lg:pb-8">
+        <div className="grid gap-8 lg:grid-cols-3">
+          {/* ── Left column ── */}
+          <div className="lg:col-span-2">
+            {/* Room tabs — only shown when 2+ rooms in cart */}
+            {cartItems.length > 1 && (
+              <div className="-mx-4 mb-6 overflow-x-auto border-b border-[#D8D8D8] sm:mx-0">
+                <div className="flex min-w-max px-4 sm:px-0">
+                  {cartItems.map((_, i) => {
+                    const isActive = i === safeTab
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setActiveTab(i)}
+                        className={cn(
+                          'px-5 py-2.5 text-[11px] font-black tracking-[1.5px] whitespace-nowrap uppercase transition-colors',
+                          isActive
+                            ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                            : 'text-[#8D8D8D] hover:text-[#101010]'
+                        )}
+                      >
+                        Room {i + 1}
+                      </button>
+                    )
+                  })}
                 </div>
-              )
-            })}
+              </div>
+            )}
 
-            <Link
-              href="/rooms"
-              className="text-primary hover:text-primary/80 inline-flex items-center gap-2 text-sm font-medium"
-            >
-              <Plus className="h-4 w-4" />
-              Add another room
-            </Link>
+            {/* Image gallery */}
+            <div className="-mx-4 mb-6 sm:mx-0 sm:mb-8">
+              <ImageGallery images={activeRoom.images} roomName={activeRoom.name} />
+            </div>
+
+            {/* Room header */}
+            <div className="mb-6 sm:mb-8">
+              <div className="mb-2 flex items-center gap-3">
+                <span className="border border-[#D8D8D8] px-2 py-0.5 text-[10px] font-black tracking-[1.5px] text-[#5A3A27] uppercase">
+                  {typeLabel}
+                </span>
+                <span className="flex items-center gap-1 text-amber-500">
+                  <Star className="h-3.5 w-3.5 fill-current" />
+                  <span className="text-xs font-semibold text-[#101010]">4.9</span>
+                </span>
+              </div>
+              <h1 className="mb-3 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010] sm:text-3xl md:text-4xl">
+                {activeRoom.name}
+              </h1>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-[#8D8D8D] sm:gap-4">
+                <span className="flex items-center gap-1.5">
+                  <Users className="h-3.5 w-3.5" />
+                  Up to {activeRoom.maxGuests} {activeRoom.maxGuests === 1 ? 'guest' : 'guests'}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Maximize2 className="h-3.5 w-3.5" />
+                  {activeRoom.size} sq ft
+                </span>
+                <span className="text-[#D8D8D8]">·</span>
+                <span>Floor {activeRoom.floor}</span>
+              </div>
+            </div>
+
+            {/* About */}
+            <div className="mb-6 sm:mb-8">
+              <h2 className="mb-1 text-[10px] font-black tracking-[2px] text-[#8D8D8D] uppercase">
+                About This Room
+              </h2>
+              <div className="mb-3 h-px w-12 bg-[#006F62]" />
+              <p className="text-sm leading-relaxed text-[#626262] sm:text-base">
+                {activeRoom.description}
+              </p>
+            </div>
+
+            {/* Amenities */}
+            <div className="mb-6 sm:mb-8">
+              <h2 className="mb-1 text-[10px] font-black tracking-[2px] text-[#8D8D8D] uppercase">
+                Amenities
+              </h2>
+              <div className="mb-4 h-px w-12 bg-[#006F62]" />
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 md:grid-cols-3">
+                {activeRoom.amenities.map((amenity) => (
+                  <div key={amenity} className="flex items-center gap-2 text-sm text-[#626262]">
+                    <span className="shrink-0 text-base">{amenityIcons[amenity] ?? '✓'}</span>
+                    <span className="leading-tight">{amenity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Rate Details */}
+            <div className="mb-6 border border-[#D8D8D8] p-4 sm:mb-8 sm:p-5">
+              <h2 className="mb-1 text-[10px] font-black tracking-[2px] text-[#8D8D8D] uppercase">
+                Rate Details
+              </h2>
+              <div className="mb-4 h-px w-12 bg-[#006F62]" />
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center justify-between border-b border-[#F0F0F0] pb-3">
+                  <span className="text-[#626262]">Room rate</span>
+                  <span className="font-semibold text-[#101010]">
+                    {formatCurrency(activeRoom.pricePerNight)} / night
+                  </span>
+                </div>
+                <div className="flex items-center justify-between border-b border-[#F0F0F0] pb-3">
+                  <span className="text-[#626262]">Breakfast add-on</span>
+                  <span className="font-semibold text-[#101010]">+$25 / night</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-[#F0F0F0] pb-3">
+                  <span className="text-[#626262]">Airport transfer</span>
+                  <span className="font-semibold text-[#101010]">+$75 one-time</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#626262]">Late checkout</span>
+                  <span className="font-semibold text-[#101010]">+$50 one-time</span>
+                </div>
+              </div>
+              <p className="mt-4 text-[10px] tracking-wide text-[#8D8D8D] italic">
+                All rates exclude applicable taxes and resort fees.
+              </p>
+            </div>
+
+            {/* Add-ons */}
+            <div className="border border-[#D8D8D8] p-4 sm:p-5">
+              <h2 className="mb-1 text-[10px] font-black tracking-[2px] text-[#8D8D8D] uppercase">
+                Add-ons
+              </h2>
+              <div className="mb-4 h-px w-12 bg-[#006F62]" />
+              <div className="space-y-3">
+                {(
+                  [
+                    {
+                      key: 'breakfast' as const,
+                      label: 'Breakfast',
+                      price: `+$25 / night × ${activeNights} night${activeNights !== 1 ? 's' : ''}`,
+                    },
+                    {
+                      key: 'airportTransfer' as const,
+                      label: 'Airport Transfer',
+                      price: '+$75 one-time',
+                    },
+                    {
+                      key: 'lateCheckout' as const,
+                      label: 'Late Checkout (until 2pm)',
+                      price: '+$50 one-time',
+                    },
+                  ] as const
+                ).map(({ key, label, price }) => (
+                  <label
+                    key={key}
+                    className="flex cursor-pointer items-center gap-3 border border-[#D8D8D8] p-3 transition-colors hover:border-[#006F62]"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={activeExtras[key]}
+                      onChange={(e) => updateCartItemExtras(safeTab, { [key]: e.target.checked })}
+                      className="h-4 w-4 shrink-0 accent-[#006F62]"
+                      aria-label={label}
+                    />
+                    <span className="min-w-0 flex-1 text-sm text-[#101010]">{label}</span>
+                    <span className="shrink-0 text-[10px] text-[#8D8D8D] sm:text-xs">{price}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Order summary — 2 cols */}
-          <div className="lg:col-span-2">
-            <div className="sticky top-24 rounded-2xl border bg-white p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-2">
-                <ShoppingCart className="h-5 w-5" />
-                <h2 className="text-lg font-semibold">Order Summary</h2>
-              </div>
-
-              <div className="space-y-3 text-sm">
-                {cartItems.map((item, index) => {
-                  const nights = daysBetween(item.checkIn, item.checkOut)
-                  return (
-                    <div key={index} className="flex justify-between">
-                      <span className="text-muted-foreground truncate pr-2">
-                        {item.room.name} × {nights}n
-                      </span>
-                      <span className="shrink-0 font-medium">
-                        {formatCurrency(item.totalPrice)}
-                      </span>
-                    </div>
-                  )
-                })}
-              </div>
-
-              <div className="mt-4 flex justify-between border-t pt-4 text-base font-bold">
-                <span>Total</span>
-                <span className="text-primary">{formatCurrency(grandTotal)}</span>
-              </div>
-
-              <Button className="mt-6 w-full" size="lg" onClick={() => router.push('/checkout')}>
-                Proceed to Checkout
-              </Button>
-
-              <p className="text-muted-foreground mt-3 text-center text-xs">
-                You won&apos;t be charged yet
-              </p>
+          {/* ── Right column — desktop only (mobile uses sticky footer) ── */}
+          <div className="hidden lg:col-span-1 lg:block">
+            <div className="lg:sticky lg:top-20">
+              <OrderSummaryPanel showCheckoutButton showRemoveButtons />
             </div>
           </div>
         </div>
       </main>
+
+      {/* ── Mobile sticky checkout bar — hidden on lg ── */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D8D8D8] bg-white px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] lg:hidden">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
+            Total
+          </span>
+          <span className="text-base font-bold text-[#006F62]">{formatCurrency(grandTotal)}</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => router.push('/checkout')}
+          className="flex w-full items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors active:bg-[#008475]"
+        >
+          Proceed to Checkout
+          <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   )
 }

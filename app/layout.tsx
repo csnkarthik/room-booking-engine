@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Nunito_Sans } from 'next/font/google'
 import './globals.css'
+import { Auth0Provider } from '@auth0/nextjs-auth0'
 import { QueryProvider } from '@/lib/providers/QueryProvider'
 import { Toaster } from '@/components/ui/sonner'
 import Footer from '@/components/footer/Footer'
@@ -25,20 +26,30 @@ export const metadata: Metadata = {
     'Book your perfect room at Encore Boston Harbor. Luxury hotel rooms and suites with seamless online booking.',
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${nunitoSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${nunitoSans.variable} h-full overflow-x-hidden antialiased`}
+    >
       <body className="flex min-h-full flex-col">
-        <QueryProvider>
-          <SiteHeader />
-          {children}
-          <Footer />
-          <Toaster richColors position="top-right" />
-        </QueryProvider>
+        <Auth0Provider>
+          <QueryProvider>
+            <SiteHeader />
+            {children}
+            <Footer />
+            <Toaster richColors position="top-right" />
+          </QueryProvider>
+        </Auth0Provider>
       </body>
     </html>
   )

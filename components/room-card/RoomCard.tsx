@@ -1,10 +1,9 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { Users, Maximize2 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/lib/utils/dates'
 import { calculateStayPrice } from '@/lib/utils/pricing'
-import { cn } from '@/lib/utils'
+import { BookRoomButton } from './BookRoomButton'
 import type { Room } from '@/lib/types'
 
 interface RoomCardProps {
@@ -27,12 +26,6 @@ const roomTypeLabels: Record<string, string> = {
 const noExtras = { breakfast: false, airportTransfer: false, lateCheckout: false }
 
 export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: RoomCardProps) {
-  const params = new URLSearchParams()
-  if (checkIn) params.set('checkIn', checkIn)
-  if (checkOut) params.set('checkOut', checkOut)
-  if (guests) params.set('guests', String(guests))
-  const query = params.toString()
-
   const hasDates = checkIn && checkOut
   const stayTotal = hasDates
     ? calculateStayPrice(room.pricePerNight, checkIn, checkOut, noExtras)
@@ -130,15 +123,7 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
             <div className="text-[10px] text-[#8D8D8D]">{priceLabel}</div>
           </div>
 
-          <Link
-            href={`/rooms/${room.id}${query ? `?${query}` : ''}`}
-            className={cn(
-              'shrink-0 bg-[#006F62] px-5 py-2.5 text-[11px] font-black tracking-[1.5px] text-white uppercase',
-              'transition-colors hover:bg-[#008475]'
-            )}
-          >
-            View Rates
-          </Link>
+          <BookRoomButton room={room} />
         </div>
 
         {/* Special rates */}

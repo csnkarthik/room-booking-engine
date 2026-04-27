@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -14,56 +14,91 @@ interface ImageGalleryProps {
 export function ImageGallery({ images, roomName }: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const stripRef = useRef<HTMLDivElement>(null)
 
   const prev = () => setActiveIndex((i) => (i === 0 ? images.length - 1 : i - 1))
   const next = () => setActiveIndex((i) => (i === images.length - 1 ? 0 : i + 1))
 
+  // Keep active thumbnail scrolled into view
+  useEffect(() => {
+    const strip = stripRef.current
+    if (!strip) return
+    const thumb = strip.children[activeIndex] as HTMLElement | undefined
+    thumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+  }, [activeIndex])
+
   return (
     <>
-      {/* Main gallery grid */}
-      <div className="grid h-[360px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-2xl md:h-[480px]">
-        {/* Primary large image */}
-        <button
-          className="relative col-span-2 row-span-2 cursor-zoom-in overflow-hidden"
-          onClick={() => {
-            setActiveIndex(0)
-            setLightboxOpen(true)
-          }}
-          aria-label={`View ${roomName} image 1`}
+      {/* Main image */}
+      <div className="group relative aspect-[16/9] w-full overflow-hidden sm:rounded-xl">
+        <div
+          className="absolute inset-0 cursor-zoom-in"
+          onClick={() => setLightboxOpen(true)}
+          aria-label={`Open ${roomName} gallery`}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && setLightboxOpen(true)}
         >
           <Image
-            src={images[0]}
-            alt={`${roomName} - main view`}
+            src={images[activeIndex]}
+            alt={`${roomName} - view ${activeIndex + 1}`}
             fill
-            className="object-cover transition-transform duration-500 hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-all duration-500"
+            sizes="(max-width: 768px) 100vw, 66vw"
             priority
           />
-        </button>
+        </div>
 
-        {/* Thumbnail images */}
-        {images.slice(1, 5).map((src, i) => (
+        {/* Counter badge */}
+        <div className="pointer-events-none absolute right-3 bottom-3 rounded bg-black/60 px-2 py-0.5 text-xs font-medium text-white">
+          {activeIndex + 1} / {images.length}
+        </div>
+
+        {/* Prev / Next arrows — visible on hover */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              aria-label="Previous image"
+              className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next image"
+              className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Thumbnail strip — all images, auto-scrolls to active */}
+      <div
+        ref={stripRef}
+        className="mt-2 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:px-0 [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((src, i) => (
           <button
             key={src}
-            className="relative cursor-zoom-in overflow-hidden"
-            onClick={() => {
-              setActiveIndex(i + 1)
-              setLightboxOpen(true)
-            }}
-            aria-label={`View ${roomName} image ${i + 2}`}
+            onClick={() => setActiveIndex(i)}
+            aria-label={`View ${roomName} image ${i + 1}`}
+            className={cn(
+              'relative h-16 w-24 shrink-0 overflow-hidden rounded transition-opacity sm:h-20 sm:w-32',
+              i === activeIndex
+                ? 'opacity-100 ring-2 ring-[#006F62] ring-offset-1'
+                : 'opacity-60 hover:opacity-100'
+            )}
           >
             <Image
               src={src}
-              alt={`${roomName} - view ${i + 2}`}
+              alt={`${roomName} - thumbnail ${i + 1}`}
               fill
-              className="object-cover transition-transform duration-500 hover:scale-105"
-              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+              sizes="128px"
             />
-            {i === 3 && images.length > 5 && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                <span className="text-lg font-semibold text-white">+{images.length - 5} more</span>
-              </div>
-            )}
           </button>
         ))}
       </div>
@@ -97,7 +132,7 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
             <ChevronLeft className="h-8 w-8" />
           </Button>
 
-          <div className="relative h-[80vh] w-[80vw]">
+          <div className="relative h-[90vh] w-[95vw] sm:h-[80vh] sm:w-[80vw]">
             <Image
               src={images[activeIndex]}
               alt={`${roomName} - image ${activeIndex + 1}`}
@@ -117,19 +152,24 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
             <ChevronRight className="h-8 w-8" />
           </Button>
 
-          {/* Dots */}
-          <div className="absolute bottom-4 flex gap-2">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                aria-label={`Go to image ${i + 1}`}
-                className={cn(
-                  'h-2 w-2 rounded-full transition-colors',
-                  i === activeIndex ? 'bg-white' : 'bg-white/40'
-                )}
-              />
-            ))}
+          {/* Counter + dots */}
+          <div className="absolute bottom-4 flex flex-col items-center gap-2">
+            <div className="flex gap-2">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`Go to image ${i + 1}`}
+                  className={cn(
+                    'h-1.5 rounded-full transition-all',
+                    i === activeIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40'
+                  )}
+                />
+              ))}
+            </div>
+            <span className="text-xs font-medium text-white/60">
+              {activeIndex + 1} / {images.length}
+            </span>
           </div>
         </div>
       )}

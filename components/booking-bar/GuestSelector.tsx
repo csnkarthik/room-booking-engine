@@ -50,7 +50,7 @@ export function GuestSelector({ value, max = 10, onChange, className }: GuestSel
         <div
           role="dialog"
           aria-label="Select number of guests"
-          className="absolute top-full z-50 mt-2 w-56 border border-[#D8D8D8] bg-white p-4 shadow-xl"
+          className="absolute top-full left-0 z-50 mt-2 w-56 max-w-[calc(100vw-2rem)] border border-[#D8D8D8] bg-white p-4 shadow-xl"
         >
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-[#2D2D2D]">Guests</span>

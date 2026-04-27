@@ -29,7 +29,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
   const [category, setCategory] = useState<RoomType | 'all'>('all')
 
   const defaultCheckIn = checkIn ?? isoDate(1)
-  const defaultCheckOut = checkOut ?? isoDate(3)
+  const defaultCheckOut = checkOut ?? isoDate(4)
   const defaultGuests = checkIn ? guests : 2
 
   const [activeCheckIn, setActiveCheckIn] = useState<string | null>(defaultCheckIn)
@@ -38,7 +38,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
 
   useEffect(() => {
     if (!checkIn) {
-      setDates(isoDate(1), isoDate(3))
+      setDates(isoDate(1), isoDate(4))
       setGuests(2)
     }
   }, [])
@@ -70,75 +70,77 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
 
   return (
     <div>
-      {/* Sticky booking bar — sits just below the 48px site header (top-12) */}
-      <div className="sticky top-12 z-40 -mx-4">
+      {/* Sticky booking bar — full-width within the 1440px container */}
+      <div className="sticky top-12 z-40">
         <BookingBar basePrice={minPrice} onSearch={handleSearch} />
       </div>
 
-      {/* Category tabs */}
-      <div
-        className="mt-6 mb-8 flex gap-0 border-b border-[#D8D8D8]"
-        role="group"
-        aria-label="Filter by category"
-      >
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.value}
-            type="button"
-            onClick={() => setCategory(cat.value)}
-            className={cn(
-              'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
-              category === cat.value
-                ? 'border-b-2 border-[#006F62] text-[#006F62]'
-                : 'text-[#626262] hover:text-[#101010]'
-            )}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+      <div className="px-4 py-10 sm:px-6 lg:px-12">
+        {/* Category tabs */}
+        <div
+          className="mb-8 flex gap-0 border-b border-[#D8D8D8]"
+          role="group"
+          aria-label="Filter by category"
+        >
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.value}
+              type="button"
+              onClick={() => setCategory(cat.value)}
+              className={cn(
+                'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
+                category === cat.value
+                  ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                  : 'text-[#626262] hover:text-[#101010]'
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
 
-      {filtered.length === 0 ? (
-        <div className="py-24 text-center">
-          <p className="text-[#626262]">No rooms match your criteria.</p>
-        </div>
-      ) : grouped ? (
-        <div className="space-y-12">
-          {Array.from(grouped.entries()).map(([type, typeRooms]) => (
-            <section key={type}>
-              <h2 className="mb-5 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010]">
-                {CATEGORIES.find((cat) => cat.value === type)?.label}
-                <span className="ml-2 font-sans text-sm font-normal text-[#8D8D8D]">
-                  ({typeRooms.length})
-                </span>
-              </h2>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {typeRooms.map((room) => (
-                  <RoomCard
-                    key={room.id}
-                    room={room}
-                    checkIn={activeCheckIn}
-                    checkOut={activeCheckOut}
-                    guests={activeGuests}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((room) => (
-            <RoomCard
-              key={room.id}
-              room={room}
-              checkIn={activeCheckIn}
-              checkOut={activeCheckOut}
-              guests={activeGuests}
-            />
-          ))}
-        </div>
-      )}
+        {filtered.length === 0 ? (
+          <div className="py-24 text-center">
+            <p className="text-[#626262]">No rooms match your criteria.</p>
+          </div>
+        ) : grouped ? (
+          <div className="space-y-12">
+            {Array.from(grouped.entries()).map(([type, typeRooms]) => (
+              <section key={type}>
+                <h2 className="mb-5 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010]">
+                  {CATEGORIES.find((cat) => cat.value === type)?.label}
+                  <span className="ml-2 font-sans text-sm font-normal text-[#8D8D8D]">
+                    ({typeRooms.length})
+                  </span>
+                </h2>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {typeRooms.map((room) => (
+                    <RoomCard
+                      key={room.id}
+                      room={room}
+                      checkIn={activeCheckIn}
+                      checkOut={activeCheckOut}
+                      guests={activeGuests}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((room) => (
+              <RoomCard
+                key={room.id}
+                room={room}
+                checkIn={activeCheckIn}
+                checkOut={activeCheckOut}
+                guests={activeGuests}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
