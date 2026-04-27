@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Sign In" [ref=e4] [cursor=pointer]:
+        - /url: /auth/login
+      - link "Join Wynn Rewards" [ref=e5] [cursor=pointer]:
+        - /url: /rewards
+      - link "View cart" [ref=e6] [cursor=pointer]:
+        - /url: /cart
+        - img [ref=e7]
+      - button "My Reservation" [ref=e11] [cursor=pointer]
+  - contentinfo [ref=e12]:
+    - generic [ref=e13]:
+      - navigation [ref=e14]:
+        - link "Encore Boston Harbor" [ref=e15] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e16]: "|"
+        - link "Privacy" [ref=e17] [cursor=pointer]:
+          - /url: /privacy
+        - generic [ref=e18]: "|"
+        - link "Terms & Conditions" [ref=e19] [cursor=pointer]:
+          - /url: /terms
+      - paragraph [ref=e20]: © 2026 Wynn Resorts Holdings, LLC. All rights reserved.
+      - paragraph [ref=e21]:
+        - text: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit
+        - link "mahelpline.org/problemgambling" [ref=e22] [cursor=pointer]:
+          - /url: https://www.mahelpline.org/problemgambling
+        - text: to speak with a trained Specialist.
+        - text: Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e28] [cursor=pointer]:
+    - img [ref=e29]

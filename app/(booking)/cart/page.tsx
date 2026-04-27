@@ -77,10 +77,10 @@ export default function CartPage() {
       <BookingStepNav currentStep={1} />
 
       {/* ── Main content — extra bottom padding on mobile for sticky footer ── */}
-      <main className="mx-auto max-w-[1440px] px-4 pt-6 pb-28 sm:px-6 sm:pt-8 lg:px-12 lg:pb-8">
-        <div className="grid gap-8 lg:grid-cols-3">
+      <main className="mx-auto max-w-[1440px] px-4 pt-6 pb-28 sm:px-6 sm:pt-8 md:pb-8 lg:px-12">
+        <div className="grid gap-8 md:grid-cols-3">
           {/* ── Left column ── */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             {/* Room tabs — only shown when 2+ rooms in cart */}
             {cartItems.length > 1 && (
               <div className="-mx-4 mb-6 overflow-x-auto border-b border-[#D8D8D8] sm:mx-0">
@@ -242,17 +242,17 @@ export default function CartPage() {
             </div>
           </div>
 
-          {/* ── Right column — desktop only (mobile uses sticky footer) ── */}
-          <div className="hidden lg:col-span-1 lg:block">
-            <div className="lg:sticky lg:top-20">
+          {/* ── Right column — tablet/desktop (mobile uses sticky footer) ── */}
+          <div className="hidden md:col-span-1 md:block">
+            <div className="md:sticky md:top-20">
               <OrderSummaryPanel showCheckoutButton showRemoveButtons />
             </div>
           </div>
         </div>
       </main>
 
-      {/* ── Mobile sticky checkout bar — hidden on lg ── */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D8D8D8] bg-white px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] lg:hidden">
+      {/* ── Mobile sticky checkout bar — hidden on md+ ── */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D8D8D8] bg-white px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] md:hidden">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
             Total

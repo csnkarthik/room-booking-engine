@@ -1,0 +1,43 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /auth/login
+        - img [ref=e5]
+      - link [ref=e8] [cursor=pointer]:
+        - /url: /rewards
+        - img [ref=e9]
+      - link "View cart — 1 room" [ref=e11] [cursor=pointer]:
+        - /url: /cart
+        - img [ref=e12]
+        - generic [ref=e16]: "1"
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - link "Back to home" [ref=e24] [cursor=pointer]:
+        - /url: /
+        - img [ref=e25]
+      - heading "Available Rooms" [level=1] [ref=e28]
+  - contentinfo [ref=e42]:
+    - generic [ref=e43]:
+      - navigation [ref=e44]:
+        - link "Encore Boston Harbor" [ref=e45] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e46]: "|"
+        - link "Privacy" [ref=e47] [cursor=pointer]:
+          - /url: /privacy
+        - generic [ref=e48]: "|"
+        - link "Terms & Conditions" [ref=e49] [cursor=pointer]:
+          - /url: /terms
+      - paragraph [ref=e50]: © 2026 Wynn Resorts Holdings, LLC. All rights reserved.
+      - paragraph [ref=e51]:
+        - text: If you or a loved one is experiencing problems with gambling and needs support, call (800) 327-5050 or visit
+        - link "mahelpline.org/problemgambling" [ref=e52] [cursor=pointer]:
+          - /url: https://www.mahelpline.org/problemgambling
+        - text: to speak with a trained Specialist.
+        - text: Specialists are available 24/7 and services are free, confidential, and available in multiple languages.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e58] [cursor=pointer]:
+    - img [ref=e59]
+  - alert [ref=e62]

@@ -57,13 +57,18 @@ Unit tests live in `tests/unit/`, e2e tests in `tests/e2e/`. Vitest uses jsdom a
 
 ## Responsive Design
 
-**Every UI component and page must be designed for all screen sizes** — mobile (320px+), tablet (768px+), and desktop (1024px+). Use Tailwind's mobile-first breakpoints (`sm:`, `md:`, `lg:`) for all layout decisions. Required practices:
+**ALL solutions — new features, bug fixes, refactors — MUST be responsive across all screen sizes.** This is a non-negotiable requirement. Every change must work at 320px (mobile), 768px (tablet), and 1280px (desktop) before it is considered done.
+
+Use Tailwind's mobile-first breakpoints (`sm:`, `md:`, `lg:`) for all layout decisions. Required practices:
 
 - Default styles target mobile; add `sm:`/`md:`/`lg:` overrides for larger screens
 - Use `px-4 sm:px-6 lg:px-12` padding on all page containers
 - Replace `hover:`-only interactions with always-visible fallbacks on touch devices
 - Test every new page/component at 320px, 768px, and 1280px viewport widths
-- For two-column layouts, ensure mobile stacks to one column; add a sticky footer CTA when the sidebar CTA is hidden on mobile
+- **Two-column layouts activate at `md:` (768px)**, not `lg:`. Sidebar content must be visible on tablets.
+- For booking-flow pages (cart, checkout, confirmation): use `md:grid-cols-3` with `md:col-span-2` / `md:col-span-1`. The sticky mobile footer (CTA bar) is `md:hidden` — it only shows on screens narrower than 768px.
+- Mobile sticky footer CTAs must have `pb-28 md:pb-8` on the `<main>` element to prevent the footer from covering scrollable content.
+- Use Playwright (`npm run test:e2e`) to visually verify responsiveness before marking any UI task complete.
 
 **Payment flow**: checkout page POSTs to `/api/payments` → creates Stripe PaymentIntent → returns `clientSecret` → Stripe Elements collects card → on success, POST to `/api/bookings` creates booking record in `bookings.json`.
 

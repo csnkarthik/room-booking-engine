@@ -88,9 +88,9 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
           {/* ── Left column — per-reservation detail ── */}
-          <div className="space-y-6 lg:col-span-2">
+          <div className="space-y-6 md:col-span-2">
             {reservations.map((operaData, index) => {
               const nights = daysBetween(operaData.arrivalDate, operaData.departureDate)
               const room = roomMap[operaData.roomType]
@@ -210,8 +210,8 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
           </div>
 
           {/* ── Right column — order summary ── */}
-          <div className="lg:col-span-1">
-            <div className="overflow-hidden border border-[#D8D8D8] bg-white lg:sticky lg:top-20">
+          <div className="md:col-span-1">
+            <div className="overflow-hidden border border-[#D8D8D8] bg-white md:sticky md:top-20">
               {/* Header */}
               <div className="bg-[#5A3A27] px-5 py-4">
                 <p className="text-[11px] font-black tracking-[2px] text-[#DDBE77] uppercase">

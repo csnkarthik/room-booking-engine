@@ -75,14 +75,14 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
     <div className="min-h-screen bg-white">
       <BookingStepNav currentStep={2} />
 
-      <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 lg:px-12 lg:pb-8">
+      <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
         <h1 className="mb-6 font-[family-name:var(--font-heading)] text-3xl font-medium tracking-wide text-[#101010]">
           Complete Your Booking
         </h1>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
           {/* Checkout form */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             {loading ? (
               <div className="space-y-4">
                 {Array.from({ length: 3 }).map((_, i) => (
@@ -112,14 +112,14 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
           </div>
 
           {/* Order summary + Pay button */}
-          <div className="lg:col-span-1">
-            <div className="space-y-3 lg:sticky lg:top-20">
+          <div className="md:col-span-1">
+            <div className="space-y-3 md:sticky md:top-20">
               <OrderSummaryPanel />
               <button
                 type="submit"
                 form="checkout-form"
                 disabled={!stripeReady || processing}
-                className="hidden w-full bg-[#006F62] py-4 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475] disabled:cursor-not-allowed disabled:opacity-50 lg:block"
+                className="hidden w-full bg-[#006F62] py-4 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475] disabled:cursor-not-allowed disabled:opacity-50 md:block"
               >
                 {processing ? 'Processing…' : `Pay $${totalWithExtras.toFixed(2)} & Confirm`}
               </button>
@@ -131,8 +131,8 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
         </div>
       </main>
 
-      {/* Mobile sticky pay footer — hidden on lg */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D8D8D8] bg-white px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] lg:hidden">
+      {/* Mobile sticky pay footer — hidden on md+ */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D8D8D8] bg-white px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] md:hidden">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
             Total
