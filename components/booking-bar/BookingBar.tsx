@@ -45,7 +45,7 @@ function fmtLong(iso: string): string {
 
 const LABEL = 'text-[13px] font-semibold uppercase tracking-wide text-[#626262] leading-none'
 const VALUE = 'text-[15px] font-light text-[#626262] leading-none'
-const DIVIDER = 'hidden lg:block w-px self-stretch bg-[#D8D8D8] mx-1 shrink-0'
+const DIVIDER = 'hidden lg:block w-px h-10 my-auto bg-[#D8D8D8] mx-1 shrink-0'
 
 function CircleBtn({
   icon,
@@ -149,10 +149,10 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
         aria-label="Room search"
       >
         {/* ── MOBILE: collapsed pill ─────────────────────────────────── */}
-        <div className="flex items-center justify-between px-4 py-3 lg:hidden">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6 lg:hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://wynncdn.shrglobal.com/CrsMedia/P13764/bbe/encore-animated-logo-wynn-resort-212-once.png"
+            src="https://images.ctfassets.net/qroo0r04c02g/5p78pbHlHkjEvU9yRbRCQ6/f1544afe51ba329c5989fada417b94bd/ebh-animated-2.gif"
             alt="Encore Boston Harbor"
             className="h-9 w-auto object-contain"
           />
@@ -173,12 +173,12 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
         </div>
 
         {/* ── DESKTOP: full horizontal bar ──────────────────────────── */}
-        <div className="hidden gap-0 px-5 lg:flex lg:h-[94px] lg:items-center">
+        <div className="mx-auto hidden max-w-[1440px] gap-0 px-4 sm:px-6 lg:flex lg:h-[94px] lg:items-center lg:px-12">
           {/* Logo */}
           <div className="flex shrink-0 items-center lg:h-full lg:pr-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://wynncdn.shrglobal.com/CrsMedia/P13764/bbe/encore-animated-logo-wynn-resort-212-once.png"
+              src="https://images.ctfassets.net/qroo0r04c02g/5p78pbHlHkjEvU9yRbRCQ6/f1544afe51ba329c5989fada417b94bd/ebh-animated-2.gif"
               alt="Encore Boston Harbor"
               className="h-11 w-auto object-contain"
             />
@@ -188,7 +188,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
 
           {/* CHECK IN / CHECK OUT */}
           <div ref={calendarRef} className="relative flex items-center lg:h-full">
-            {/* CHECK IN */}
+            {/* CHECK IN / CHECK OUT — combined */}
             <button
               type="button"
               onClick={() => setShowCalendar((o) => !o)}
@@ -196,26 +196,15 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               aria-expanded={showCalendar}
               className="flex cursor-pointer flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
             >
-              <span className={LABEL}>Check In</span>
-              <div className="flex items-center gap-2">
-                <span className={VALUE}>{checkIn ? fmtDate(checkIn) : 'Add Date'}</span>
-                <Calendar className="h-4 w-4 shrink-0 text-[#626262]" />
+              <div className="flex items-center gap-6">
+                <span className={LABEL}>Check In</span>
+                <span className={LABEL}>Check Out</span>
               </div>
-            </button>
-
-            <div className={DIVIDER} />
-
-            {/* CHECK OUT */}
-            <button
-              type="button"
-              onClick={() => setShowCalendar((o) => !o)}
-              aria-haspopup="dialog"
-              aria-expanded={showCalendar}
-              className="flex cursor-pointer flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
-            >
-              <span className={LABEL}>Check Out</span>
               <div className="flex items-center gap-2">
-                <span className={VALUE}>{checkOut ? fmtDate(checkOut) : 'Add Date'}</span>
+                <span className={VALUE}>
+                  {checkIn ? fmtDate(checkIn) : '—'}&nbsp;–&nbsp;
+                  {checkOut ? fmtDate(checkOut) : '—'}
+                </span>
                 <Calendar className="h-4 w-4 shrink-0 text-[#626262]" />
               </div>
             </button>

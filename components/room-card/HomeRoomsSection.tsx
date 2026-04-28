@@ -75,7 +75,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
         <BookingBar basePrice={minPrice} onSearch={handleSearch} />
       </div>
 
-      <div className="px-4 py-10 sm:px-6 lg:px-12">
+      <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-12">
         {/* Category tabs */}
         <div
           className="mb-8 flex gap-0 border-b border-[#D8D8D8]"
