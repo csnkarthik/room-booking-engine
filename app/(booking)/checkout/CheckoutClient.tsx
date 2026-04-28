@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -20,9 +20,8 @@ interface CheckoutClientProps {
 export function CheckoutClient({ user }: CheckoutClientProps) {
   const router = useRouter()
   const { cartItems } = useBookingStore()
-  const [clientSecret, setClientSecret] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
+  const [paymentReady, setPaymentReady] = useState(false)
   const [hasCart] = useState(() => cartItems.length > 0)
 
   const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
@@ -40,36 +39,10 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   useEffect(() => {
     if (!hasCart) {
       router.replace('/')
-      return
     }
-
-    const roomNames = cartItems.map((i) => i.room.name).join(', ')
-
-    fetch('/api/payments', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount: grandTotal,
-        currency: 'usd',
-        metadata: {
-          rooms: roomNames,
-          roomCount: String(cartItems.length),
-          checkIn: cartItems[0]?.checkIn,
-          checkOut: cartItems[0]?.checkOut,
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret)
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [hasCart, router])
 
   if (!hasCart) return null
-
-  const stripeReady = !loading && !!clientSecret
 
   return (
     <div className="min-h-screen bg-white">
@@ -77,34 +50,26 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
 
       <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
         <div className="grid gap-8 md:grid-cols-3">
-          {/* Checkout form */}
+          {/* Checkout form — renders immediately, no PaymentIntent waterfall */}
           <div className="md:col-span-2">
-            {loading ? (
-              <div className="space-y-4">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <div key={i} className="bg-muted h-16 animate-pulse rounded-xl" />
-                ))}
-              </div>
-            ) : clientSecret ? (
-              <Elements
-                stripe={stripePromise}
-                options={{
-                  clientSecret,
-                  appearance: {
-                    theme: 'stripe',
-                    variables: { colorPrimary: '#0f172a' },
-                  },
-                }}
-              >
-                <CheckoutForm user={user} onProcessingChange={setProcessing} />
-              </Elements>
-            ) : (
-              <div className="border-destructive/50 bg-destructive/10 rounded-xl border p-6 text-center">
-                <p className="text-destructive text-sm">
-                  Failed to initialize payment. Please go back and try again.
-                </p>
-              </div>
-            )}
+            <Elements
+              stripe={stripePromise}
+              options={{
+                mode: 'payment',
+                amount: Math.round(grandTotal * 100),
+                currency: 'usd',
+                appearance: {
+                  theme: 'stripe',
+                  variables: { colorPrimary: '#0f172a' },
+                },
+              }}
+            >
+              <CheckoutForm
+                user={user}
+                onProcessingChange={setProcessing}
+                onPaymentReady={() => setPaymentReady(true)}
+              />
+            </Elements>
           </div>
 
           {/* Order summary + Pay button */}
@@ -114,7 +79,7 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
               <button
                 type="submit"
                 form="checkout-form"
-                disabled={!stripeReady || processing}
+                disabled={!paymentReady || processing}
                 className="hidden w-full bg-[#006F62] py-4 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475] disabled:cursor-not-allowed disabled:opacity-50 md:block"
               >
                 {processing ? 'Processing…' : `Pay $${totalWithExtras.toFixed(2)} & Confirm`}
@@ -138,7 +103,7 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
         <button
           type="submit"
           form="checkout-form"
-          disabled={!stripeReady || processing}
+          disabled={!paymentReady || processing}
           className="flex w-full items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors active:bg-[#008475] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {processing ? 'Processing…' : `Pay $${totalWithExtras.toFixed(2)} & Confirm`}

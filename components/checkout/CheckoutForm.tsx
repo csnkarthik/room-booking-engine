@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import { useForm, Controller } from 'react-hook-form'
@@ -78,16 +79,23 @@ type GuestFormValues = z.infer<typeof GuestSchema>
 interface CheckoutFormProps {
   user?: User | null
   onProcessingChange?: (processing: boolean) => void
+  onPaymentReady?: () => void
 }
 
-export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
+export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: CheckoutFormProps) {
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
   const { cartItems, clearCart } = useBookingStore()
+  const [paymentElementReady, setPaymentElementReady] = useState(false)
 
   function updateProcessing(value: boolean) {
     onProcessingChange?.(value)
+  }
+
+  function handlePaymentReady() {
+    setPaymentElementReady(true)
+    onPaymentReady?.()
   }
 
   const {
@@ -107,14 +115,48 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
     },
   })
 
+  const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
+
   const onSubmit = async (guestData: GuestFormValues) => {
     if (!stripe || !elements || cartItems.length === 0) return
 
     updateProcessing(true)
 
     try {
+      // Step 1: validate payment element fields
+      const { error: submitError } = await elements.submit()
+      if (submitError) {
+        toast.error(submitError.message ?? 'Payment validation failed.')
+        updateProcessing(false)
+        return
+      }
+
+      // Step 2: create PaymentIntent on the server
+      const res = await fetch('/api/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: grandTotal,
+          currency: 'usd',
+          metadata: {
+            rooms: cartItems.map((i) => i.room.name).join(', '),
+            roomCount: String(cartItems.length),
+            checkIn: cartItems[0]?.checkIn,
+            checkOut: cartItems[0]?.checkOut,
+          },
+        }),
+      })
+      const paymentData = await res.json()
+      if (!paymentData.clientSecret) {
+        toast.error('Failed to initialize payment. Please try again.')
+        updateProcessing(false)
+        return
+      }
+
+      // Step 3: confirm payment with the clientSecret
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
+        clientSecret: paymentData.clientSecret,
         confirmParams: {
           return_url: `${window.location.origin}/confirmation`,
         },
@@ -396,12 +438,30 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
       {/* Stripe Payment Element */}
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="mb-4 text-lg font-semibold">Payment Details</h2>
-        <PaymentElement
-          options={{
-            layout: 'tabs',
-            wallets: { link: 'never' },
-          }}
-        />
+        <div className="relative">
+          {/* Skeleton shown while PaymentElement iframe loads */}
+          {!paymentElementReady && (
+            <div className="animate-pulse space-y-3">
+              <div className="h-10 rounded-lg bg-gray-100" />
+              <div className="h-10 rounded-lg bg-gray-100" />
+              <div className="h-36 rounded-lg bg-gray-100" />
+            </div>
+          )}
+          {/* PaymentElement kept in DOM from the start so the iframe loads in background */}
+          <div
+            className="transition-opacity duration-500"
+            style={
+              paymentElementReady
+                ? { opacity: 1 }
+                : { opacity: 0, position: 'absolute', inset: 0, pointerEvents: 'none' }
+            }
+          >
+            <PaymentElement
+              options={{ layout: 'tabs', wallets: { link: 'never' } }}
+              onReady={handlePaymentReady}
+            />
+          </div>
+        </div>
         <p className="text-muted-foreground mt-3 text-xs">
           Test card: <code className="bg-muted rounded px-1 py-0.5">4242 4242 4242 4242</code> — any
           future date, any CVC
