@@ -2,15 +2,76 @@
 
 import { useRouter } from 'next/navigation'
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
 import { daysBetween } from '@/lib/utils/dates'
+import { AddressAutofill } from '@/components/checkout/AddressAutofill'
 import type { User } from '@auth0/nextjs-auth0/types'
+
+const COUNTRIES = [
+  { code: 'US', name: 'United States' },
+  { code: 'CA', name: 'Canada' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'FR', name: 'France' },
+  { code: 'IT', name: 'Italy' },
+  { code: 'ES', name: 'Spain' },
+  { code: 'NL', name: 'Netherlands' },
+  { code: 'CH', name: 'Switzerland' },
+  { code: 'JP', name: 'Japan' },
+  { code: 'CN', name: 'China' },
+  { code: 'IN', name: 'India' },
+  { code: 'BR', name: 'Brazil' },
+  { code: 'MX', name: 'Mexico' },
+  { code: 'AR', name: 'Argentina' },
+  { code: 'KR', name: 'South Korea' },
+  { code: 'SG', name: 'Singapore' },
+  { code: 'AE', name: 'United Arab Emirates' },
+  { code: 'SA', name: 'Saudi Arabia' },
+  { code: 'ZA', name: 'South Africa' },
+  { code: 'NG', name: 'Nigeria' },
+  { code: 'EG', name: 'Egypt' },
+  { code: 'SE', name: 'Sweden' },
+  { code: 'NO', name: 'Norway' },
+  { code: 'DK', name: 'Denmark' },
+  { code: 'FI', name: 'Finland' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'PL', name: 'Poland' },
+  { code: 'NZ', name: 'New Zealand' },
+  { code: 'HK', name: 'Hong Kong' },
+  { code: 'TW', name: 'Taiwan' },
+  { code: 'TH', name: 'Thailand' },
+  { code: 'MY', name: 'Malaysia' },
+  { code: 'PH', name: 'Philippines' },
+  { code: 'ID', name: 'Indonesia' },
+  { code: 'TR', name: 'Turkey' },
+  { code: 'IL', name: 'Israel' },
+  { code: 'RU', name: 'Russia' },
+  { code: 'UA', name: 'Ukraine' },
+  { code: 'CL', name: 'Chile' },
+  { code: 'CO', name: 'Colombia' },
+  { code: 'PE', name: 'Peru' },
+  { code: 'VN', name: 'Vietnam' },
+  { code: 'PK', name: 'Pakistan' },
+  { code: 'BD', name: 'Bangladesh' },
+  { code: 'AT', name: 'Austria' },
+  { code: 'BE', name: 'Belgium' },
+  { code: 'GR', name: 'Greece' },
+  { code: 'CZ', name: 'Czech Republic' },
+]
 
 type GuestFormValues = z.infer<typeof GuestSchema>
 
@@ -32,6 +93,9 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
+    watch,
     formState: { errors },
   } = useForm<GuestFormValues>({
     resolver: zodResolver(GuestSchema),
@@ -207,11 +271,18 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
                 *
               </span>
             </label>
-            <Input
+            <AddressAutofill
               id="addressLine1"
-              {...register('addressLine1')}
-              aria-invalid={!!errors.addressLine1}
-              placeholder="123 Main St"
+              value={watch('addressLine1') ?? ''}
+              onChange={(v) => setValue('addressLine1', v, { shouldValidate: true })}
+              onBlur={() => {}}
+              hasError={!!errors.addressLine1}
+              onSelect={(s) => {
+                setValue('city', s.city, { shouldValidate: true })
+                setValue('state', s.state, { shouldValidate: true })
+                setValue('postalCode', s.zip_code, { shouldValidate: true })
+                setValue('countryCode', 'US', { shouldValidate: true })
+              }}
             />
             {errors.addressLine1 && (
               <p className="text-destructive mt-1 text-xs" role="alert">
@@ -288,19 +359,30 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
               )}
             </div>
           </div>
-          <div className="w-full sm:w-auto sm:max-w-[120px]">
+          <div className="w-full">
             <label htmlFor="countryCode" className="mb-1 block text-sm font-medium">
               Country{' '}
               <span aria-hidden="true" className="text-destructive">
                 *
               </span>
             </label>
-            <Input
-              id="countryCode"
-              {...register('countryCode')}
-              aria-invalid={!!errors.countryCode}
-              placeholder="US"
-              maxLength={2}
+            <Controller
+              name="countryCode"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger id="countryCode" aria-invalid={!!errors.countryCode}>
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {COUNTRIES.map((c) => (
+                      <SelectItem key={c.code} value={c.code}>
+                        {c.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             />
             {errors.countryCode && (
               <p className="text-destructive mt-1 text-xs" role="alert">

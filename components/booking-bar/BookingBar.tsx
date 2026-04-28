@@ -64,7 +64,7 @@ function CircleBtn({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-black text-[14px] leading-none text-black transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-30"
+      className="flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-black text-[14px] leading-none text-black transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-30"
     >
       {icon}
     </button>
@@ -161,7 +161,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
             onClick={() => setSheetOpen(true)}
             aria-haspopup="dialog"
             aria-expanded={sheetOpen}
-            className="flex items-center gap-1.5 rounded-full border border-[#006F62] px-3 py-1.5 text-[13px] font-semibold text-[#006F62]"
+            className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#006F62] px-3 py-1.5 text-[13px] font-semibold text-[#006F62]"
           >
             {pillLabel}
             {sheetOpen ? (
@@ -194,7 +194,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               onClick={() => setShowCalendar((o) => !o)}
               aria-haspopup="dialog"
               aria-expanded={showCalendar}
-              className="flex flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
+              className="flex cursor-pointer flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
             >
               <span className={LABEL}>Check In</span>
               <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               onClick={() => setShowCalendar((o) => !o)}
               aria-haspopup="dialog"
               aria-expanded={showCalendar}
-              className="flex flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
+              className="flex cursor-pointer flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
             >
               <span className={LABEL}>Check Out</span>
               <div className="flex items-center gap-2">
@@ -309,7 +309,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               type="button"
               onClick={handleSearch}
               aria-label="Search available rooms"
-              className="bg-[#006F62] px-5 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
+              className="cursor-pointer bg-[#006F62] px-5 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
             >
               Update
             </button>
@@ -343,7 +343,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                 type="button"
                 onClick={closeSheet}
                 aria-label="Close"
-                className="absolute top-1/2 right-4 -translate-y-1/2 text-[#626262] hover:text-black"
+                className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer text-[#626262] hover:text-black"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -379,7 +379,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                       <button
                         type="button"
                         onClick={() => setSheetCalendar(true)}
-                        className="flex items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
+                        className="flex cursor-pointer items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
                       >
                         <span>{checkIn ? fmtLong(checkIn) : 'Add date'}</span>
                         <Calendar className="ml-2 h-4 w-4 shrink-0" />
@@ -412,7 +412,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                       <button
                         type="button"
                         onClick={() => setSheetCalendar(true)}
-                        className="flex items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
+                        className="flex cursor-pointer items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
                       >
                         <span>{checkOut ? fmtLong(checkOut) : 'Add date'}</span>
                         <Calendar className="ml-2 h-4 w-4 shrink-0" />
@@ -451,7 +451,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                     />
                     <button
                       type="button"
-                      className="text-[13px] font-semibold tracking-wide text-[#006F62] uppercase hover:text-[#015A4F]"
+                      className="cursor-pointer text-[13px] font-semibold tracking-wide text-[#006F62] uppercase hover:text-[#015A4F]"
                     >
                       Apply
                     </button>
@@ -469,7 +469,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="border border-[#626262] px-5 py-2 text-[13px] tracking-[0.4px] text-[#626262] uppercase transition-colors hover:border-black hover:text-black"
+                  className="cursor-pointer border border-[#626262] px-5 py-2 text-[13px] tracking-[0.4px] text-[#626262] uppercase transition-colors hover:border-black hover:text-black"
                 >
                   Reset
                 </button>
@@ -479,7 +479,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                     handleSearch()
                     closeSheet()
                   }}
-                  className="bg-[#006F62] px-5 py-2 text-[13px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F]"
+                  className="cursor-pointer bg-[#006F62] px-5 py-2 text-[13px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F]"
                 >
                   Update
                 </button>

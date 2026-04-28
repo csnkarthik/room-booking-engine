@@ -85,7 +85,7 @@ export function RoomsListWithFilter({
             type="button"
             onClick={() => setCategory(cat.value)}
             className={cn(
-              'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
+              'cursor-pointer px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
               category === cat.value
                 ? 'border-b-2 border-[#006F62] text-[#006F62]'
                 : 'text-[#626262] hover:text-[#101010]'
