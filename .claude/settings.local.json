@@ -47,7 +47,10 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,'->',v\\) for k,v in d.get\\('exports',{}\\).items\\(\\)]\")",
       "mcp__playwright__browser_console_messages",
       "Bash(del /F \"C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile\")",
-      "Bash(powershell -command \"Remove-Item -Force 'C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile' -ErrorAction SilentlyContinue; Write-Host done\")"
+      "Bash(powershell -command \"Remove-Item -Force 'C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile' -ErrorAction SilentlyContinue; Write-Host done\")",
+      "WebSearch",
+      "Bash(grep -E \"\\(page|layout|loading|\\\\.tsx$\\)\")",
+      "Bash(npx shadcn@latest add select --yes)"
     ]
   }
 }

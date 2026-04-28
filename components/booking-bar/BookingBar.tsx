@@ -45,7 +45,7 @@ function fmtLong(iso: string): string {
 
 const LABEL = 'text-[13px] font-semibold uppercase tracking-wide text-[#626262] leading-none'
 const VALUE = 'text-[15px] font-light text-[#626262] leading-none'
-const DIVIDER = 'hidden lg:block w-px self-stretch bg-[#D8D8D8] mx-1 shrink-0'
+const DIVIDER = 'hidden lg:block w-px h-10 my-auto bg-[#D8D8D8] mx-1 shrink-0'
 
 function CircleBtn({
   icon,
@@ -64,7 +64,7 @@ function CircleBtn({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-black text-[14px] leading-none text-black transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-30"
+      className="flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-black text-[14px] leading-none text-black transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-30"
     >
       {icon}
     </button>
@@ -149,10 +149,10 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
         aria-label="Room search"
       >
         {/* ── MOBILE: collapsed pill ─────────────────────────────────── */}
-        <div className="flex items-center justify-between px-4 py-3 lg:hidden">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6 lg:hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://wynncdn.shrglobal.com/CrsMedia/P13764/bbe/encore-animated-logo-wynn-resort-212-once.png"
+            src="https://images.ctfassets.net/qroo0r04c02g/5p78pbHlHkjEvU9yRbRCQ6/f1544afe51ba329c5989fada417b94bd/ebh-animated-2.gif"
             alt="Encore Boston Harbor"
             className="h-9 w-auto object-contain"
           />
@@ -161,7 +161,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
             onClick={() => setSheetOpen(true)}
             aria-haspopup="dialog"
             aria-expanded={sheetOpen}
-            className="flex items-center gap-1.5 rounded-full border border-[#006F62] px-3 py-1.5 text-[13px] font-semibold text-[#006F62]"
+            className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#006F62] px-3 py-1.5 text-[13px] font-semibold text-[#006F62]"
           >
             {pillLabel}
             {sheetOpen ? (
@@ -173,12 +173,12 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
         </div>
 
         {/* ── DESKTOP: full horizontal bar ──────────────────────────── */}
-        <div className="hidden gap-0 px-5 lg:flex lg:h-[94px] lg:items-center">
+        <div className="mx-auto hidden max-w-[1440px] gap-0 px-4 sm:px-6 lg:flex lg:h-[94px] lg:items-center lg:px-12">
           {/* Logo */}
           <div className="flex shrink-0 items-center lg:h-full lg:pr-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://wynncdn.shrglobal.com/CrsMedia/P13764/bbe/encore-animated-logo-wynn-resort-212-once.png"
+              src="https://images.ctfassets.net/qroo0r04c02g/5p78pbHlHkjEvU9yRbRCQ6/f1544afe51ba329c5989fada417b94bd/ebh-animated-2.gif"
               alt="Encore Boston Harbor"
               className="h-11 w-auto object-contain"
             />
@@ -188,34 +188,23 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
 
           {/* CHECK IN / CHECK OUT */}
           <div ref={calendarRef} className="relative flex items-center lg:h-full">
-            {/* CHECK IN */}
+            {/* CHECK IN / CHECK OUT — combined */}
             <button
               type="button"
               onClick={() => setShowCalendar((o) => !o)}
               aria-haspopup="dialog"
               aria-expanded={showCalendar}
-              className="flex flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
+              className="flex cursor-pointer flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
             >
-              <span className={LABEL}>Check In</span>
-              <div className="flex items-center gap-2">
-                <span className={VALUE}>{checkIn ? fmtDate(checkIn) : 'Add Date'}</span>
-                <Calendar className="h-4 w-4 shrink-0 text-[#626262]" />
+              <div className="flex items-center gap-6">
+                <span className={LABEL}>Check In</span>
+                <span className={LABEL}>Check Out</span>
               </div>
-            </button>
-
-            <div className={DIVIDER} />
-
-            {/* CHECK OUT */}
-            <button
-              type="button"
-              onClick={() => setShowCalendar((o) => !o)}
-              aria-haspopup="dialog"
-              aria-expanded={showCalendar}
-              className="flex flex-col justify-center gap-1.5 py-1 transition-colors hover:bg-gray-50 focus:outline-none lg:h-full lg:px-5 lg:py-0"
-            >
-              <span className={LABEL}>Check Out</span>
               <div className="flex items-center gap-2">
-                <span className={VALUE}>{checkOut ? fmtDate(checkOut) : 'Add Date'}</span>
+                <span className={VALUE}>
+                  {checkIn ? fmtDate(checkIn) : '—'}&nbsp;–&nbsp;
+                  {checkOut ? fmtDate(checkOut) : '—'}
+                </span>
                 <Calendar className="h-4 w-4 shrink-0 text-[#626262]" />
               </div>
             </button>
@@ -309,7 +298,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               type="button"
               onClick={handleSearch}
               aria-label="Search available rooms"
-              className="bg-[#006F62] px-5 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
+              className="cursor-pointer bg-[#006F62] px-9 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
             >
               Update
             </button>
@@ -343,7 +332,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                 type="button"
                 onClick={closeSheet}
                 aria-label="Close"
-                className="absolute top-1/2 right-4 -translate-y-1/2 text-[#626262] hover:text-black"
+                className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer text-[#626262] hover:text-black"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -379,7 +368,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                       <button
                         type="button"
                         onClick={() => setSheetCalendar(true)}
-                        className="flex items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
+                        className="flex cursor-pointer items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
                       >
                         <span>{checkIn ? fmtLong(checkIn) : 'Add date'}</span>
                         <Calendar className="ml-2 h-4 w-4 shrink-0" />
@@ -412,7 +401,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                       <button
                         type="button"
                         onClick={() => setSheetCalendar(true)}
-                        className="flex items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
+                        className="flex cursor-pointer items-center justify-between border border-[#D8D8D8] px-3 py-2 text-sm text-[#626262] transition-colors hover:border-[#006F62]"
                       >
                         <span>{checkOut ? fmtLong(checkOut) : 'Add date'}</span>
                         <Calendar className="ml-2 h-4 w-4 shrink-0" />
@@ -451,7 +440,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                     />
                     <button
                       type="button"
-                      className="text-[13px] font-semibold tracking-wide text-[#006F62] uppercase hover:text-[#015A4F]"
+                      className="cursor-pointer text-[13px] font-semibold tracking-wide text-[#006F62] uppercase hover:text-[#015A4F]"
                     >
                       Apply
                     </button>
@@ -469,7 +458,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="border border-[#626262] px-5 py-2 text-[13px] tracking-[0.4px] text-[#626262] uppercase transition-colors hover:border-black hover:text-black"
+                  className="cursor-pointer border border-[#626262] px-5 py-2 text-[13px] tracking-[0.4px] text-[#626262] uppercase transition-colors hover:border-black hover:text-black"
                 >
                   Reset
                 </button>
@@ -479,7 +468,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                     handleSearch()
                     closeSheet()
                   }}
-                  className="bg-[#006F62] px-5 py-2 text-[13px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F]"
+                  className="cursor-pointer bg-[#006F62] px-5 py-2 text-[13px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F]"
                 >
                   Update
                 </button>

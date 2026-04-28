@@ -84,7 +84,7 @@ export function OrderSummaryPanel({
                           <button
                             onClick={() => handleRemove(index)}
                             aria-label={`Remove ${item.room.name}`}
-                            className="shrink-0 p-0.5 text-[#8D8D8D] transition-colors hover:text-red-500"
+                            className="shrink-0 cursor-pointer p-0.5 text-[#8D8D8D] transition-colors hover:text-red-500"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -161,7 +161,7 @@ export function OrderSummaryPanel({
               <button
                 type="button"
                 onClick={() => router.push('/checkout')}
-                className="mb-3 flex w-full items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475]"
+                className="mb-3 flex w-full cursor-pointer items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475]"
               >
                 Proceed to Checkout
                 <ArrowRight className="h-4 w-4" />
@@ -206,13 +206,13 @@ export function OrderSummaryPanel({
                   <div className="flex gap-3">
                     <button
                       onClick={() => setPendingRemoveIndex(null)}
-                      className="flex-1 border border-[#D8D8D8] py-3 text-[11px] font-black tracking-[1.5px] text-[#101010] uppercase transition-colors hover:border-[#101010]"
+                      className="flex-1 cursor-pointer border border-[#D8D8D8] py-3 text-[11px] font-black tracking-[1.5px] text-[#101010] uppercase transition-colors hover:border-[#101010]"
                     >
                       Keep it
                     </button>
                     <button
                       onClick={confirmRemove}
-                      className="flex-1 bg-red-600 py-3 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-red-700"
+                      className="flex-1 cursor-pointer bg-red-600 py-3 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-red-700"
                     >
                       {isLast ? 'Remove & Leave' : 'Yes, Remove'}
                     </button>

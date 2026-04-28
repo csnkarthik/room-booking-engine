@@ -48,7 +48,7 @@ export function BookRoomButton({ room, className }: BookRoomButtonProps) {
       type="button"
       onClick={handleClick}
       className={cn(
-        'shrink-0 bg-[#006F62] px-5 py-2.5 text-[11px] font-black tracking-[1.5px] text-white uppercase',
+        'shrink-0 cursor-pointer bg-[#006F62] px-5 py-2.5 text-[11px] font-black tracking-[1.5px] text-white uppercase',
         'transition-colors hover:bg-[#008475]',
         className
       )}

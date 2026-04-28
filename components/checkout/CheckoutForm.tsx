@@ -1,37 +1,109 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
 import { daysBetween } from '@/lib/utils/dates'
+import { AddressAutofill } from '@/components/checkout/AddressAutofill'
 import type { User } from '@auth0/nextjs-auth0/types'
+
+const COUNTRIES = [
+  { code: 'US', name: 'United States' },
+  { code: 'CA', name: 'Canada' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'FR', name: 'France' },
+  { code: 'IT', name: 'Italy' },
+  { code: 'ES', name: 'Spain' },
+  { code: 'NL', name: 'Netherlands' },
+  { code: 'CH', name: 'Switzerland' },
+  { code: 'JP', name: 'Japan' },
+  { code: 'CN', name: 'China' },
+  { code: 'IN', name: 'India' },
+  { code: 'BR', name: 'Brazil' },
+  { code: 'MX', name: 'Mexico' },
+  { code: 'AR', name: 'Argentina' },
+  { code: 'KR', name: 'South Korea' },
+  { code: 'SG', name: 'Singapore' },
+  { code: 'AE', name: 'United Arab Emirates' },
+  { code: 'SA', name: 'Saudi Arabia' },
+  { code: 'ZA', name: 'South Africa' },
+  { code: 'NG', name: 'Nigeria' },
+  { code: 'EG', name: 'Egypt' },
+  { code: 'SE', name: 'Sweden' },
+  { code: 'NO', name: 'Norway' },
+  { code: 'DK', name: 'Denmark' },
+  { code: 'FI', name: 'Finland' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'PL', name: 'Poland' },
+  { code: 'NZ', name: 'New Zealand' },
+  { code: 'HK', name: 'Hong Kong' },
+  { code: 'TW', name: 'Taiwan' },
+  { code: 'TH', name: 'Thailand' },
+  { code: 'MY', name: 'Malaysia' },
+  { code: 'PH', name: 'Philippines' },
+  { code: 'ID', name: 'Indonesia' },
+  { code: 'TR', name: 'Turkey' },
+  { code: 'IL', name: 'Israel' },
+  { code: 'RU', name: 'Russia' },
+  { code: 'UA', name: 'Ukraine' },
+  { code: 'CL', name: 'Chile' },
+  { code: 'CO', name: 'Colombia' },
+  { code: 'PE', name: 'Peru' },
+  { code: 'VN', name: 'Vietnam' },
+  { code: 'PK', name: 'Pakistan' },
+  { code: 'BD', name: 'Bangladesh' },
+  { code: 'AT', name: 'Austria' },
+  { code: 'BE', name: 'Belgium' },
+  { code: 'GR', name: 'Greece' },
+  { code: 'CZ', name: 'Czech Republic' },
+]
 
 type GuestFormValues = z.infer<typeof GuestSchema>
 
 interface CheckoutFormProps {
   user?: User | null
   onProcessingChange?: (processing: boolean) => void
+  onPaymentReady?: () => void
 }
 
-export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
+export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: CheckoutFormProps) {
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
   const { cartItems, clearCart } = useBookingStore()
+  const [paymentElementReady, setPaymentElementReady] = useState(false)
 
   function updateProcessing(value: boolean) {
     onProcessingChange?.(value)
   }
 
+  function handlePaymentReady() {
+    setPaymentElementReady(true)
+    onPaymentReady?.()
+  }
+
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
+    watch,
     formState: { errors },
   } = useForm<GuestFormValues>({
     resolver: zodResolver(GuestSchema),
@@ -43,14 +115,48 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
     },
   })
 
+  const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
+
   const onSubmit = async (guestData: GuestFormValues) => {
     if (!stripe || !elements || cartItems.length === 0) return
 
     updateProcessing(true)
 
     try {
+      // Step 1: validate payment element fields
+      const { error: submitError } = await elements.submit()
+      if (submitError) {
+        toast.error(submitError.message ?? 'Payment validation failed.')
+        updateProcessing(false)
+        return
+      }
+
+      // Step 2: create PaymentIntent on the server
+      const res = await fetch('/api/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: grandTotal,
+          currency: 'usd',
+          metadata: {
+            rooms: cartItems.map((i) => i.room.name).join(', '),
+            roomCount: String(cartItems.length),
+            checkIn: cartItems[0]?.checkIn,
+            checkOut: cartItems[0]?.checkOut,
+          },
+        }),
+      })
+      const paymentData = await res.json()
+      if (!paymentData.clientSecret) {
+        toast.error('Failed to initialize payment. Please try again.')
+        updateProcessing(false)
+        return
+      }
+
+      // Step 3: confirm payment with the clientSecret
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
+        clientSecret: paymentData.clientSecret,
         confirmParams: {
           return_url: `${window.location.origin}/confirmation`,
         },
@@ -207,11 +313,18 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
                 *
               </span>
             </label>
-            <Input
+            <AddressAutofill
               id="addressLine1"
-              {...register('addressLine1')}
-              aria-invalid={!!errors.addressLine1}
-              placeholder="123 Main St"
+              value={watch('addressLine1') ?? ''}
+              onChange={(v) => setValue('addressLine1', v, { shouldValidate: true })}
+              onBlur={() => {}}
+              hasError={!!errors.addressLine1}
+              onSelect={(s) => {
+                setValue('city', s.city, { shouldValidate: true })
+                setValue('state', s.state, { shouldValidate: true })
+                setValue('postalCode', s.zip_code, { shouldValidate: true })
+                setValue('countryCode', 'US', { shouldValidate: true })
+              }}
             />
             {errors.addressLine1 && (
               <p className="text-destructive mt-1 text-xs" role="alert">
@@ -288,19 +401,30 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
               )}
             </div>
           </div>
-          <div className="w-full sm:w-auto sm:max-w-[120px]">
+          <div className="w-full">
             <label htmlFor="countryCode" className="mb-1 block text-sm font-medium">
               Country{' '}
               <span aria-hidden="true" className="text-destructive">
                 *
               </span>
             </label>
-            <Input
-              id="countryCode"
-              {...register('countryCode')}
-              aria-invalid={!!errors.countryCode}
-              placeholder="US"
-              maxLength={2}
+            <Controller
+              name="countryCode"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger id="countryCode" aria-invalid={!!errors.countryCode}>
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {COUNTRIES.map((c) => (
+                      <SelectItem key={c.code} value={c.code}>
+                        {c.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             />
             {errors.countryCode && (
               <p className="text-destructive mt-1 text-xs" role="alert">
@@ -314,12 +438,30 @@ export function CheckoutForm({ user, onProcessingChange }: CheckoutFormProps) {
       {/* Stripe Payment Element */}
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="mb-4 text-lg font-semibold">Payment Details</h2>
-        <PaymentElement
-          options={{
-            layout: 'tabs',
-            wallets: { link: 'never' },
-          }}
-        />
+        <div className="relative">
+          {/* Skeleton shown while PaymentElement iframe loads */}
+          {!paymentElementReady && (
+            <div className="animate-pulse space-y-3">
+              <div className="h-10 rounded-lg bg-gray-100" />
+              <div className="h-10 rounded-lg bg-gray-100" />
+              <div className="h-36 rounded-lg bg-gray-100" />
+            </div>
+          )}
+          {/* PaymentElement kept in DOM from the start so the iframe loads in background */}
+          <div
+            className="transition-opacity duration-500"
+            style={
+              paymentElementReady
+                ? { opacity: 1 }
+                : { opacity: 0, position: 'absolute', inset: 0, pointerEvents: 'none' }
+            }
+          >
+            <PaymentElement
+              options={{ layout: 'tabs', wallets: { link: 'never' } }}
+              onReady={handlePaymentReady}
+            />
+          </div>
+        </div>
         <p className="text-muted-foreground mt-3 text-xs">
           Test card: <code className="bg-muted rounded px-1 py-0.5">4242 4242 4242 4242</code> — any
           future date, any CVC

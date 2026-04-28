@@ -92,7 +92,7 @@ export default function CartPage() {
                         key={i}
                         onClick={() => setActiveTab(i)}
                         className={cn(
-                          'px-5 py-2.5 text-[11px] font-black tracking-[1.5px] whitespace-nowrap uppercase transition-colors',
+                          'cursor-pointer px-5 py-2.5 text-[11px] font-black tracking-[1.5px] whitespace-nowrap uppercase transition-colors',
                           isActive
                             ? 'border-b-2 border-[#006F62] text-[#006F62]'
                             : 'text-[#8D8D8D] hover:text-[#101010]'
@@ -262,7 +262,7 @@ export default function CartPage() {
         <button
           type="button"
           onClick={() => router.push('/checkout')}
-          className="flex w-full items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors active:bg-[#008475]"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 bg-[#006F62] py-3.5 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors active:bg-[#008475]"
         >
           Proceed to Checkout
           <ArrowRight className="h-4 w-4" />

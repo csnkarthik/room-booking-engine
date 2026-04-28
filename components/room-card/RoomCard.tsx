@@ -125,11 +125,6 @@ export function RoomCard({ room, checkIn, checkOut, guests, apiPricePerNight }: 
 
           <BookRoomButton room={room} />
         </div>
-
-        {/* Special rates */}
-        <p className="mt-3 text-center text-[10px] tracking-wider text-[#8D8D8D]">
-          Special Rates Available
-        </p>
       </div>
     </div>
   )

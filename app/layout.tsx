@@ -6,6 +6,8 @@ import { QueryProvider } from '@/lib/providers/QueryProvider'
 import { Toaster } from '@/components/ui/sonner'
 import Footer from '@/components/footer/Footer'
 import { SiteHeader } from '@/components/header/SiteHeader'
+import NextTopLoader from 'nextjs-toploader'
+import { PageTransition } from '@/components/PageTransition'
 
 const playfair = Playfair_Display({
   variable: '--font-heading',
@@ -42,10 +44,19 @@ export default function RootLayout({
       className={`${playfair.variable} ${nunitoSans.variable} h-full overflow-x-hidden antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <NextTopLoader
+          color="#D2A94A"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+        />
         <Auth0Provider>
           <QueryProvider>
             <SiteHeader />
-            {children}
+            <PageTransition>{children}</PageTransition>
             <Footer />
             <Toaster richColors position="top-right" />
           </QueryProvider>

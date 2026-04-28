@@ -41,7 +41,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
   if (reservations.length === 0 && paymentIntentId) {
     return (
       <div className="min-h-screen bg-white">
-        <BookingStepNav currentStep={3} />
+        <BookingStepNav currentStep={4} />
         <main className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-12">
           <div className="mb-8 text-center">
             <CheckCircle className="mx-auto mb-4 h-16 w-16 text-green-500" />
@@ -71,7 +71,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <BookingStepNav currentStep={3} />
+      <BookingStepNav currentStep={4} />
 
       <main className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-12">
         {/* Success header */}

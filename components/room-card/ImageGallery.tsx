@@ -60,14 +60,14 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
             <button
               onClick={prev}
               aria-label="Previous image"
-              className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
+              className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={next}
               aria-label="Next image"
-              className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
+              className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white opacity-70 transition-opacity hover:bg-black/70 sm:opacity-0 sm:group-hover:opacity-100"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -86,7 +86,7 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
             onClick={() => setActiveIndex(i)}
             aria-label={`View ${roomName} image ${i + 1}`}
             className={cn(
-              'relative h-16 w-24 shrink-0 overflow-hidden rounded transition-opacity sm:h-20 sm:w-32',
+              'relative h-16 w-24 shrink-0 cursor-pointer overflow-hidden rounded transition-opacity sm:h-20 sm:w-32',
               i === activeIndex
                 ? 'opacity-100 ring-2 ring-[#006F62] ring-offset-1'
                 : 'opacity-60 hover:opacity-100'
@@ -161,7 +161,7 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
                   onClick={() => setActiveIndex(i)}
                   aria-label={`Go to image ${i + 1}`}
                   className={cn(
-                    'h-1.5 rounded-full transition-all',
+                    'h-1.5 cursor-pointer rounded-full transition-all',
                     i === activeIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40'
                   )}
                 />

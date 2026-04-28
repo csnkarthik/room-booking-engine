@@ -75,7 +75,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
         <BookingBar basePrice={minPrice} onSearch={handleSearch} />
       </div>
 
-      <div className="px-4 py-10 sm:px-6 lg:px-12">
+      <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-12">
         {/* Category tabs */}
         <div
           className="mb-8 flex gap-0 border-b border-[#D8D8D8]"
@@ -88,7 +88,7 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
               type="button"
               onClick={() => setCategory(cat.value)}
               className={cn(
-                'px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
+                'cursor-pointer px-5 pb-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors',
                 category === cat.value
                   ? 'border-b-2 border-[#006F62] text-[#006F62]'
                   : 'text-[#626262] hover:text-[#101010]'
