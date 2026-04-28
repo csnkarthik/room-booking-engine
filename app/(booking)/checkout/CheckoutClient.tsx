@@ -76,10 +76,6 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
       <BookingStepNav currentStep={2} />
 
       <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
-        <h1 className="mb-6 font-[family-name:var(--font-heading)] text-3xl font-medium tracking-wide text-[#101010]">
-          Complete Your Booking
-        </h1>
-
         <div className="grid gap-8 md:grid-cols-3">
           {/* Checkout form */}
           <div className="md:col-span-2">

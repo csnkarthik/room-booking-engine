@@ -39,21 +39,19 @@ export function BookingStepNav({ currentStep }: BookingStepNavProps) {
               const isCurrent = stepNum === currentStep
               return (
                 <Fragment key={step.n}>
-                  {i > 0 && (
-                    <div aria-hidden className="h-px w-3 shrink-0 bg-[#D8D8D8] sm:w-[22px]" />
-                  )}
+                  {i > 0 && <div aria-hidden className="h-px w-4 shrink-0 bg-[#D8D8D8] sm:w-8" />}
                   <div
                     className={cn(
-                      'flex items-center gap-1.5 sm:gap-2.5',
-                      'text-[10px] font-black tracking-[1.5px] uppercase sm:text-[11px]',
-                      isDone ? 'text-[#006F62]' : isCurrent ? 'text-[#101010]' : 'text-[#9CA3AF]'
+                      'flex items-center gap-2 sm:gap-3',
+                      'text-[11px] font-black tracking-[1.5px] uppercase sm:text-[13px]',
+                      isDone ? 'text-[#5D3F23]' : isCurrent ? 'text-[#101010]' : 'text-[#9CA3AF]'
                     )}
                   >
                     <span
                       className={cn(
-                        'inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] tracking-normal sm:h-6 sm:w-6 sm:text-[10px]',
+                        'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[10px] tracking-normal sm:h-7 sm:w-7 sm:text-[11px]',
                         isDone
-                          ? 'border-[#006F62] bg-[#006F62] text-white'
+                          ? 'border-[#5D3F23] bg-[#5D3F23] text-white'
                           : isCurrent
                             ? 'border-[#101010] bg-[#101010] text-white'
                             : 'border-current'

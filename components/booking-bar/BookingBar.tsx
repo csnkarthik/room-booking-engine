@@ -298,7 +298,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               type="button"
               onClick={handleSearch}
               aria-label="Search available rooms"
-              className="cursor-pointer bg-[#006F62] px-5 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
+              className="cursor-pointer bg-[#006F62] px-9 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#015A4F] focus:outline-none"
             >
               Update
             </button>
