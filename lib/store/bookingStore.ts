@@ -25,6 +25,7 @@ interface BookingState {
 
   addToCart: (item: CartItem) => void
   removeFromCart: (index: number) => void
+  updateCartItem: (index: number, patch: Partial<CartItem>) => void
   updateCartItemExtras: (index: number, extras: Partial<BookingExtras>) => void
   clearCart: () => void
 }
@@ -94,6 +95,11 @@ export const useBookingStore = create<BookingState>()(
       removeFromCart: (index) =>
         set((state) => ({
           cartItems: state.cartItems.filter((_, i) => i !== index),
+        })),
+
+      updateCartItem: (index, patch) =>
+        set((state) => ({
+          cartItems: state.cartItems.map((item, i) => (i === index ? { ...item, ...patch } : item)),
         })),
 
       updateCartItemExtras: (index, newExtras) =>
