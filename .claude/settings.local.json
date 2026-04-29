@@ -50,7 +50,9 @@
       "Bash(powershell -command \"Remove-Item -Force 'C:\\\\Users\\\\csnkarthik\\\\AppData\\\\Local\\\\ms-playwright\\\\mcp-chrome-aedfb8a\\\\lockfile' -ErrorAction SilentlyContinue; Write-Host done\")",
       "WebSearch",
       "Bash(grep -E \"\\(page|layout|loading|\\\\.tsx$\\)\")",
-      "Bash(npx shadcn@latest add select --yes)"
+      "Bash(npx shadcn@latest add select --yes)",
+      "Bash(npx playwright *)",
+      "Bash(git stash *)"
     ]
   }
 }
