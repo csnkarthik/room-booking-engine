@@ -50,22 +50,30 @@
 
 :root {
   /* Encore Boston Harbor — Wynn Design System */
-  --background: oklch(1 0 0); /* #FFFFFF white */
-  --foreground: oklch(0.18 0 0); /* #101010 near-black */
+  --background: #f7f7f7;
+  --foreground: oklch(0.18 0 0);
+  /* #101010 near-black */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0 0);
-  --primary: oklch(0.44 0.083 179); /* #006F62 Wynn green */
-  --primary-foreground: oklch(1 0 0); /* white on green */
-  --secondary: oklch(0.978 0 0); /* #F6F8FA light gray */
+  --primary: oklch(0.44 0.083 179);
+  /* #006F62 Wynn green */
+  --primary-foreground: oklch(1 0 0);
+  /* white on green */
+  --secondary: oklch(0.978 0 0);
+  /* #F6F8FA light gray */
   --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.978 0 0); /* #F6F8FA */
-  --muted-foreground: oklch(0.44 0 0); /* #626262 */
-  --accent: oklch(0.73 0.114 78); /* #D2A94A Wynn gold */
+  --muted: oklch(0.978 0 0);
+  /* #F6F8FA */
+  --muted-foreground: oklch(0.44 0 0);
+  /* #626262 */
+  --accent: oklch(0.73 0.114 78);
+  /* #D2A94A Wynn gold */
   --accent-foreground: oklch(0.18 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.872 0 0); /* #D8D8D8 */
+  --border: oklch(0.872 0 0);
+  /* #D8D8D8 */
   --input: oklch(0.872 0 0);
   --ring: oklch(0.44 0.083 179);
   --chart-1: oklch(0.44 0.083 179);
@@ -123,6 +131,7 @@
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -133,17 +142,20 @@
   animation: page-fade-in 0.25s ease-out;
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
+  } */
+
+/* body {
     @apply bg-background text-foreground;
-    font-family: var(--font-sans), 'Lato', system-ui, sans-serif;
+    font-family: 'Avenir LT Std', var(--font-sans), 'Lato', system-ui, sans-serif;
   }
+
   html {
     @apply font-sans;
-  }
+  } */
+/* 
   h1,
   h2,
   h3,
@@ -151,4 +163,79 @@
     font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
     letter-spacing: 0.02em;
   }
+} */
+
+
+@layer base {
+  @font-face {
+    font-family: 'Big Caslon';
+    font-style: normal;
+    font-display: swap;
+    src: url('/fonts/Big Caslon/BigCaslon-Medium.woff2') format('woff2');
+  }
+
+  /* Font files provided by the design team */
+  @font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std/avenirltstd-heavy-webfont.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std/avenirltstd-medium-webfont.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std/avenirltstd-light-webfont.ttf') format('truetype');
+  }
+
+  /* Font files used in the "current" production site */
+  @font-face {
+    font-family: 'AvenirLTStd85Heavy';
+    font-style: normal;
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std Dev/avenirltstd-heavy-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'AvenirLTStd65Medium';
+    font-style: normal;
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std Dev/avenirltstd-medium-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'AvenirLTStd35Light';
+    font-display: swap;
+    src: url('/fonts/Avenir LT Std Dev/avenirltstd-light-webfont.woff') format('woff');
+  }
+}
+
+/* Default fonts. You can override this rules by using the classes "font-bc" or "font-avenir" */
+* {
+  font-family: 'Avenir';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Big Caslon';
+  -webkit-text-stroke: 0.2px;
+}
+
+p {
+  font-weight: 300;
 }

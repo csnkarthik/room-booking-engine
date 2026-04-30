@@ -13,7 +13,7 @@ export default function HomePage() {
     <main className="bg-background min-h-screen">
       <Suspense
         fallback={
-          <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-12">
+          <div className="mx-auto max-w-[1140px] px-4 py-10 sm:px-6 lg:px-12">
             <div className="space-y-6">
               <div className="bg-muted h-14 w-full animate-pulse" />
               <div className="flex gap-2">

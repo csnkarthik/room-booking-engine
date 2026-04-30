@@ -62,10 +62,10 @@ function RoomListItem({ room, checkIn, checkOut, isCurrentRoom, onSelect }: Room
   const totalPrice =
     checkIn && checkOut
       ? calculateStayPrice(room.pricePerNight, checkIn, checkOut, {
-          breakfast: false,
-          airportTransfer: false,
-          lateCheckout: false,
-        })
+        breakfast: false,
+        airportTransfer: false,
+        lateCheckout: false,
+      })
       : room.pricePerNight
 
   const unavailable =
@@ -260,11 +260,10 @@ export function ModifyBookingDialog({
               <button
                 key={type}
                 onClick={() => setSelectedRoomType(type)}
-                className={`flex-1 cursor-pointer py-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors ${
-                  selectedRoomType === type
-                    ? 'border-b-2 border-[#006F62] text-[#006F62]'
-                    : 'text-[#8D8D8D] hover:text-[#101010]'
-                }`}
+                className={`flex-1 cursor-pointer py-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors ${selectedRoomType === type
+                  ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                  : 'text-[#8D8D8D] hover:text-[#101010]'
+                  }`}
               >
                 {roomTypeLabels[type]}
               </button>
@@ -344,7 +343,7 @@ export function ModifyBookingDialog({
               </p>
             </div>
             <ChevronRight
-              className={`mt-1 h-4 w-4 shrink-0 text-[#8D8D8D] transition-transform ${calendarOpen ? 'rotate-90' : ''}`}
+              className={`mt-1 h-[35px] w-[33px] shrink-0 transition-transform ${calendarOpen ? 'rotate-90' : ''}`}
             />
           </button>
 

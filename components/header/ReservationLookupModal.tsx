@@ -82,7 +82,7 @@ export function ReservationLookupModal({ open, onOpenChange }: Props) {
           {/* Header */}
           <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
             <div>
-              <Dialog.Title className="text-base font-semibold text-gray-900">
+              <Dialog.Title className="text-base text-gray-900">
                 Find My Reservation
               </Dialog.Title>
               <Dialog.Description className="mt-0.5 text-xs text-gray-500">

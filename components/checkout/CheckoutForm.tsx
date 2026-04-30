@@ -220,8 +220,8 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
   return (
     <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {/* Guest Info */}
-      <div className="rounded-2xl border bg-white p-6">
-        <h2 className="mb-4 text-lg font-semibold">Guest Information</h2>
+      <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6">
+        <h2 className="mb-4 text-lg">Guest Information</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="firstName" className="mb-1 block text-sm font-medium">
@@ -317,7 +317,7 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
               id="addressLine1"
               value={watch('addressLine1') ?? ''}
               onChange={(v) => setValue('addressLine1', v, { shouldValidate: true })}
-              onBlur={() => {}}
+              onBlur={() => { }}
               hasError={!!errors.addressLine1}
               onSelect={(s) => {
                 setValue('city', s.city, { shouldValidate: true })
@@ -436,8 +436,8 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
       </div>
 
       {/* Stripe Payment Element */}
-      <div className="rounded-2xl border bg-white p-6">
-        <h2 className="mb-4 text-lg font-semibold">Payment Details</h2>
+      <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6">
+        <h2 className="mb-4 text-lg">Payment Details</h2>
         <div className="relative">
           {/* Skeleton shown while PaymentElement iframe loads */}
           {!paymentElementReady && (

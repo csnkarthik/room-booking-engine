@@ -71,11 +71,11 @@ export function HomeRoomsSection({ rooms, minPrice }: HomeRoomsSectionProps) {
   return (
     <div>
       {/* Sticky booking bar — full-width within the 1440px container */}
-      <div className="sticky top-12 z-40">
+      <div className="sticky top-10 z-40">
         <BookingBar basePrice={minPrice} onSearch={handleSearch} />
       </div>
 
-      <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-12">
+      <div className="mx-auto max-w-[1140px] px-4 py-10 sm:px-6 lg:px-12">
         {/* Category tabs */}
         <div
           className="mb-8 flex gap-0 border-b border-[#D8D8D8]"

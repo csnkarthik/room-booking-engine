@@ -22,8 +22,9 @@ export function BookingSummary() {
   }, 0)
 
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-lg font-semibold">
+    <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6 shadow-sm"
+      style={{ borderColor: '#D8D8D8' }}>
+      <h2 className="mb-4 text-lg">
         Booking Summary{' '}
         <span className="text-muted-foreground text-sm font-normal">
           ({cartItems.length} room{cartItems.length !== 1 ? 's' : ''})
@@ -92,27 +93,27 @@ export function BookingSummary() {
               {(item.extras.breakfast ||
                 item.extras.airportTransfer ||
                 item.extras.lateCheckout) && (
-                <div className="mt-2 space-y-1 border-t pt-2 text-xs">
-                  {item.extras.breakfast && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Breakfast × {nights} nights</span>
-                      <span>{formatCurrency(25 * nights)}</span>
-                    </div>
-                  )}
-                  {item.extras.airportTransfer && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Airport transfer</span>
-                      <span>{formatCurrency(75)}</span>
-                    </div>
-                  )}
-                  {item.extras.lateCheckout && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Late checkout</span>
-                      <span>{formatCurrency(50)}</span>
-                    </div>
-                  )}
-                </div>
-              )}
+                  <div className="mt-2 space-y-1 border-t pt-2 text-xs">
+                    {item.extras.breakfast && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Breakfast × {nights} nights</span>
+                        <span>{formatCurrency(25 * nights)}</span>
+                      </div>
+                    )}
+                    {item.extras.airportTransfer && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Airport transfer</span>
+                        <span>{formatCurrency(75)}</span>
+                      </div>
+                    )}
+                    {item.extras.lateCheckout && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Late checkout</span>
+                        <span>{formatCurrency(50)}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
             </div>
           )
         })}

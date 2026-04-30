@@ -45,10 +45,10 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   if (!hasCart) return null
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <BookingStepNav currentStep={2} />
 
-      <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
+      <main className="mx-auto max-w-[1140px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Checkout form — renders immediately, no PaymentIntent waterfall */}
           <div className="md:col-span-2">

@@ -83,14 +83,14 @@ export default function CartPage() {
   )
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-background min-h-screen">
       <BookingStepNav currentStep={1} />
 
       {/* ── Main content — extra bottom padding on mobile for sticky footer ── */}
-      <main className="mx-auto max-w-[1440px] px-4 pt-6 pb-28 sm:px-6 sm:pt-8 md:pb-8 lg:px-12">
+      <main className="mx-auto max-w-[1140px] px-4 pt-6 pb-28 sm:px-6 sm:pt-8 md:pb-8 lg:px-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* ── Left column ── */}
-          <div className="md:col-span-2">
+          <div className="min-w-0 md:col-span-2">
             {/* Room tabs — only shown when 2+ rooms in cart */}
             {cartItems.length > 1 && (
               <div className="-mx-4 mb-6 overflow-x-auto border-b border-[#D8D8D8] sm:mx-0">
@@ -122,7 +122,7 @@ export default function CartPage() {
             </div>
 
             {/* Room header — title left, actions right */}
-            <div className="mb-6 flex items-start justify-between gap-4 pt-5 sm:mb-8">
+            <div className="mb-6 flex flex-col items-stretch gap-4 pt-5 sm:mb-8 sm:flex-row sm:items-start sm:justify-between">
               {/* Left: badges + title + meta */}
               <div className="min-w-0 flex-1">
                 <div className="mb-2 flex items-center gap-3">
@@ -134,7 +134,7 @@ export default function CartPage() {
                     <span className="text-xs font-semibold text-[#101010]">4.9</span>
                   </span>
                 </div>
-                <h1 className="mb-3 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide text-[#101010] sm:text-3xl md:text-4xl">
+                <h1 className="mb-3 font-[family-name:var(--font-heading)] text-2xl font-medium tracking-wide break-words text-[#101010] sm:text-3xl md:text-4xl">
                   {activeRoom.name}
                 </h1>
                 <div className="flex flex-wrap items-center gap-3 text-xs text-[#8D8D8D] sm:gap-4">
@@ -152,18 +152,18 @@ export default function CartPage() {
               </div>
 
               {/* Right: Modify / Cancel */}
-              <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:gap-3">
+              <div className="flex shrink-0 flex-row gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => setModifyOpen(true)}
-                  className="cursor-pointer border border-[#006F62] px-4 py-2 text-[11px] font-black tracking-[1.5px] text-[#006F62] uppercase transition-colors hover:bg-[#006F62] hover:text-white sm:px-5 sm:py-2.5"
+                  className="flex-1 cursor-pointer border border-[#006F62] px-4 py-2 text-[11px] font-black tracking-[1.5px] text-[#006F62] uppercase transition-colors hover:bg-[#006F62] hover:text-white sm:flex-none sm:px-5 sm:py-2.5"
                 >
                   Modify
                 </button>
                 <button
                   type="button"
                   onClick={() => setPendingRemoveIndex(safeTab)}
-                  className="cursor-pointer border border-[#D8D8D8] px-4 py-2 text-[11px] font-black tracking-[1.5px] text-[#626262] uppercase transition-colors hover:border-red-500 hover:text-red-500 sm:px-5 sm:py-2.5"
+                  className="flex-1 cursor-pointer border border-[#D8D8D8] px-4 py-2 text-[11px] font-black tracking-[1.5px] text-[#626262] uppercase transition-colors hover:border-red-500 hover:text-red-500 sm:flex-none sm:px-5 sm:py-2.5"
                 >
                   Cancel
                 </button>
@@ -266,7 +266,7 @@ export default function CartPage() {
                       aria-label={label}
                     />
                     <span className="min-w-0 flex-1 text-sm text-[#101010]">{label}</span>
-                    <span className="shrink-0 text-[10px] text-[#8D8D8D] sm:text-xs">{price}</span>
+                    <span className="shrink-0 text-[12px] text-[#8D8D8D] sm:text-xs">{price}</span>
                   </label>
                 ))}
               </div>
@@ -274,7 +274,7 @@ export default function CartPage() {
           </div>
 
           {/* ── Right column — tablet/desktop (mobile uses sticky footer) ── */}
-          <div className="hidden md:col-span-1 md:block">
+          <div className="hidden md:col-span-1 md:block mt-10">
             <div className="md:sticky md:top-20">
               <OrderSummaryPanel showCheckoutButton />
             </div>
