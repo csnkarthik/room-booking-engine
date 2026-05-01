@@ -221,7 +221,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
                   </span>
                 </div>
               </div>
-              <CalendarIcon className="h-[34px] ml-2 mr-4 -mt-1" />
+              <CalendarIcon className="-mt-1 mr-4 ml-2 h-[34px]" />
             </button>
 
             {showCalendar && (
@@ -313,7 +313,7 @@ export function BookingBar({ className, basePrice, roomTypeCode, onSearch }: Boo
               type="button"
               onClick={handleSearch}
               aria-label="Search available rooms"
-              className="w-[172px] cursor-pointer bg-[#006F62] px-9 py-2 text-[14px] tracking-[0.4px] text-white uppercase opacity-25 transition-colors hover:bg-[#8FC8C0] focus:outline-none"
+              className="w-[172px] cursor-pointer bg-[#006F62] px-9 py-2 text-[14px] tracking-[0.4px] text-white uppercase transition-colors hover:bg-[#8FC8C0] focus:outline-none"
             >
               Update
             </button>
