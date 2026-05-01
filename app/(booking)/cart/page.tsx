@@ -8,7 +8,7 @@ import { BookingStepNav } from '@/components/booking/BookingStepNav'
 import { OrderSummaryPanel } from '@/components/booking/OrderSummaryPanel'
 import { ModifyBookingDialog } from '@/components/cart/ModifyBookingDialog'
 import { useBookingStore } from '@/lib/store/bookingStore'
-import { formatCurrency, formatDisplayDate, daysBetween } from '@/lib/utils/dates'
+import { formatCurrency, daysBetween } from '@/lib/utils/dates'
 import { cn } from '@/lib/utils'
 
 const amenityIcons: Record<string, string> = {
@@ -274,8 +274,15 @@ export default function CartPage() {
           </div>
 
           {/* ── Right column — tablet/desktop (mobile uses sticky footer) ── */}
-          <div className="hidden md:col-span-1 md:block mt-10">
-            <div className="md:sticky md:top-20">
+          <div className="hidden md:col-span-1 md:block">
+            {/* Invisible spacer mirrors the tab bar height so the panel top aligns
+                with the image gallery whether or not tabs are rendered */}
+            {cartItems.length > 1 && (
+              <div className="-mx-4 mb-6 border-b border-transparent sm:mx-0" aria-hidden="true">
+                <div className="invisible py-2.5 text-[11px] select-none">&nbsp;</div>
+              </div>
+            )}
+            <div className="md:sticky md:top-28 lg:top-36">
               <OrderSummaryPanel showCheckoutButton />
             </div>
           </div>

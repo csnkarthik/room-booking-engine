@@ -42,7 +42,7 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
     }
   }, [hasCart, router])
 
-  if (!hasCart) return null
+  if (!hasCart || totalWithExtras <= 0) return null
 
   return (
     <div className="min-h-screen">
@@ -56,7 +56,7 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
               stripe={stripePromise}
               options={{
                 mode: 'payment',
-                amount: Math.round(grandTotal * 100),
+                amount: Math.round(totalWithExtras * 100),
                 currency: 'usd',
                 appearance: {
                   theme: 'stripe',
