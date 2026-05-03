@@ -22,7 +22,19 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   const { cartItems } = useBookingStore()
   const [processing, setProcessing] = useState(false)
   const [paymentReady, setPaymentReady] = useState(false)
-  const [hasCart] = useState(() => cartItems.length > 0)
+
+  // Read localStorage directly on first client render to avoid Zustand's async
+  // hydration race. On SSR, window is undefined so we return 1 (optimistic: don't
+  // redirect until we know for sure the cart is empty on the client).
+  const [initialCartCount] = useState<number>(() => {
+    if (typeof window === 'undefined') return 1
+    try {
+      const raw = localStorage.getItem('booking-session')
+      return JSON.parse(raw ?? '{}')?.state?.cartItems?.length ?? 0
+    } catch {
+      return 0
+    }
+  })
 
   const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
   const extrasTotal = cartItems.reduce((sum, item) => {
@@ -37,12 +49,12 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   const totalWithExtras = grandTotal + extrasTotal
 
   useEffect(() => {
-    if (!hasCart) {
+    if (initialCartCount === 0) {
       router.replace('/')
     }
-  }, [hasCart, router])
+  }, [initialCartCount, router])
 
-  if (!hasCart || totalWithExtras <= 0) return null
+  if (initialCartCount === 0 || cartItems.length === 0 || totalWithExtras <= 0) return null
 
   return (
     <div className="min-h-screen">
@@ -58,6 +70,7 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
                 mode: 'payment',
                 amount: Math.round(totalWithExtras * 100),
                 currency: 'usd',
+                capture_method: 'manual',
                 appearance: {
                   theme: 'stripe',
                   variables: { colorPrimary: '#0f172a' },

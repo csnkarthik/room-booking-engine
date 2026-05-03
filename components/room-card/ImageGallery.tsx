@@ -9,9 +9,10 @@ import { cn } from '@/lib/utils'
 interface ImageGalleryProps {
   images: string[]
   roomName: string
+  className?: string
 }
 
-export function ImageGallery({ images, roomName }: ImageGalleryProps) {
+export function ImageGallery({ images, roomName, className }: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const stripRef = useRef<HTMLDivElement>(null)
@@ -30,7 +31,12 @@ export function ImageGallery({ images, roomName }: ImageGalleryProps) {
   return (
     <>
       {/* Main image */}
-      <div className="group relative aspect-[16/9] w-full overflow-hidden sm:rounded-xl">
+      <div
+        className={cn(
+          'group relative aspect-[16/9] w-full overflow-hidden sm:rounded-xl',
+          className
+        )}
+      >
         <div
           className="absolute inset-0 cursor-zoom-in"
           onClick={() => setLightboxOpen(true)}

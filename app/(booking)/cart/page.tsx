@@ -118,7 +118,11 @@ export default function CartPage() {
 
             {/* Image gallery */}
             <div className="-mx-4 sm:mx-0">
-              <ImageGallery images={activeRoom.images} roomName={activeRoom.name} />
+              <ImageGallery
+                images={activeRoom.images}
+                roomName={activeRoom.name}
+                className="rounded-none sm:rounded-none"
+              />
             </div>
 
             {/* Room header — title left, actions right */}

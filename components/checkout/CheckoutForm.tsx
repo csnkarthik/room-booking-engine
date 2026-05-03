@@ -7,6 +7,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import dynamic from 'next/dynamic'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -18,8 +19,14 @@ import {
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
 import { daysBetween } from '@/lib/utils/dates'
-import { AddressAutofill } from '@/components/checkout/AddressAutofill'
 import type { User } from '@auth0/nextjs-auth0/types'
+
+// @mapbox/search-js-react accesses `document` at module evaluation time, which
+// crashes SSR. Load it only on the client.
+const AddressAutofill = dynamic(
+  () => import('@/components/checkout/AddressAutofill').then((m) => m.AddressAutofill),
+  { ssr: false, loading: () => <Input placeholder="123 Main St" disabled /> }
+)
 
 const COUNTRIES = [
   { code: 'US', name: 'United States' },
@@ -169,12 +176,13 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
         return
       }
 
-      if (paymentIntent?.status === 'succeeded') {
-        // Best-effort: create one Opera reservation per cart item
+      if (paymentIntent?.status === 'requires_capture') {
+        // Payment authorized (funds held). Now attempt Opera reservations before capturing.
         const reservationIds: string[] = []
         for (const item of cartItems) {
+          let operaRes: Response
           try {
-            const operaRes = await fetch('/api/opera/reservation', {
+            operaRes = await fetch('/api/opera/reservation', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -190,15 +198,42 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
                 guest: guestData,
               }),
             })
-            if (operaRes.ok) {
-              const data = await operaRes.json()
-              if (data.operaReservationId) reservationIds.push(data.operaReservationId)
-            } else {
-              console.error('[CheckoutForm] Opera reservation failed:', await operaRes.text())
-            }
           } catch (err) {
-            console.error('[CheckoutForm] Opera reservation error:', err)
+            console.error('[CheckoutForm] Opera reservation network error:', err)
+            // Cancel the auth hold — nothing was charged
+            await fetch(`/api/payments/${paymentIntent.id}/cancel`, { method: 'POST' })
+            toast.error(
+              `Unable to complete your reservation for "${item.room.name}". Your card was not charged.`
+            )
+            updateProcessing(false)
+            return
           }
+
+          if (!operaRes.ok) {
+            const errText = await operaRes.text()
+            console.error('[CheckoutForm] Opera reservation failed:', errText)
+            // Cancel the auth hold — nothing was charged
+            await fetch(`/api/payments/${paymentIntent.id}/cancel`, { method: 'POST' })
+            toast.error(
+              `"${item.room.name}" is no longer available for your selected dates. Your card was not charged.`
+            )
+            updateProcessing(false)
+            return
+          }
+
+          const data = await operaRes.json()
+          if (data.operaReservationId) reservationIds.push(data.operaReservationId)
+        }
+
+        // All reservations secured — capture the payment
+        const captureRes = await fetch(`/api/payments/${paymentIntent.id}/capture`, {
+          method: 'POST',
+        })
+        if (!captureRes.ok) {
+          console.error('[CheckoutForm] Payment capture failed')
+          toast.error('Payment capture failed. Please contact support — your reservation is held.')
+          updateProcessing(false)
+          return
         }
 
         toast.success('Payment successful! Your booking is confirmed.')
@@ -317,7 +352,7 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
               id="addressLine1"
               value={watch('addressLine1') ?? ''}
               onChange={(v) => setValue('addressLine1', v, { shouldValidate: true })}
-              onBlur={() => { }}
+              onBlur={() => {}}
               hasError={!!errors.addressLine1}
               onSelect={(s) => {
                 setValue('city', s.city, { shouldValidate: true })
