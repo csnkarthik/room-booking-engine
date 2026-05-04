@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
-import { readRooms } from '@/lib/utils/data'
+import { readRooms, readAvailability } from '@/lib/utils/data'
 import { HomeRoomsSection } from '@/components/room-card/HomeRoomsSection'
 
 async function RoomsSection() {
   const rooms = readRooms().filter((r) => r.available)
+  const availabilities = readAvailability()
   const minPrice = Math.min(...rooms.map((r) => r.pricePerNight))
-  return <HomeRoomsSection rooms={rooms} minPrice={minPrice} />
+  return <HomeRoomsSection rooms={rooms} availabilities={availabilities} minPrice={minPrice} />
 }
 
 export default function HomePage() {
