@@ -49,8 +49,9 @@ export function HomeRoomsSection({ rooms, availabilities, minPrice }: HomeRoomsS
   const [activeGuests, setActiveGuests] = useState<number>(2)
 
   useEffect(() => {
-    if (!checkIn) {
-      setDates(isoDate(1), isoDate(4))
+    const today = new Date().toISOString().slice(0, 10)
+    if (!checkIn || checkIn <= today) {
+      setDates(isoDate(2), isoDate(5))
       setGuests(2)
     }
   }, [])
