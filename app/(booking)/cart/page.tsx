@@ -169,7 +169,7 @@ export default function CartPage() {
                   onClick={() => setPendingRemoveIndex(safeTab)}
                   className="flex-1 cursor-pointer border border-[#D8D8D8] px-4 py-2 text-[11px] font-black tracking-[1.5px] text-[#626262] uppercase transition-colors hover:border-red-500 hover:text-red-500 sm:flex-none sm:px-5 sm:py-2.5"
                 >
-                  Cancel
+                  Remove
                 </button>
               </div>
             </div>
@@ -338,7 +338,7 @@ export default function CartPage() {
                     </button>
                     <button
                       onClick={confirmRemove}
-                      className="flex-1 cursor-pointer bg-red-600 py-3 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-red-700"
+                      className="flex-1 cursor-pointer bg-[#006F62] py-3 text-[11px] font-black tracking-[1.5px] text-white uppercase transition-colors hover:bg-[#008475]"
                     >
                       {isLast ? 'Remove & Leave' : 'Yes, Remove'}
                     </button>

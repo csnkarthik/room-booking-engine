@@ -62,10 +62,10 @@ function RoomListItem({ room, checkIn, checkOut, isCurrentRoom, onSelect }: Room
   const totalPrice =
     checkIn && checkOut
       ? calculateStayPrice(room.pricePerNight, checkIn, checkOut, {
-        breakfast: false,
-        airportTransfer: false,
-        lateCheckout: false,
-      })
+          breakfast: false,
+          airportTransfer: false,
+          lateCheckout: false,
+        })
       : room.pricePerNight
 
   const unavailable =
@@ -229,7 +229,7 @@ export function ModifyBookingDialog({
           if (e.target === e.currentTarget) onClose()
         }}
       >
-        <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-lg">
+        <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-2xl">
           {/* Header */}
           <div className="flex shrink-0 items-center border-b border-[#D8D8D8] px-4 py-4">
             <button
@@ -260,10 +260,11 @@ export function ModifyBookingDialog({
               <button
                 key={type}
                 onClick={() => setSelectedRoomType(type)}
-                className={`flex-1 cursor-pointer py-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors ${selectedRoomType === type
-                  ? 'border-b-2 border-[#006F62] text-[#006F62]'
-                  : 'text-[#8D8D8D] hover:text-[#101010]'
-                  }`}
+                className={`flex-1 cursor-pointer py-3 text-[11px] font-black tracking-[1.5px] uppercase transition-colors ${
+                  selectedRoomType === type
+                    ? 'border-b-2 border-[#006F62] text-[#006F62]'
+                    : 'text-[#8D8D8D] hover:text-[#101010]'
+                }`}
               >
                 {roomTypeLabels[type]}
               </button>
@@ -303,7 +304,7 @@ export function ModifyBookingDialog({
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-lg">
+      <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-2xl">
         {/* Header */}
         <div className="flex shrink-0 items-center justify-between border-b border-[#D8D8D8] px-6 py-5">
           <h2
@@ -349,7 +350,7 @@ export function ModifyBookingDialog({
 
           {/* Inline calendar */}
           {calendarOpen && (
-            <div className="border-b border-[#D8D8D8] px-4 py-4">
+            <div className="border-b border-[#D8D8D8] px-2 py-4">
               {pricesLoading && <p className="mb-2 text-[10px] text-[#8D8D8D]">Loading prices…</p>}
               <DateRangeCalendar
                 checkIn={localCheckIn}
