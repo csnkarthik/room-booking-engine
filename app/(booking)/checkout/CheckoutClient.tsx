@@ -22,7 +22,19 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   const { cartItems } = useBookingStore()
   const [processing, setProcessing] = useState(false)
   const [paymentReady, setPaymentReady] = useState(false)
-  const [hasCart] = useState(() => cartItems.length > 0)
+
+  // Read localStorage directly on first client render to avoid Zustand's async
+  // hydration race. On SSR, window is undefined so we return 1 (optimistic: don't
+  // redirect until we know for sure the cart is empty on the client).
+  const [initialCartCount] = useState<number>(() => {
+    if (typeof window === 'undefined') return 1
+    try {
+      const raw = localStorage.getItem('booking-session')
+      return JSON.parse(raw ?? '{}')?.state?.cartItems?.length ?? 0
+    } catch {
+      return 0
+    }
+  })
 
   const grandTotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0)
   const extrasTotal = cartItems.reduce((sum, item) => {
@@ -37,18 +49,18 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
   const totalWithExtras = grandTotal + extrasTotal
 
   useEffect(() => {
-    if (!hasCart) {
+    if (initialCartCount === 0) {
       router.replace('/')
     }
-  }, [hasCart, router])
+  }, [initialCartCount, router])
 
-  if (!hasCart) return null
+  if (initialCartCount === 0 || cartItems.length === 0 || totalWithExtras <= 0) return null
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <BookingStepNav currentStep={2} />
 
-      <main className="mx-auto max-w-[1440px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
+      <main className="mx-auto max-w-[1140px] px-4 py-8 pb-28 sm:px-6 md:pb-8 lg:px-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Checkout form — renders immediately, no PaymentIntent waterfall */}
           <div className="md:col-span-2">
@@ -56,8 +68,9 @@ export function CheckoutClient({ user }: CheckoutClientProps) {
               stripe={stripePromise}
               options={{
                 mode: 'payment',
-                amount: Math.round(grandTotal * 100),
+                amount: Math.round(totalWithExtras * 100),
                 currency: 'usd',
+                capture_method: 'manual',
                 appearance: {
                   theme: 'stripe',
                   variables: { colorPrimary: '#0f172a' },

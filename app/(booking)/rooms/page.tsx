@@ -68,7 +68,7 @@ export default async function RoomsPage({ searchParams }: PageProps) {
 
   return (
     <div className="bg-background min-h-screen">
-      <main className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-12">
+      <main className="mx-auto max-w-[1140px] px-4 py-8 sm:px-6 lg:px-12">
         <div className="mb-6 flex items-center gap-3">
           <Link
             href="/"

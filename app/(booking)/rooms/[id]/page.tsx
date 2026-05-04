@@ -39,9 +39,9 @@ const roomTypeLabels: Record<string, string> = {
 
 const STEPS = [
   { n: '01', label: 'SEARCH', href: '/' },
-  { n: '02', label: 'SUITE', href: null },
-  { n: '03', label: 'CHECKOUT', href: null },
-  { n: '04', label: 'CONFIRM', href: null },
+  { n: '02', label: 'Booking', href: null },
+  { n: '03', label: 'Payment', href: null },
+  { n: '04', label: 'Confirmation', href: null },
 ]
 
 export default async function RoomDetailPage({ params }: PageProps) {

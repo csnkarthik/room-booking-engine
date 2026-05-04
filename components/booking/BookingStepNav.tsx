@@ -4,9 +4,9 @@ import { Plus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const STEPS = [
-  { n: '01', label: 'SUITE' },
-  { n: '02', label: 'CHECKOUT' },
-  { n: '03', label: 'CONFIRM' },
+  { n: '01', label: 'Booking' },
+  { n: '02', label: 'Payment' },
+  { n: '03', label: 'Confirmation' },
 ]
 
 interface BookingStepNavProps {
@@ -17,9 +17,9 @@ export function BookingStepNav({ currentStep }: BookingStepNavProps) {
   return (
     <nav
       aria-label="Booking progress"
-      className="sticky top-12 z-40 border-b border-[#D8D8D8] bg-white"
+      className="sticky top-10 z-40 border-b border-[#D8D8D8] bg-white"
     >
-      <div className="mx-auto flex max-w-[1440px] items-center px-4 py-3 sm:px-6 sm:py-[14px] lg:h-[94px] lg:px-12 lg:py-0">
+      <div className="mx-auto flex max-w-[1140px] items-center px-4 py-3 sm:px-6 sm:py-[14px] lg:h-[94px] lg:px-12 lg:py-0">
         {/* Logo */}
         <Link href="/" className="mr-4 shrink-0 sm:mr-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -44,7 +44,7 @@ export function BookingStepNav({ currentStep }: BookingStepNavProps) {
                     className={cn(
                       'flex items-center gap-2 sm:gap-3',
                       'text-[11px] font-black tracking-[1.5px] uppercase sm:text-[13px]',
-                      isDone ? 'text-[#5D3F23]' : isCurrent ? 'text-[#101010]' : 'text-[#9CA3AF]'
+                      isDone ? 'text-[#5D3F23]' : isCurrent ? 'text-[#5d3f23]' : 'text-[#9CA3AF]'
                     )}
                   >
                     <span
@@ -53,7 +53,7 @@ export function BookingStepNav({ currentStep }: BookingStepNavProps) {
                         isDone
                           ? 'border-[#5D3F23] bg-[#5D3F23] text-white'
                           : isCurrent
-                            ? 'border-[#101010] bg-[#101010] text-white'
+                            ? 'border-[#5d3f23] bg-[#5d3f23] text-white'
                             : 'border-current'
                       )}
                     >

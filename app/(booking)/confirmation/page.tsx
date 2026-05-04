@@ -42,7 +42,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
     return (
       <div className="min-h-screen bg-white">
         <BookingStepNav currentStep={4} />
-        <main className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-12">
+        <main className="mx-auto max-w-[1140px] px-4 py-12 sm:px-6 lg:px-12">
           <div className="mb-8 text-center">
             <CheckCircle className="mx-auto mb-4 h-16 w-16 text-green-500" />
             <h1 className="mb-2 text-3xl font-bold text-[#101010]">Payment Received!</h1>
@@ -73,7 +73,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
     <div className="min-h-screen bg-white">
       <BookingStepNav currentStep={4} />
 
-      <main className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-12">
+      <main className="mx-auto max-w-[1140px] px-4 py-8 sm:px-6 lg:px-12">
         {/* Success header */}
         <div className="mb-8 flex items-center gap-4">
           <CheckCircle className="h-10 w-10 shrink-0 text-green-500" />
@@ -172,13 +172,13 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
                         </dd>
                       </div>
                       <div>
-                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
+                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#2B2B2B] uppercase">
                           Guest Name
                         </dt>
                         <dd className="font-semibold text-[#101010]">{operaData.guestName}</dd>
                       </div>
                       <div>
-                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
+                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#2B2B2BD] uppercase">
                           Status
                         </dt>
                         <dd>
@@ -186,7 +186,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
                         </dd>
                       </div>
                       <div>
-                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#8D8D8D] uppercase">
+                        <dt className="mb-1 text-[10px] font-black tracking-[1.5px] text-[#2B2B2B] uppercase">
                           Amount
                         </dt>
                         <dd className="font-semibold text-[#006F62]">
@@ -246,14 +246,14 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
                             )}
                           </div>
                           <div className="min-w-0 flex-1">
-                            <p className="text-xs leading-tight font-semibold text-[#101010]">
+                            <p className="text-sm leading-tight font-semibold text-[#101010]">
                               {room?.name ?? r.roomType}
                             </p>
-                            <p className="mt-0.5 text-[10px] text-[#8D8D8D]">
+                            <p className="mt-0.5 text-[12px] text-[#2B2B2B]">
                               {formatDisplayDate(r.arrivalDate)} —{' '}
                               {formatDisplayDate(r.departureDate)}
                             </p>
-                            <p className="text-[10px] text-[#8D8D8D]">
+                            <p className="text-[12px] text-[#2B2B2B]">
                               {r.adults} guest{r.adults !== 1 ? 's' : ''} · {nights} night
                               {nights !== 1 ? 's' : ''}
                             </p>
@@ -282,7 +282,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-2 flex items-center justify-between border-t border-[#D8D8D8] pt-2">
+                  <div className="mt-2 flex items-center justify-between border-t border-[#2B2B2B] pt-2">
                     <span className="text-[11px] font-black tracking-[1px] text-[#101010] uppercase">
                       Total Paid
                     </span>
@@ -292,7 +292,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
                   </div>
                 </div>
 
-                <p className="mt-4 text-center text-[10px] tracking-wide text-[#8D8D8D] italic">
+                <p className="mt-4 text-center text-[10px] tracking-wide text-[#2B2B2B] italic">
                   Excludes applicable taxes and resort fees.
                 </p>
               </div>

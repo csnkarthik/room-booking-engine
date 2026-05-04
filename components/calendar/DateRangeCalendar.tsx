@@ -194,19 +194,24 @@ export function DateRangeCalendar({
                 'relative flex flex-col items-center justify-center py-1 text-xs transition-colors',
                 showPricing ? 'h-12' : 'h-9',
                 blocked && 'cursor-not-allowed opacity-30',
-                !blocked && 'hover:bg-primary/10 cursor-pointer',
-                inRange && 'bg-primary/10',
+                !blocked && 'cursor-pointer hover:bg-[#5A3A27]/10',
+                inRange && 'bg-[#5A3A27]/10',
                 (isStart || isEnd) &&
-                  'bg-primary text-primary-foreground hover:bg-primary rounded-lg font-semibold'
+                'rounded-lg bg-[#5A3A27] font-semibold text-white hover:bg-[#5A3A27]'
               )}
             >
-              <span className={cn('font-medium', showPricing ? 'text-xs' : 'text-sm')}>
+              <span
+                className={cn(
+                  'font-bold',
+                  showPricing ? 'text-base lg:text-[20px]' : 'text-sm lg:text-[20px]'
+                )}
+              >
                 {dayNum}
               </span>
               {price !== null && (
                 <span
                   className={cn(
-                    'text-[9px] leading-none',
+                    'text-xs leading-none',
                     isStart || isEnd ? 'text-primary-foreground/80' : 'text-muted-foreground'
                   )}
                 >
@@ -222,16 +227,16 @@ export function DateRangeCalendar({
 
   return (
     <div
-      className={cn('w-full rounded-xl border bg-white p-4 shadow-lg', className)}
+      className={cn('w-full rounded-xl border border-[#D8D8D8] bg-white p-4 shadow-lg', className)}
       role="dialog"
       aria-label="Date range calendar"
     >
       {/* Prompt */}
-      <div className="text-muted-foreground mb-3 text-center text-xs">
+      {/* <div className="text-muted-foreground mb-3 text-center text-base font-medium">
         {selecting === 'checkIn'
           ? 'Select check-in date'
           : `Select check-out (min ${minStay} night${minStay > 1 ? 's' : ''})`}
-      </div>
+      </div> */}
 
       <div className="flex gap-6">
         {/* Left month */}
@@ -247,7 +252,7 @@ export function DateRangeCalendar({
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span className="text-sm font-semibold">{leftMonthName}</span>
+            <span className="text-base font-bold">{leftMonthName}</span>
             {/* Next button visible only on mobile (right month is hidden) */}
             <Button
               variant="ghost"
@@ -275,7 +280,7 @@ export function DateRangeCalendar({
         <div className="hidden flex-1 flex-col lg:flex">
           <div className="mb-3 flex items-center justify-between">
             <div className="h-8 w-8" />
-            <span className="text-sm font-semibold">{rightMonthName}</span>
+            <span className="text-base font-bold">{rightMonthName}</span>
             <Button
               variant="ghost"
               size="icon"

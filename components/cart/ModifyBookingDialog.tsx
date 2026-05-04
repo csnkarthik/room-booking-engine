@@ -229,7 +229,7 @@ export function ModifyBookingDialog({
           if (e.target === e.currentTarget) onClose()
         }}
       >
-        <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-lg">
+        <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-2xl">
           {/* Header */}
           <div className="flex shrink-0 items-center border-b border-[#D8D8D8] px-4 py-4">
             <button
@@ -304,7 +304,7 @@ export function ModifyBookingDialog({
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-lg">
+      <div className="relative flex h-full w-full flex-col bg-white md:h-auto md:max-h-[90vh] md:max-w-2xl">
         {/* Header */}
         <div className="flex shrink-0 items-center justify-between border-b border-[#D8D8D8] px-6 py-5">
           <h2
@@ -344,13 +344,13 @@ export function ModifyBookingDialog({
               </p>
             </div>
             <ChevronRight
-              className={`mt-1 h-4 w-4 shrink-0 text-[#8D8D8D] transition-transform ${calendarOpen ? 'rotate-90' : ''}`}
+              className={`mt-1 h-[35px] w-[33px] shrink-0 transition-transform ${calendarOpen ? 'rotate-90' : ''}`}
             />
           </button>
 
           {/* Inline calendar */}
           {calendarOpen && (
-            <div className="border-b border-[#D8D8D8] px-4 py-4">
+            <div className="border-b border-[#D8D8D8] px-2 py-4">
               {pricesLoading && <p className="mb-2 text-[10px] text-[#8D8D8D]">Loading prices…</p>}
               <DateRangeCalendar
                 checkIn={localCheckIn}

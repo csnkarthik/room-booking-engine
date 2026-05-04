@@ -90,7 +90,7 @@ export function RoomBookingPanel({
       : 0
 
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-lg">
+    <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6 shadow-lg">
       <div className="mb-4">
         <span className="text-primary text-2xl font-bold">
           {formatCurrency(room.pricePerNight)}

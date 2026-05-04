@@ -58,18 +58,18 @@ export function OrderSummaryPanel({ showCheckoutButton = false }: OrderSummaryPa
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-1">
-                      <p className="text-xs leading-tight font-semibold text-[#101010]">
+                      <p className="text-sm leading-tight font-semibold text-[#101010]">
                         {item.room.name}
                       </p>
                     </div>
-                    <p className="mt-0.5 text-[10px] text-[#8D8D8D]">
+                    <p className="mt-0.5 text-[10px] text-[#2B2B2B]">
                       {formatDisplayDate(item.checkIn)} — {formatDisplayDate(item.checkOut)}
                     </p>
-                    <p className="text-[10px] text-[#8D8D8D]">
+                    <p className="text-[10px] text-[#2B2B2B]">
                       {item.guests} guest{item.guests !== 1 ? 's' : ''} · {nights} night
                       {nights !== 1 ? 's' : ''}
                     </p>
-                    <p className="mt-1 text-xs font-semibold text-[#006F62]">
+                    <p className="mt-1 text-xs font-bold text-[#006F62]">
                       {formatCurrency(item.totalPrice)}
                     </p>
                   </div>

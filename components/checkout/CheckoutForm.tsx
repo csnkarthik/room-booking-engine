@@ -7,6 +7,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import dynamic from 'next/dynamic'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -18,8 +19,14 @@ import {
 import { useBookingStore } from '@/lib/store/bookingStore'
 import { GuestSchema } from '@/lib/types/schemas'
 import { daysBetween } from '@/lib/utils/dates'
-import { AddressAutofill } from '@/components/checkout/AddressAutofill'
 import type { User } from '@auth0/nextjs-auth0/types'
+
+// @mapbox/search-js-react accesses `document` at module evaluation time, which
+// crashes SSR. Load it only on the client.
+const AddressAutofill = dynamic(
+  () => import('@/components/checkout/AddressAutofill').then((m) => m.AddressAutofill),
+  { ssr: false, loading: () => <Input placeholder="123 Main St" disabled /> }
+)
 
 const COUNTRIES = [
   { code: 'US', name: 'United States' },
@@ -169,12 +176,13 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
         return
       }
 
-      if (paymentIntent?.status === 'succeeded') {
-        // Best-effort: create one Opera reservation per cart item
+      if (paymentIntent?.status === 'requires_capture') {
+        // Payment authorized (funds held). Now attempt Opera reservations before capturing.
         const reservationIds: string[] = []
         for (const item of cartItems) {
+          let operaRes: Response
           try {
-            const operaRes = await fetch('/api/opera/reservation', {
+            operaRes = await fetch('/api/opera/reservation', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -190,15 +198,42 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
                 guest: guestData,
               }),
             })
-            if (operaRes.ok) {
-              const data = await operaRes.json()
-              if (data.operaReservationId) reservationIds.push(data.operaReservationId)
-            } else {
-              console.error('[CheckoutForm] Opera reservation failed:', await operaRes.text())
-            }
           } catch (err) {
-            console.error('[CheckoutForm] Opera reservation error:', err)
+            console.error('[CheckoutForm] Opera reservation network error:', err)
+            // Cancel the auth hold — nothing was charged
+            await fetch(`/api/payments/${paymentIntent.id}/cancel`, { method: 'POST' })
+            toast.error(
+              `Unable to complete your reservation for "${item.room.name}". Your card was not charged.`
+            )
+            updateProcessing(false)
+            return
           }
+
+          if (!operaRes.ok) {
+            const errText = await operaRes.text()
+            console.error('[CheckoutForm] Opera reservation failed:', errText)
+            // Cancel the auth hold — nothing was charged
+            await fetch(`/api/payments/${paymentIntent.id}/cancel`, { method: 'POST' })
+            toast.error(
+              `"${item.room.name}" is no longer available for your selected dates. Your card was not charged.`
+            )
+            updateProcessing(false)
+            return
+          }
+
+          const data = await operaRes.json()
+          if (data.operaReservationId) reservationIds.push(data.operaReservationId)
+        }
+
+        // All reservations secured — capture the payment
+        const captureRes = await fetch(`/api/payments/${paymentIntent.id}/capture`, {
+          method: 'POST',
+        })
+        if (!captureRes.ok) {
+          console.error('[CheckoutForm] Payment capture failed')
+          toast.error('Payment capture failed. Please contact support — your reservation is held.')
+          updateProcessing(false)
+          return
         }
 
         toast.success('Payment successful! Your booking is confirmed.')
@@ -220,8 +255,8 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
   return (
     <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {/* Guest Info */}
-      <div className="rounded-2xl border bg-white p-6">
-        <h2 className="mb-4 text-lg font-semibold">Guest Information</h2>
+      <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6">
+        <h2 className="mb-4 text-lg">Guest Information</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="firstName" className="mb-1 block text-sm font-medium">
@@ -436,8 +471,8 @@ export function CheckoutForm({ user, onProcessingChange, onPaymentReady }: Check
       </div>
 
       {/* Stripe Payment Element */}
-      <div className="rounded-2xl border bg-white p-6">
-        <h2 className="mb-4 text-lg font-semibold">Payment Details</h2>
+      <div className="rounded-2xl border border-[#D8D8D8] bg-white p-6">
+        <h2 className="mb-4 text-lg">Payment Details</h2>
         <div className="relative">
           {/* Skeleton shown while PaymentElement iframe loads */}
           {!paymentElementReady && (
